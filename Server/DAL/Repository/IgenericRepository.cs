@@ -12,7 +12,7 @@ namespace DAL.Repository
 		/// Permet de récupérer la liste des entités
 		/// </summary>
 		/// <returns>Retourne la liste des entités</returns>
-		Task<List<TEntity>> GetAllAsync();
+		Task<IEnumerable<TEntity>> GetAllAsync();
 
 		/// <summary>
 		/// Permet de récupérer une entité par son Identifiant

@@ -33,22 +33,20 @@ namespace UnitTest.Services
 		public T GetRepository<T>() where T : class
 		{
 			Type repository = typeof(T);
-			switch (repository)
+
+			if (repository == typeof(IMenuRepository))
 			{
-				case IMenuRepository:
-					return new FakeMenuRepository() as T;
-
-				case IPlatRepository:
-					return new FakePlatRepository() as T;
-
-				case IIngredientRepository:
-					return new FakeIngredientRepository() as T;
-
-				default:
-					return null;
-
+				return new FakeMenuRepository() as T;
 			}
-
+			else if (repository == typeof(IPlatRepository))
+			{
+				return new FakePlatRepository() as T;
+			}
+			else if (repository == typeof(IIngredientRepository))
+			{
+				return new FakeIngredientRepository() as T;
+			}
+			else return null;
 		}
 
 		public void Rollback()

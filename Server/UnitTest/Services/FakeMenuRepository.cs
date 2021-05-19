@@ -31,10 +31,10 @@ namespace UnitTest.Services
 			
 		}
 
-		public Task<List<Menu>> GetAllAsync()
+		public Task<IEnumerable<Menu>> GetAllAsync()
 		{
 			
-			return Task.FromResult(MenuDb);
+			return Task.FromResult(MenuDb as IEnumerable<Menu>);
 				
 		}
 

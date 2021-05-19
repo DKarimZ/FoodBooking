@@ -49,7 +49,7 @@ namespace UnitTest.Services
 
 		public List<Plat> PlatDb = new List<Plat>
 		{
-			new Plat(3,"sauté de boeuf","plat",13,new List<Ingredient>(){
+			new Plat(1,"sauté de boeuf","plat",13,new List<Ingredient>(){
 				new Ingredient(6,"champignons",4),
 				new Ingredient(7,"sauce soja",2)
 		
