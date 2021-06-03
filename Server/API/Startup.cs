@@ -1,3 +1,5 @@
+using System;
+using System.Text;
 using BLL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json;
 using DocFx;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API
 {
@@ -67,6 +71,25 @@ namespace API
 				config.ApiGroupNames = new[] { "1.0" };
 			});
 
+			//JWT Authentification
+			services
+				.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(options =>
+				{
+					options.TokenValidationParameters = new TokenValidationParameters()
+					{
+						ValidateIssuer = false,
+						ValidateAudience = false,
+						ValidAudience = Configuration["JwtIssuer"],
+						ValidIssuer = Configuration["JwtIssuer"],
+						ValidateIssuerSigningKey = true,
+						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"])),
+
+						ClockSkew = TimeSpan.Zero
+					};
+
+				});
+
 			//Ajout de la méthode AddBLL (voir BLLExtension)
 			services.AddBLL();
 		}
@@ -106,6 +129,10 @@ namespace API
 
 			app.UseRouting();
 
+			//Add Authentification -> Error 401
+			app.UseAuthentication();
+
+			//Add AUthorisation -> Error 403
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>

@@ -11,6 +11,6 @@ namespace DAL.Repository
 	/// </summary>
 	public interface IClientRepository : IgenericRepository<Client>, IpageableRepository<Client>
 	{
-
+		Task<Client> GetClientByUsernameAndPassword(string Nom, string password);
 	}
 }

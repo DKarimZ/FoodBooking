@@ -24,7 +24,7 @@ namespace BO.Entity
 		/// <summary>
 		/// type de plat (entrée, plat, dessert)
 		/// </summary>
-		public string typePlat { get; set; }
+		public TypePlat typePlat { get; set; }
 
 		/// <summary>
 		/// Score de popularité du plat
@@ -34,7 +34,7 @@ namespace BO.Entity
 		/// <summary>
 		/// Liste d'ingredients du plat
 		/// </summary>
-		public List<Ingredient> Ingredients { get; set; }
+		public List<PlatIngredient> PlatIngredient { get; set; }
 
 		/// <summary>
 		/// Constructeur par défaut pour serialisation par l'API
@@ -52,14 +52,14 @@ namespace BO.Entity
 		/// <param name="typePlat"></param>
 		/// <param name="score"></param>
 		/// <param name="ingredients"></param>
-		public Plat(int? idPlat, string nomPlat, string typePlat, int score, List<Ingredient> ingredients
+		public Plat(int? idPlat, string nomPlat, TypePlat typePlat, int score, List<PlatIngredient> platIngredients
 			)
 		{
 			IdPlat = idPlat;
 			this.nomPlat = nomPlat;
 			this.typePlat = typePlat;
 			Score = score;
-			Ingredients = ingredients;
+			PlatIngredient = platIngredients;
 		}
 
 		// Methode Equals (Si besoin de la redéfinir)
@@ -70,13 +70,13 @@ namespace BO.Entity
 				   nomPlat == plat.nomPlat &&
 				   typePlat == plat.typePlat &&
 				   Score == plat.Score &&
-				   EqualityComparer<List<Ingredient>>.Default.Equals(Ingredients, plat.Ingredients);
+				   EqualityComparer<List<PlatIngredient>>.Default.Equals(PlatIngredient, plat.PlatIngredient);
 		}
 
 		// Methode GetHashCode (Si besoin de la redéfinir)
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(IdPlat, nomPlat, typePlat, Score, Ingredients);
+			return HashCode.Combine(IdPlat, nomPlat, typePlat, Score, PlatIngredient);
 		}
 	}
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers.V1
 {
@@ -19,6 +20,7 @@ namespace API.Controllers.V1
 	[Route("api/v{version:apiVersion}/commandes")]
 	[Produces(MediaTypeNames.Application.Json)]
 	[Consumes(MediaTypeNames.Application.Json)]
+	[Authorize(Roles = "Restaurateur")]
 
 	public class CommandeController : ControllerBase
 	{

@@ -29,7 +29,7 @@ namespace BO.Entity
 		/// <summary>
 		/// Liste des Menus
 		/// </summary>
-		public List<Menu> Menus { get; set; }
+		public List<Service> Menus { get; set; }
 
 		/// <summary>
 		/// Constructeur par défaut pour serialisation par l'API
@@ -46,7 +46,7 @@ namespace BO.Entity
 		/// <param name="service"></param>
 		/// <param name="formule"></param>
 		/// <param name="menus"></param>
-		public Repas(int idRepas, string service, string formule, List<Menu> menus)
+		public Repas(int idRepas, string service, string formule, List<Service> menus)
 		{
 			IdRepas = idRepas;
 			Service = service;
@@ -61,7 +61,7 @@ namespace BO.Entity
 				   IdRepas == repas.IdRepas &&
 				   Service == repas.Service &&
 				   Formule == repas.Formule &&
-				   EqualityComparer<List<Menu>>.Default.Equals(Menus, repas.Menus);
+				   EqualityComparer<List<Service>>.Default.Equals(Menus, repas.Menus);
 		}
 
 		// Methode GetHashCode (Si besoin de la redéfinir)

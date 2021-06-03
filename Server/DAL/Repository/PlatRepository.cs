@@ -15,9 +15,9 @@ namespace DAL.Repository
 	class PlatRepository : IPlatRepository
 	{
 		private readonly DbSession _session;
-		private readonly ILogger<MenuRepository> _logger;
+		private readonly ILogger<ServiceRepository> _logger;
 
-		public PlatRepository(DbSession session, ILogger<MenuRepository> logger)
+		public PlatRepository(DbSession session, ILogger<ServiceRepository> logger)
 		{
 			_session = session;
 			_logger = logger;

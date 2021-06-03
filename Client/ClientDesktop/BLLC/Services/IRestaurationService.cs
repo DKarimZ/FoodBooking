@@ -6,9 +6,9 @@ namespace BLLC.Services
 {
 	public interface IRestaurationService
 	{
-		Task<Menu> CreateMenu(Menu newMenu);
-		Task<IEnumerable<Menu>> GetAllMenus();
-		Task<bool> RemoveMenu(Menu menuToDelete);
-		Task<Menu> UpdateMenu(Menu menuToUpdate);
+		Task<Service> CreateMenu(Service newMenu);
+		Task<IEnumerable<Service>> GetAllServices();
+		Task<bool> RemoveMenu(Service menuToDelete);
+		Task<Service> UpdateMenu(Service menuToUpdate);
 	}
 }

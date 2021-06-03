@@ -19,7 +19,7 @@ namespace DAL
 
 			services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-			services.AddTransient<IMenuRepository, MenuRepository>();
+			services.AddTransient<IServiceRepository, ServiceRepository>();
 			services.AddTransient<IPlatRepository, PlatRepository>();
 			services.AddTransient<IReservationRepository, ReservationRepository>();
 			services.AddTransient<IClientRepository, ClientRepository>();

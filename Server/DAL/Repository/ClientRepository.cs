@@ -90,6 +90,16 @@ namespace DAL.Repository
 
 			return new PageResponse<Client>(pageRequest.Page, pageRequest.PageSize, countTask, (clientTask).ToList());
 		}
+
+		public Task<Client> GetClientByUsernameAndPassword(string nom, string password)
+		{
+			//TODO réécrire la requete avec un nom au lieu du Username
+			var stmt = @"select * from client
+						 Where Nom = @Nom AND Password = @Password";
+
+			return  _session.Connection.QueryFirstOrDefaultAsync<Client>(stmt, new { Nom = nom, Password = password }, _session.Transaction);
+
+		}
 	}
 }
 

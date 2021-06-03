@@ -34,6 +34,11 @@ namespace BO.Entity
 		/// <summary>
 		/// Constructeur par defaut pour la serialisation de l'API
 		/// </summary>
+
+		public string role { get; set; }
+
+		//Creer le login et le password
+
 		public Client()
 		{
 
@@ -48,10 +53,10 @@ namespace BO.Entity
 		/// <param name="telephone"></param>
 		public Client(int? id, string nom, string prenom, string telephone)
 		{
-			IdClient = id;
-			this.nom = nom;
-			this.prenom = prenom;
-			this.telephone = telephone;
+				IdClient = id;
+				this.nom = nom;
+				this.prenom = prenom;
+				this.telephone = telephone;
 		}
 
 		// Methode Equals (Si besoin de la redéfinir)

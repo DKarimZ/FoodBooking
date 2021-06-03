@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BLLC.Services;
+using BO.Entity;
+using ClientDesktop.Formulaire;
 
 namespace ClientDesktop
 {
@@ -14,10 +17,12 @@ namespace ClientDesktop
 		[STAThread]
 		static void Main()
 		{
+			var authService = AuthentificationService.Getinstance();
+
 			Application.SetHighDpiMode(HighDpiMode.SystemAware);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new FrmAccueil());
+			Application.Run(new loginForm());
 		}
 	}
 }

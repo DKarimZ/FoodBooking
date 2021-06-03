@@ -76,22 +76,22 @@ namespace UnitTest
 				IdPlat = 10,
 				nomPlat = "boeuf aux carottes et oignons",
 				Score = 1,
-				Ingredients = new List<Ingredient>()
+				PlatIngredient = new List<PlatIngredient>()
 				{
-					new Ingredient() { IdIngredient = 11, nomIngredient = "boeuf", prixMoyen = 12 },
-					new Ingredient() { IdIngredient = 12, nomIngredient = "carotte", prixMoyen = 12 },
-					new Ingredient() { IdIngredient = 13, nomIngredient = "oignons", prixMoyen = 12 }
+					new PlatIngredient() ,
+					new PlatIngredient() ,
+					new PlatIngredient() 
 				}
 			};
 
 			Plat newbadPlat = new Plat()
 			{
 				IdPlat = 11,
-				Ingredients = new List<Ingredient>()
+				PlatIngredient = new List<PlatIngredient>()
 				{
-					new Ingredient() { IdIngredient = 11, nomIngredient = "boeuf", prixMoyen = 12 },
-					new Ingredient() { IdIngredient = 12, nomIngredient = "carotte", prixMoyen = 12 },
-					new Ingredient() { IdIngredient = 13, nomIngredient = "oignons", prixMoyen = 12 }
+					new PlatIngredient(), 
+					new PlatIngredient(), 
+					new PlatIngredient() 
 				}
 			};
 
@@ -125,6 +125,7 @@ namespace UnitTest
 
 		}
 
+		[Fact]
 		public async void TestModifyPlat()
 		{
 			IRestaurationService restaurationService = new FakeRestaurationService();
@@ -133,11 +134,11 @@ namespace UnitTest
 			Plat platUpdated = new Plat()
 			{
 				nomPlat = "boeuf aux carottes",
-				Ingredients = new List<Ingredient>()
+				PlatIngredient = new List<PlatIngredient>()
 				{
-					new Ingredient() { IdIngredient = 11, nomIngredient = "boeuf", prixMoyen = 12 },
-					new Ingredient() { IdIngredient = 12, nomIngredient = "carotte", prixMoyen = 12 },
-					new Ingredient() { IdIngredient = 13, nomIngredient = "oignons", prixMoyen = 12 }
+					new(),
+					new(),
+					new()
 				}
 			};
 

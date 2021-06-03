@@ -22,35 +22,35 @@ namespace BLL.Services
 		/// </summary>
 		/// <param name="pageRequest"></param>
 		/// <returns>retourne la liste des menus</returns>
-		Task<List<Menu>> GetAllMenus();
+		Task<List<Service>> GetAllServices();
 
 		/// <summary>
 		/// Permet de récupérer un menu par son Identifiant
 		/// </summary>
 		/// <param name="IdMenu"></param>
 		/// <returns>retourne un menu en particulier ou null si non touvé</returns>
-		Task<Menu> GetMenuById(int IdMenu);
+		Task<Service> GetServiceById(int IdMenu);
 
 		/// <summary>
 		/// Permet de créer un menu
 		/// </summary>
 		/// <param name="newMenu"></param>
 		/// <returns>Retourne le nouveau menu</returns>
-		Task<Menu> CreateMenu(Menu newMenu);
+		Task<Service> CreateService(Service newMenu);
 
 		/// <summary>
 		/// Permet de mettre à jour un menu
 		/// </summary>
 		/// <param name="menuToUpdate"></param>
 		/// <returns>retourne le menu mis a jour</returns>
-		Task<Menu> UpdateMenu(Menu menuToUpdate);
+		Task<Service> UpdateService(Service serviceToUpdate);
 
 		/// <summary>
 		/// Permet de supprimer un menu
 		/// </summary>
 		/// <param name="IdMenu"></param>
 		/// <returns>retoune un boolean en fonction du succes de la methode</returns>
-		Task<bool> RemoveMenu(int IdMenu);
+		Task<bool> RemoveService(int IdService);
 
 		#endregion
 		//Services liés aux plats

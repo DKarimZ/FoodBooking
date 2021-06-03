@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-	public interface IMenuRepository : IgenericRepository<Menu>
+	public interface IServiceRepository : IgenericRepository<Service>
 	{
 		
 	}

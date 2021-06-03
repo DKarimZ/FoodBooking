@@ -12,28 +12,29 @@ using BO.DTO.Requests;
 
 namespace DAL.Repository
 {
-	class MenuRepository : IMenuRepository
+	class ServiceRepository : IServiceRepository
 	{
 		private readonly DbSession _session;
-		private readonly ILogger<MenuRepository> _logger;
+		private readonly ILogger<ServiceRepository> _logger;
 
-		public MenuRepository(DbSession session, ILogger<MenuRepository> logger)
+		public ServiceRepository(DbSession session, ILogger<ServiceRepository> logger)
 		{
 			_session = session;
 			_logger = logger;
 		}
 
-		public async Task <IEnumerable<Menu>> GetAllAsync() 
+		public async Task <IEnumerable<Service>> GetAllAsync() 
 		{
-			var stmt = @"select * from menu";
-			return await _session.Connection.QueryAsync<Menu>(stmt, null, _session.Transaction);
+			var stmt = @"select * from Services";
+			return await _session.Connection.QueryAsync<Service>(stmt, null, _session.Transaction);
 		}
-		public async Task<Menu> GetAsync(int id) 
+		public async Task<Service> GetAsync(int id) 
 		{
-			var stmt = @"select * from menu where id = @id";
-			return await _session.Connection.QueryFirstOrDefaultAsync<Menu>(stmt, new { Id = id }, _session.Transaction);
+			var stmt = @"select * from Services where IdService = @id";
+			var r =  await _session.Connection.QueryFirstOrDefaultAsync<Service>(stmt, new { Id = id }, _session.Transaction);
+			return r;
 		}
-		public async Task<bool> UpdateAsync(Menu menuToUpdate)
+		public async Task<bool> UpdateAsync(Service menuToUpdate)
 		{
 			var stmt = @"update menu set firstDayWeek = @firstDayweek, Plats = @Plats from menu join plat where IdMenu = @IdMenu";
 
@@ -47,7 +48,7 @@ namespace DAL.Repository
 				return false;
 			}
 		}
-		public async Task<Menu> InsertAsync(Menu menuToCreate)
+		public async Task<Service> InsertAsync(Service menuToCreate)
 		{
 			var stmt = @"insert into menu(firstDayweek, Plats) output INSERTED.ID values (@firstDayweek, @Plats)";
 			try

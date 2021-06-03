@@ -19,12 +19,12 @@ namespace BO.Entity
 		/// <summary>
 		/// Nom de l'ingredient
 		/// </summary>
-		public string nomIngredient { get; set; }
+		public string NomIngredient { get; set; }
 
 		/// <summary>
 		/// Prix moyen de l'ingredient
 		/// </summary>
-		public int prixMoyen { get; set; }
+		public float PrixMoyen { get; set; }
 
 		/// <summary>
 		/// Constructeur par defaut pour serialisation par l'API
@@ -40,11 +40,11 @@ namespace BO.Entity
 		/// <param name="idIngredient"></param>
 		/// <param name="nomIngredient"></param>
 		/// <param name="prixMoyen"></param>
-		public Ingredient(int? idIngredient, string nomIngredient, int prixMoyen)
+		public Ingredient(int? idIngredient, string nomIngredient, float prixMoyen)
 		{
 			IdIngredient = idIngredient;
-			this.nomIngredient = nomIngredient;
-			this.prixMoyen = prixMoyen;
+			this.NomIngredient = nomIngredient;
+			this.PrixMoyen = prixMoyen;
 		}
 
 		// Methode Equals (Si besoin de la redéfinir)
@@ -52,14 +52,14 @@ namespace BO.Entity
 		{
 			return obj is Ingredient ingredient &&
 				   IdIngredient == ingredient.IdIngredient &&
-				   nomIngredient == ingredient.nomIngredient &&
-				   prixMoyen == ingredient.prixMoyen;
+				   NomIngredient == ingredient.NomIngredient &&
+				   PrixMoyen == ingredient.PrixMoyen;
 		}
 
 		// Methode GetHashCode (Si besoin de la redéfinir)
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(IdIngredient, nomIngredient, prixMoyen);
+			return HashCode.Combine(IdIngredient, NomIngredient, PrixMoyen);
 		}
 	}
 }

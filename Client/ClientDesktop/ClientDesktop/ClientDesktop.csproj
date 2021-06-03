@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="userControls\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\BO\BO.csproj" />
     <ProjectReference Include="..\..\..\FoodBookingServer\BO\BO.csproj" />
     <ProjectReference Include="..\BLLC\BLLC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="userControls\" />
   </ItemGroup>
 
 </Project>

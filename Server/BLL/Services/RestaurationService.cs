@@ -29,34 +29,34 @@ namespace BLL.Services
 
 		// Methodes liées aux services de gestion des menus
 		#region Menu
-		public async Task <List<Menu>> GetAllMenus()
+		public async Task <List<Service>> GetAllServices()
 		{
 			//Utilisation de la méthode GetAllAsync du repository IMenurepository
-			IMenuRepository _menus = _db.GetRepository<IMenuRepository>();
-			IEnumerable<Menu> menus = await _menus.GetAllAsync();
+			IServiceRepository _menus = _db.GetRepository<IServiceRepository>();
+			IEnumerable<Service> menus = await _menus.GetAllAsync();
 
 			return menus.ToList();
 
 		}
-		public async Task<Menu> GetMenuById(int IdMenu)
+		public async Task<Service> GetServiceById(int IdMenu)
 		{
-			IMenuRepository _menus = _db.GetRepository<IMenuRepository>();
+			IServiceRepository _menus = _db.GetRepository<IServiceRepository>();
 			return await _menus.GetAsync(IdMenu);
 		}
-		public async Task<Menu> CreateMenu(Menu newMenu)
+		public async Task<Service> CreateService(Service newMenu)
 		{
 			//La methode InsertAsync est appelé dans une transaction
 			_db.BeginTransaction();
-			IMenuRepository _menus = _db.GetRepository<IMenuRepository>();
-			Menu nouvMenu = await _menus.InsertAsync(newMenu);
+			IServiceRepository _menus = _db.GetRepository<IServiceRepository>();
+			Service nouvMenu = await _menus.InsertAsync(newMenu);
 			_db.Commit();
 			return nouvMenu;
 
 		}
-		public async Task<Menu> UpdateMenu(Menu menuToUpdate)
+		public async Task<Service> UpdateService(Service menuToUpdate)
 		{
 			_db.BeginTransaction();
-			IMenuRepository _menus = _db.GetRepository<IMenuRepository>();
+			IServiceRepository _menus = _db.GetRepository<IServiceRepository>();
 			try
 			{
 				//Ici on teste si la methode UpdateAsync a fonctionné (elle renvoie le boolean isModified)
@@ -83,12 +83,12 @@ namespace BLL.Services
 			}
 
 		}
-		public async Task<bool> RemoveMenu(int IdMenu)
+		public async Task<bool> RemoveService(int IdService)
 		{
 			//La methode DeleteAsync est appelée dans une transaction
 			_db.BeginTransaction();
-			IMenuRepository _menus = _db.GetRepository<IMenuRepository>();
-			bool isDeleted = await _menus.DeleteAsync(IdMenu);
+			IServiceRepository _service = _db.GetRepository<IServiceRepository>();
+			bool isDeleted = await _service.DeleteAsync(IdService);
 			_db.Commit();
 			return isDeleted;
 

@@ -8,15 +8,26 @@ using System.Threading.Tasks;
 
 namespace UnitTest.Services
 {
-	class FakeMenuRepository : IMenuRepository
+	/// <summary>
+	/// testing the Menu Repository methods
+	/// </summary>
+	class FakeMenuRepository : IServiceRepository
 	{
-		List<Menu> MenuDb = new List<Menu>()
+		//List of menu created for the testing of Menu Repository
+		List<Service> ServiceDb = new List<Service>()
 		{
-			new Menu(13,"Mardi",new Plat()),
-			new Menu(14,"Mercredi",new Plat()),
-			new Menu(15,"Jeudi",new Plat()),
+			new Service(13,true,new ()),
+			new Service(14,false,new ()),
+			new Service(15,true,new ()),
 
 		};
+
+
+		/// <summary>
+		/// Testing the Delete method of the Menu repository
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Returns true if the Id<= 15 or false if Id > 15</returns>
 		public Task<bool> DeleteAsync(int id)
 		{
 			if (id > 15)
@@ -31,48 +42,67 @@ namespace UnitTest.Services
 			
 		}
 
-		public Task<IEnumerable<Menu>> GetAllAsync()
+		/// <summary>
+		/// Testing the GetAll method of the Menu Repository
+		/// </summary>
+		/// <returns>returns the list (casted in IEnumerable) of the menus</returns>
+		public Task<IEnumerable<Service>> GetAllAsync()
 		{
 			
-			return Task.FromResult(MenuDb as IEnumerable<Menu>);
+			return Task.FromResult(ServiceDb as IEnumerable<Service>);
 				
 		}
 
-		public Task<Menu> GetAsync(int id)
+		/// <summary>
+		/// Testing the Get method of the Menu Repository
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Returns null if the id of the menu > 15 or returns the menu if the id <= 15</returns>
+		public Task<Service> GetAsync(int id)
 		{
 			if (id > 15) {
-				return Task.FromResult<Menu>(null);
+				return Task.FromResult<Service>(null);
 			};
 
-			return Task.FromResult(new Menu()
+			return Task.FromResult(new Service()
 			{
-				IdMenu = id,
-				firstDayweek = "Lundi",
-				Plats = new Plat()
+				IdService = id,
+				Midi = true,
+				dateJourservice = new ()
 			});
 		}
 
-		public Task<Menu> InsertAsync(Menu entity)
+		/// <summary>
+		/// Testing the Insert method of the menu repository
+		/// </summary>
+		/// <param name="entity"></param>
+		/// <returns>returns the menu entity if the entity != null or returns null if the entity is null </returns>
+		public Task<Service> InsertAsync(Service entity)
 		{
 			if (entity != null)
 			{
-				entity.IdMenu = 1;
+				entity.IdService = 1;
 				return Task.FromResult(entity);
 			}
 			else
 			{
-				return Task.FromResult<Menu>(null);
+				return Task.FromResult<Service>(null);
 			}
 
 		}
 
-		public Task<bool> UpdateAsync(Menu entity)
+		/// <summary>
+		/// Testing the Update method of the menu repository
+		/// </summary>
+		/// <param name="entity"></param>
+		/// <returns>returns ann exception if the entity menu is null or returns flase if the IdMeu of the entity to update is null or returns true </returns>
+		public Task<bool> UpdateAsync(Service entity)
 		{	if (entity == null)
 			{
 				throw new Exception();
 			}
 
-			if (entity.IdMenu == null)
+			if (entity.IdService == null)
 			{
 				return Task.FromResult(false);
 			}

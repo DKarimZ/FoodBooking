@@ -31,7 +31,7 @@ namespace ClientDesktop
 			this.LoadMenus();
 		}
 
-		public void Initialize(Menu menu)
+		public void Initialize(Service menu)
 		{
 			if (menu != null)
 			{
@@ -42,30 +42,22 @@ namespace ClientDesktop
 
 		}
 
-		public Menu Compute()
+		public Service Compute()
 		{
-			Menu menu = new Menu();
-			menu.Plats = new List<Plat>();
-			menu.Plats[0].nomPlat = textBox1.Text;
-			menu.Plats[1].nomPlat = textBox2.Text;
-			menu.Plats[2].nomPlat = textBox2.Text;
-
-
-			return new Menu()
-			{
-				IdMenu = 7,
-				Plats = menu.Plats
-
-			};
+			Service menu = new Service();
+			return new();
 
 
 
-			}
+
+
+
+		}
 
 		public async void LoadMenus()
 		{
-			Task<IEnumerable<Menu>> menuTask = _restaurationService.GetAllMenus();
-			IEnumerable<Menu> menu = await menuTask;
+			Task<IEnumerable<Service>> menuTask = _restaurationService.GetAllServices();
+			IEnumerable<Service> menu = await menuTask;
 			bindingSource.DataSource = menu;
 
 			menuGridView.DataSource = bindingSource;

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers.V1
 {
@@ -18,6 +19,7 @@ namespace API.Controllers.V1
 	[Route("api/v{version:apiVersion}/plats")]
 	[Produces(MediaTypeNames.Application.Json)]
 	[Consumes(MediaTypeNames.Application.Json)]
+	[Authorize(Roles = "Restaurateur")]
 
 	public class PlatController : ControllerBase
 	{
@@ -35,6 +37,7 @@ namespace API.Controllers.V1
 		/// <returns>retourne le liste des plats</returns>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
+		
 		public async Task<ActionResult<PageResponse<Plat>>> GetAllPlats([FromQuery] PageRequest pagerequest)
 		{
 			return Ok(await _restaurationService.GetAllPlats(pagerequest));

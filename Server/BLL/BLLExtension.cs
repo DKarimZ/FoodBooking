@@ -30,6 +30,7 @@ namespace BLL
 			services.AddTransient<IReservationService, ReservationService>();
 			services.AddTransient<IRestaurationService, RestaurationService>();
 			services.AddTransient<IFournisseurService, FournisseurService>();
+			services.AddTransient<IAccountService, AccountService>();
 
 			return services;
 

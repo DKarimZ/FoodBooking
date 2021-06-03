@@ -13,10 +13,6 @@
 
   "ConnectionStrings": {
     "DefaultConnection": "Server=localhost;Database=FoodBookingCDA3Test;Trusted_Connection=True;"
-  },
-
-  "JwtKey": "mySecretPassword",
-  "JwtIssuer": "https://localhost:5001",
-  "JwtExpireDays" :  30 
+  }
 
 }

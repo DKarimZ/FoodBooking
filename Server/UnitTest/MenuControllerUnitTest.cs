@@ -22,10 +22,10 @@ namespace UnitTest
 		public async void TestGetMenuById()
 		{
 			IRestaurationService restaurationService = new FakeRestaurationService();
-			MenuController menuController = new MenuController(restaurationService);
+			ServiceController menuController = new ServiceController(restaurationService);
 
-			OkObjectResult menuActionresult = await menuController.GetMenuById(1) as OkObjectResult;
-			NotFoundResult NotFoundmenuActionResult = await menuController.GetMenuById(567) as NotFoundResult;
+			OkObjectResult menuActionresult = await menuController.GetServiceById(1) as OkObjectResult;
+			NotFoundResult NotFoundmenuActionResult = await menuController.GetServiceById(567) as NotFoundResult;
 
 			Assert.NotNull(menuActionresult);
 			Assert.Equal(200, menuActionresult.StatusCode);
@@ -39,24 +39,12 @@ namespace UnitTest
 		public async void TestGetAllMenus()
 		{
 			IRestaurationService restaurationService = new FakeRestaurationService();
-			MenuController menuController = new MenuController(restaurationService);
+			ServiceController menuController = new ServiceController(restaurationService);
 
-			Menu menu = new Menu();
+			Service menu = new Service();
 
-			//PageRequest pageRequest = new PageRequest()
-			//{
-			//	Page = 1,
-			//	PageSize = 10
-			//};
-
-			//PageRequest wrongpageRequest = new PageRequest()
-			//{
-			//	Page = 8,
-			//	PageSize = 30
-			//};
-
-			ActionResult<Menu> menuActionresult = await menuController.GetAllMenus(menu);
-			ActionResult<Menu> wrongmenuActionresult = await menuController.GetAllMenus(menu);
+			ActionResult<Service> menuActionresult = await menuController.GetAllServices(menu);
+			ActionResult<Service> wrongmenuActionresult = await menuController.GetAllServices(menu);
 
 			Assert.NotNull(menuActionresult);
 			Assert.NotNull(wrongmenuActionresult);
@@ -66,24 +54,24 @@ namespace UnitTest
 		[Fact]
 		public async void TestCreateMenu()
 			{
-			Menu newMenu = new Menu()
+			Service newMenu = new Service()
 			{
-				IdMenu = 8,
-				firstDayweek = "Mardi",
-				Plats = new Plat()
+				IdService = 8,
+				Midi = true,
+				dateJourservice = new DateTime(2021,06,13)
 			};
 
-			Menu wrongMenu = new Menu()
+			Service wrongMenu = new Service()
 			{
-				IdMenu = 9,
-				Plats = new Plat()
+				IdService = 9,
+				Midi = false
 			};
 
 			IRestaurationService restaurationService = new FakeRestaurationService();
-			MenuController menuController = new MenuController(restaurationService);
+			ServiceController menuController = new ServiceController(restaurationService);
 
-			CreatedAtActionResult menuActionResult = await menuController.CreateMenu(newMenu) as CreatedAtActionResult;
-			BadRequestResult badrequestMenu = await menuController.CreateMenu(wrongMenu) as BadRequestResult;
+			CreatedAtActionResult menuActionResult = await menuController.CreateService(newMenu) as CreatedAtActionResult;
+			BadRequestResult badrequestMenu = await menuController.CreateService(wrongMenu) as BadRequestResult;
 
 			Assert.NotNull(menuActionResult);
 			Assert.Equal(201, menuActionResult.StatusCode);
@@ -96,10 +84,10 @@ namespace UnitTest
 		public async void TestDeleteMenu()
 		{
 			IRestaurationService restaurationService = new FakeRestaurationService();
-			MenuController menuController = new MenuController(restaurationService);
+			ServiceController menuController = new ServiceController(restaurationService);
 
-			NoContentResult noContentExpected = await menuController.DeleteMenu(1) as NoContentResult;
-			NotFoundResult nofoundExpected = await menuController.DeleteMenu(7898) as NotFoundResult;
+			NoContentResult noContentExpected = await menuController.DeleteService(1) as NoContentResult;
+			NotFoundResult nofoundExpected = await menuController.DeleteService(7898) as NotFoundResult;
 
 			Assert.NotNull(noContentExpected);
 			Assert.Equal(204, noContentExpected.StatusCode);

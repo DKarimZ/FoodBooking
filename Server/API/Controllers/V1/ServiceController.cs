@@ -10,34 +10,36 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers.V1
 {
 	[ApiController]
 	[ApiVersion("1.0")]
-	[Route("api/v{version:apiVersion}/menus")]
+	[Route("api/v{version:apiVersion}/services")]
 	[Produces(MediaTypeNames.Application.Json)]
 	[Consumes(MediaTypeNames.Application.Json)]
+	[Authorize(Roles = "Restaurateur")]
 
-	public class MenuController : ControllerBase
+	public class ServiceController : ControllerBase
 	{
 		private readonly IRestaurationService _restaurationService = null;
 
-		public MenuController(IRestaurationService restaurationService)
+		public ServiceController(IRestaurationService restaurationService)
 		{
 			_restaurationService = restaurationService;
 		}
 
 		/// <summary>
-		/// Permet de récupérer la liste des menus
+		/// Permet de récupérer la liste des services
 		/// </summary>
 		/// <param name="pageRequest"></param>
 		/// <returns>retourne la liste des plats</returns>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<Menu>> GetAllMenus([FromQuery] Menu menuRequest)
+		public async Task<ActionResult<Service>> GetAllServices([FromQuery] Service serviceRequest)
 		{
-			return Ok(await _restaurationService.GetAllMenus());
+			return Ok(await _restaurationService.GetAllServices());
 		}
 
 		/// <summary>
@@ -48,16 +50,16 @@ namespace API.Controllers.V1
 		[HttpGet("{id}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> GetMenuById([FromRoute] int id)
+		public async Task<IActionResult> GetServiceById([FromRoute] int id)
 		{
-			Menu menu = await _restaurationService.GetMenuById(id);
-			if (menu == null)
+			Service service = await _restaurationService.GetServiceById(id);
+			if (service == null)
 			{
 				return NotFound(); // StatusCode = 404
 			}
 			else
 			{
-				return Ok(menu); // StatusCode = 200
+				return Ok(service); // StatusCode = 200
 			}
 		}
 
@@ -65,19 +67,19 @@ namespace API.Controllers.V1
 		/// <summary>
 		/// Permet de créer un menu en BDD
 		/// </summary>
-		/// <param name="menu"></param>
+		/// <param name="service"></param>
 		/// <returns>retourne un code en fonction du résultat</returns>
 		[HttpPost()]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<IActionResult> CreateMenu([FromBody] Menu menu)
+		public async Task<IActionResult> CreateService([FromBody] Service service)
 		{
-			// Ajout du menu avec la bll server
-			Menu newMenu = await _restaurationService.CreateMenu(menu);
-			if (newMenu != null )
+			// Ajout du service avec la bll server
+			Service newService = await _restaurationService.CreateService(service);
+			if (newService != null )
 			{
-				// Créer une redirection vers GetMenuById(newMenu.IdMenu);
-				return CreatedAtAction(nameof(GetMenuById), new { id = newMenu.IdMenu }, newMenu);
+				// Créer une redirection vers GetServiceById(newMenu.IdMenu);
+				return CreatedAtAction(nameof(GetServiceById), new { id = newService.IdService }, newService);
 			}
 			else
 			{
@@ -87,16 +89,16 @@ namespace API.Controllers.V1
 		}
 
 		/// <summary>
-		/// Permet de supprimer un menu en BDD
+		/// Permet de supprimer un service en BDD
 		/// </summary>
 		/// <param name="idMenu"></param>
 		/// <returns>retourne un code en fonction du résultat</returns>
 		[HttpDelete("{id}")]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> DeleteMenu([FromRoute] int idMenu)
+		public async Task<IActionResult> DeleteService([FromRoute] int idService)
 		{
-			if (await _restaurationService.RemoveMenu(idMenu))
+			if (await _restaurationService.RemoveService(idService))
 			{
 				// Renvoie un code 204 aucun contenu
 				return NoContent();
@@ -112,26 +114,26 @@ namespace API.Controllers.V1
 		/// Permet de modifier un livre en BDD
 		/// </summary>
 		/// <param name="idMenu"></param>
-		/// <param name="menu"></param>
+		/// <param name="service"></param>
 		/// <returns>retroune un code en fonction du résultat</returns>
 		[HttpPut("{id}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> ModifyMenu([FromRoute] int idMenu, [FromBody] Menu menu)
+		public async Task<IActionResult> ModifyService([FromRoute] int idMenu, [FromBody] Service service)
 		{
-			if (menu == null || idMenu != menu.IdMenu)
+			if (service == null || idMenu != service.IdService)
 			{
 				// Retourne un code 400  Bad Request
 				return BadRequest();
 			}
 			else
 			{
-				Menu menuModified = await _restaurationService.UpdateMenu(menu);
-				if (menuModified != null)
+				Service serviceModified = await _restaurationService.UpdateService(service);
+				if (serviceModified != null)
 				{
 					// Renvoie la ressource modifiée
-					return Ok(menuModified);
+					return Ok(serviceModified);
 				}
 				else
 				{

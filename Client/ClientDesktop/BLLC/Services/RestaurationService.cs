@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -17,38 +18,49 @@ namespace BLLC.Services
 		public RestaurationService()
 		{
 			_httpClient = new HttpClient();
-			_httpClient.BaseAddress = new Uri("https://localhost:5001/api/");
+			_httpClient.BaseAddress = new Uri("https://localhost:5001/api/v1/");
 		}
 
-		public async Task<IEnumerable<Menu>> GetAllMenus()
+		public async Task<IEnumerable<Service>> GetAllServices()
 		{
-			var reponse = await _httpClient.GetAsync($"menus");
+			if (AuthentificationService.Getinstance().IsLogged) {
 
-			if (reponse.IsSuccessStatusCode)
-			{
-				using (var stream = await reponse.Content.ReadAsStreamAsync())
+				_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+				var reponse = await _httpClient.GetAsync($"services");
+
+				if (reponse.IsSuccessStatusCode)
 				{
-					List<Menu> menus = await JsonSerializer.DeserializeAsync<List<Menu>>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-					return menus;
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						List<Service> menus = await JsonSerializer.DeserializeAsync<List<Service>>(stream,
+							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+						return menus;
+					}
+				}
+				else
+				{
+					return null;
 				}
 			}
-			else
-			{
-				return null;
-			}
+			
+			
+			return null;
+			
 		}
 		//public async Task<Menu> GetMenuById(int IdMenu) 
 		//{
 		//
 		//}
-		public async Task<Menu> CreateMenu(Menu newMenu)
+		public async Task<Service> CreateMenu(Service newMenu)
 		{
 			try
 			{
 				var reponse = await _httpClient.PostAsJsonAsync($"menus", newMenu);
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
-					return await JsonSerializer.DeserializeAsync<Menu>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+					return await JsonSerializer.DeserializeAsync<Service>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 				}
 			}
 			catch (Exception)
@@ -56,19 +68,19 @@ namespace BLLC.Services
 				return null;
 			}
 		}
-		public async Task<Menu> UpdateMenu(Menu menuToUpdate)
+		public async Task<Service> UpdateMenu(Service menuToUpdate)
 		{
 			try
 			{
-				if (menuToUpdate.IdMenu == null)
+				if (menuToUpdate.IdService == null)
 				{
 					return null;
 				}
 
-				var reponse = await _httpClient.PostAsJsonAsync($"menus/{menuToUpdate.IdMenu}", menuToUpdate);
+				var reponse = await _httpClient.PostAsJsonAsync($"menus/{menuToUpdate.IdService}", menuToUpdate);
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
-					return await JsonSerializer.DeserializeAsync<Menu>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+					return await JsonSerializer.DeserializeAsync<Service>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 				}
 			}
 			catch (Exception)
@@ -78,13 +90,13 @@ namespace BLLC.Services
 			}
 
 		}
-		public async Task<bool> RemoveMenu(Menu menuToDelete)
+		public async Task<bool> RemoveMenu(Service menuToDelete)
 		{
-			if (menuToDelete.IdMenu != null)
+			if (menuToDelete.IdService != null)
 			{
 				try
 				{
-					await _httpClient.DeleteAsync($"menus/{menuToDelete.IdMenu}");
+					await _httpClient.DeleteAsync($"menus/{menuToDelete.IdService}");
 					return true;
 				}
 				catch (Exception)

@@ -155,8 +155,8 @@ namespace ClientDesktop
 			// 
 			this.menuGridView.AllowUserToAddRows = false;
 			this.menuGridView.AllowUserToDeleteRows = false;
+			this.menuGridView.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.menuGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.menuGridView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.menuGridView.Location = new System.Drawing.Point(3, 3);
 			this.menuGridView.Name = "menuGridView";
 			this.menuGridView.ReadOnly = true;

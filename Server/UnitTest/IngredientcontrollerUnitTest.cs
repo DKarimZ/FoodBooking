@@ -14,6 +14,9 @@ using Xunit;
 
 namespace UnitTest
 {
+	/// <summary>
+	/// Testing the Ingredient controller / methods
+	/// </summary>
 	public class IngredientcontrollerUnitTest
 	{
 		[Fact]
@@ -49,7 +52,7 @@ namespace UnitTest
 			IRestaurationService restaurationService = new FakeRestaurationService();
 			IngredientController ingredientController = new IngredientController(restaurationService);
 
-			OkObjectResult ingredientresult = await ingredientController.GetingredienttById(1) as OkObjectResult;
+			OkObjectResult ingredientresult = await ingredientController.GetingredienttById(3) as OkObjectResult;
 			NotFoundResult ingredientnotfoundResult = await ingredientController.GetingredienttById(1678) as NotFoundResult;
 
 			Assert.NotNull(ingredientresult);
@@ -70,14 +73,14 @@ namespace UnitTest
 			Ingredient newIngredient = new Ingredient()
 			{
 				IdIngredient = 5,
-				nomIngredient = "saumon",
-				prixMoyen = 14
+				NomIngredient = "saumon",
+				PrixMoyen = 14
 			};
 
 			Ingredient newbadIngredient = new Ingredient()
 			{
 				IdIngredient = 6,
-				prixMoyen = 18
+				PrixMoyen = 18
 			};
 
 			CreatedAtActionResult ingredientcreatedResult = await ingredientController.CreateIngredient(newIngredient) as CreatedAtActionResult;
@@ -96,7 +99,7 @@ namespace UnitTest
 			IRestaurationService restaurationService = new FakeRestaurationService();
 			IngredientController ingredientController = new IngredientController(restaurationService);
 
-			NoContentResult ingredientdeleteResult = await ingredientController.Deleteingredient(1) as NoContentResult;
+			NoContentResult ingredientdeleteResult = await ingredientController.Deleteingredient(3) as NoContentResult;
 			NotFoundResult ingredientnotfoundResult = await ingredientController.Deleteingredient(789) as NotFoundResult;
 
 			Assert.NotNull(ingredientdeleteResult);
@@ -115,13 +118,14 @@ namespace UnitTest
 
 			Ingredient ingredientupdated = new Ingredient()
 			{
-				nomIngredient = "tomatoes",
-				prixMoyen = 5
+				IdIngredient = 3,
+				NomIngredient = "tomatoes",
+				PrixMoyen = 5
 
 			};
 
-			OkObjectResult ingredientUpdatedresult = await ingredientController.Modifyingredient(5, ingredientupdated) as OkObjectResult;
-			BadRequestResult ingredientbadRequestresult = await ingredientController.Modifyingredient(1678, ingredientupdated) as BadRequestResult;
+			OkObjectResult ingredientUpdatedresult = await ingredientController.Modifyingredient(3, ingredientupdated) as OkObjectResult;
+			BadRequestResult ingredientbadRequestresult = await ingredientController.Modifyingredient(167, ingredientupdated) as BadRequestResult;
 
 			Assert.NotNull(ingredientUpdatedresult);
 			Assert.Equal(200, ingredientUpdatedresult.StatusCode);

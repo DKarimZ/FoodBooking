@@ -7,10 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UnitTest.Services
+
 {
+	/// <summary>
+	/// Creating the fakeUnitOfWOrk and his methods
+	/// </summary>
 	class FakeUnitOfwork : IUnitOfWork
 	{
-
 		public void BeginTransaction()
 		{
 			return;
@@ -25,6 +28,7 @@ namespace UnitTest.Services
 		{
 			return;
 		}
+
 		/// <summary>
 		/// T => IMenuRepository, I
 		/// </summary>
@@ -34,7 +38,7 @@ namespace UnitTest.Services
 		{
 			Type repository = typeof(T);
 
-			if (repository == typeof(IMenuRepository))
+			if (repository == typeof(IServiceRepository))
 			{
 				return new FakeMenuRepository() as T;
 			}

@@ -16,7 +16,8 @@ namespace DAL.UOW
 
         public DbSession(IConfiguration configuration, string connectionName)
         {
-            Connection = new SqlConnection(configuration.GetConnectionString(connectionName));
+	        var connectionString = configuration.GetConnectionString(connectionName);
+            Connection = new SqlConnection(connectionString);
             Connection.Open();
         }
 
