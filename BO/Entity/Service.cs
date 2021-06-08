@@ -41,6 +41,14 @@ namespace BO.Entity
 
 		}
 
+		public Service(int? idService, bool midi, DateTime dateJourservice,List<Plat> plats)
+		{
+			IdService = idService;
+			Midi = midi;
+			this.dateJourservice = dateJourservice;
+			Plats = plats;
+		}
+
 		public Service(int? idService, bool midi, DateTime dateJourservice)
 		{
 			IdService = idService;

@@ -43,6 +43,15 @@ namespace API.Controllers.V1
 			return Ok(await _restaurationService.GetAllPlats(pagerequest));
 		}
 
+		[HttpGet("type/{idType}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+
+		public async Task<ActionResult<PageResponse<Plat>>> GetAllPlats([FromRoute] int idType)
+		{
+			return Ok(await _restaurationService.GetAllPlatsByType(idType));
+		}
+
+
 		/// <summary>
 		/// Permet de récupérer un plat en fonction de son identifiant
 		/// </summary>
@@ -51,6 +60,7 @@ namespace API.Controllers.V1
 		[HttpGet("{id}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
+
 		public async Task<IActionResult> GetPlatById([FromRoute] int id)
 		{
 			Plat plat = await _restaurationService.GetPlatById(id);

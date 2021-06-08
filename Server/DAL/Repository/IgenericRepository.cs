@@ -41,6 +41,9 @@ namespace DAL.Repository
 		/// <param name="id"></param>
 		/// <returns>Retourne un boolean en fonction du succes de la suppression</returns>
 		Task<bool> DeleteAsync(int id);
+
+
 		
+
 	}
 }

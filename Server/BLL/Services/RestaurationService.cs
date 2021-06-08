@@ -47,9 +47,11 @@ namespace BLL.Services
 		{
 			//La methode InsertAsync est appelé dans une transaction
 			_db.BeginTransaction();
+			
 			IServiceRepository _menus = _db.GetRepository<IServiceRepository>();
 			Service nouvMenu = await _menus.InsertAsync(newMenu);
-			_db.Commit();
+			//if(nouvMenu.Plats[0]!= null && nouvMenu.Plats[1]!= null && nouvMenu.Plats[2]!=null) 
+				_db.Commit();
 			return nouvMenu;
 
 		}
@@ -122,6 +124,15 @@ namespace BLL.Services
 			_db.Commit();
 			return nouvPlat;
 		}
+
+		public async Task<List<Plat>> GetAllPlatsByType(int idType)
+		{
+			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();
+			return (await _plats.GetAllThePlatsByTypePlat(idType)).ToList();
+	}
+
+
+
 		public async Task<Plat> UpdatePlat(Plat platToUpdate)
 		{
 			_db.BeginTransaction();

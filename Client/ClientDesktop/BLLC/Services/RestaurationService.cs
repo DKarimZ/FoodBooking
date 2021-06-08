@@ -23,9 +23,11 @@ namespace BLLC.Services
 
 		public async Task<IEnumerable<Service>> GetAllServices()
 		{
-			if (AuthentificationService.Getinstance().IsLogged) {
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
 
-				_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
 
 
 				var reponse = await _httpClient.GetAsync($"services");
@@ -44,20 +46,106 @@ namespace BLLC.Services
 					return null;
 				}
 			}
-			
-			
+
+
 			return null;
-			
+
 		}
-		//public async Task<Menu> GetMenuById(int IdMenu) 
-		//{
-		//
-		//}
-		public async Task<Service> CreateMenu(Service newMenu)
+		
+
+
+		public async Task<Service> GetServiceById(int idService)
+		{
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+				var reponse = await _httpClient.GetAsync($"services/" + idService);
+
+				if (reponse.IsSuccessStatusCode)
+				{
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						Service service = await JsonSerializer.DeserializeAsync<Service>(stream,
+							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+						return service;
+					}
+				}
+				else
+				{
+					return null;
+				}
+			}
+
+
+			return null;
+
+		}
+	
+
+	public async Task<Plat> GetPlatById(int idplat)
+	{
+		if (AuthentificationService.Getinstance().IsLogged)
+		{
+
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+			var reponse = await _httpClient.GetAsync($"plats/" + idplat);
+
+			if (reponse.IsSuccessStatusCode)
+			{
+				using (var stream = await reponse.Content.ReadAsStreamAsync())
+				{
+					Plat plat = await JsonSerializer.DeserializeAsync<Plat>(stream,
+						new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+					return plat;
+				}
+			}
+			else
+			{
+				return null;
+			}
+		}
+
+
+		return null;
+
+	}
+
+
+	public async Task<IEnumerable<Plat>> GetAllPlatsByType(int typePlat)
+	{
+
+		var reponse = await _httpClient.GetAsync($"plats/type/" + typePlat);
+
+		if (reponse.IsSuccessStatusCode)
+		{
+			using (var stream = await reponse.Content.ReadAsStreamAsync())
+			{
+				List<Plat> plats = await JsonSerializer.DeserializeAsync<List<Plat>>(stream,
+					new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+				return plats;
+			}
+		}
+		else
+		{
+			return null;
+		}
+
+
+
+		}
+
+
+	public async Task<Service> CreateMenu(Service newService)
 		{
 			try
 			{
-				var reponse = await _httpClient.PostAsJsonAsync($"menus", newMenu);
+				var reponse = await _httpClient.PostAsJsonAsync($"services", newService);
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
 					return await JsonSerializer.DeserializeAsync<Service>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
@@ -77,7 +165,7 @@ namespace BLLC.Services
 					return null;
 				}
 
-				var reponse = await _httpClient.PostAsJsonAsync($"menus/{menuToUpdate.IdService}", menuToUpdate);
+				var reponse = await _httpClient.PostAsJsonAsync($"services/{menuToUpdate.IdService}", menuToUpdate);
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
 					return await JsonSerializer.DeserializeAsync<Service>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
@@ -96,8 +184,9 @@ namespace BLLC.Services
 			{
 				try
 				{
-					await _httpClient.DeleteAsync($"menus/{menuToDelete.IdService}");
-					return true;
+					var response = await _httpClient.DeleteAsync($"services/{menuToDelete.IdService}");
+					if(response.IsSuccessStatusCode) 
+						return true;
 				}
 				catch (Exception)
 				{

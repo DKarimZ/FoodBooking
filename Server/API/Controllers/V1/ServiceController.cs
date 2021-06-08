@@ -93,7 +93,7 @@ namespace API.Controllers.V1
 		/// </summary>
 		/// <param name="idMenu"></param>
 		/// <returns>retourne un code en fonction du résultat</returns>
-		[HttpDelete("{id}")]
+		[HttpDelete("{idService}")]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> DeleteService([FromRoute] int idService)

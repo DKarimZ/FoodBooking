@@ -3,6 +3,8 @@ using DAL.UOW;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,10 +52,18 @@ namespace DAL.Repository
 		}
 		public async Task<Service> InsertAsync(Service menuToCreate)
 		{
-			var stmt = @"insert into menu(firstDayweek, Plats) output INSERTED.ID values (@firstDayweek, @Plats)";
+			var stmt = @"insert into Services (Midi, dateJourservice) output INSERTED.IdService values ( @Midi, @datejourservice)";
+			
 			try
 			{
-				int i = await _session.Connection.QuerySingleAsync<int>(stmt, menuToCreate, _session.Transaction);
+				var i = await _session.Connection.QuerySingleAsync<int>(stmt, menuToCreate, _session.Transaction);
+				
+				var stmtServicePlat = @"insert into ServicePlat (IdService, IdPlat) output INSERTED.IdService values (@idService, @idPlat)";
+				menuToCreate.Plats.ForEach(async plat =>
+				{
+					await _session.Connection.QuerySingleAsync<int>(stmtServicePlat, new{ idService  = i, idPlat = plat.IdPlat}, _session.Transaction);
+				});
+
 				return await GetAsync(i);
 			}
 			catch
@@ -61,17 +71,28 @@ namespace DAL.Repository
 				return null;
 			}
 		}
-		public async Task<bool> DeleteAsync(int idMenu)
+		public async  Task<bool> DeleteAsync(int idService)
 		{
-			var stmt = @"delete from menu where IdMenu = @IdMenu";
+
+			var queryParameters = new DynamicParameters();
+			queryParameters.Add("IdService",idService);
+
+
 
 			try
 			{
-				int i = await _session.Connection.ExecuteAsync(stmt, new { idMenu = idMenu }, _session.Transaction);
+				var i = 	await _session.Connection.ExecuteAsync(
+					"EffacerUnService",
+					queryParameters,
+					commandType: CommandType.StoredProcedure, transaction: _session.Transaction);
+
+
 				return i > 0;
+
 			}
-			catch 
+			catch(Exception e)
 			{
+				_logger.LogWarning(e.Message);
 				return false;
 			
 			}

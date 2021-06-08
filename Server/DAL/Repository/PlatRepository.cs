@@ -24,13 +24,20 @@ namespace DAL.Repository
 		}
 		public async Task<IEnumerable<Plat>> GetAllAsync()
 		{
-			var stmt = @"select * from plat";
+			var stmt = @"select * from Plat";
 			return await _session.Connection.QueryAsync<Plat>(stmt, null, _session.Transaction);
 		}
+
+		public async Task<IEnumerable<Plat>> GetAllThePlatsByTypePlat(int idtypePlat)
+		{
+			var stmt = @"select * from Plat where IdTypePlat = @idtypePlat";
+			return await _session.Connection.QueryAsync<Plat>(stmt, new{@idtypePlat = idtypePlat}, _session.Transaction);
+		}
+
 		public async Task<Plat> GetAsync(int id)
 		{
-			var stmt = @"select * from plat where id = @id";
-			return await _session.Connection.QueryFirstOrDefaultAsync<Plat>(stmt, new { Id = id }, _session.Transaction);
+			var stmt = @"select * from Plat where IdPlat = @id";
+			return await _session.Connection.QueryFirstOrDefaultAsync<Plat>(stmt, new { @id = id }, _session.Transaction);
 		}
 		public async Task<bool> UpdateAsync(Plat platToUpdate)
 		{
@@ -48,7 +55,7 @@ namespace DAL.Repository
 		}
 		public async Task<Plat> InsertAsync(Plat platToCreate)
 		{
-			var stmt = @"insert into plat(nomPlat,typePlat,Ingredients) output INSERTED.ID values (@nomPlat,@typePlat, @Ingredients)";
+			var stmt = @"insert into plat(Nom,score,IdTypePlat) output INSERTED.ID values (@nom,@score, @IdTypePlat)";
 			try
 			{
 				int i = await _session.Connection.QuerySingleAsync<int>(stmt, platToCreate, _session.Transaction);

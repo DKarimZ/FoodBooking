@@ -56,6 +56,9 @@ namespace BLL.Services
 		//Services liés aux plats
 		#region Plat
 
+
+		Task<List<Plat>> GetAllPlatsByType(int idType);
+
 		/// <summary>
 		/// Permet de récupérer la liste des plats
 		/// </summary>

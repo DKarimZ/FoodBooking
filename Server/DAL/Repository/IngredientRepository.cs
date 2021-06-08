@@ -30,8 +30,9 @@ namespace DAL.Repository
 		}
 		public async Task<Ingredient> GetAsync(int id)
 		{
-			var stmt = @"select * from ingredient where id = @id";
-			return await _session.Connection.QueryFirstOrDefaultAsync<Ingredient>(stmt, new { Id = id }, _session.Transaction);
+			var stmt = @"select * from ingredient where IdIngredient = @id";
+			return await _session.Connection.QueryFirstOrDefaultAsync<Ingredient>(stmt, new { @id = id }, _session.Transaction);
+
 		}
 		public async Task<bool> UpdateAsync(Ingredient ingredientToUpdate)
 		{

@@ -19,7 +19,7 @@ namespace BO.Entity
 		/// <summary>
 		/// nom du plat
 		/// </summary>
-		public string nomPlat { get; set; }
+		public string Nom { get; set; }
 
 		/// <summary>
 		/// type de plat (entrée, plat, dessert)
@@ -56,7 +56,7 @@ namespace BO.Entity
 			)
 		{
 			IdPlat = idPlat;
-			this.nomPlat = nomPlat;
+			this.Nom = nomPlat;
 			this.typePlat = typePlat;
 			Score = score;
 			PlatIngredient = platIngredients;
@@ -67,7 +67,7 @@ namespace BO.Entity
 		{
 			return obj is Plat plat &&
 				   IdPlat == plat.IdPlat &&
-				   nomPlat == plat.nomPlat &&
+				   Nom == plat.Nom &&
 				   typePlat == plat.typePlat &&
 				   Score == plat.Score &&
 				   EqualityComparer<List<PlatIngredient>>.Default.Equals(PlatIngredient, plat.PlatIngredient);
@@ -76,7 +76,7 @@ namespace BO.Entity
 		// Methode GetHashCode (Si besoin de la redéfinir)
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(IdPlat, nomPlat, typePlat, Score, PlatIngredient);
+			return HashCode.Combine(IdPlat, Nom, typePlat, Score, PlatIngredient);
 		}
 	}
 }
