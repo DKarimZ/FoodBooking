@@ -11,6 +11,6 @@ namespace DAL.Repository
 {
 	public interface IServiceRepository : IgenericRepository<Service>
 	{
-		
+	
 	}
 }

@@ -65,6 +65,9 @@ namespace BLL.Services
 		/// <returns>retourne la liste des plats</returns>
 		Task<PageResponse<Plat>> GetAllPlats(PageRequest pageRequest);
 
+
+		Task<List<Plat>> GetAllPlats();
+
 		/// <summary>
 		/// permet de récupérer un plat en fonction de son identifiant
 		/// </summary>

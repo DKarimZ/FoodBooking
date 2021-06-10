@@ -8,6 +8,9 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using BLLC.Extension;
+using BO.DTO.Requests;
+using BO.DTO.Responses;
 
 namespace BLLC.Services
 {
@@ -51,7 +54,104 @@ namespace BLLC.Services
 			return null;
 
 		}
-		
+
+
+
+		public async Task<PageResponse<Plat>> GetAllPlats(PageRequest pageRequest)
+		{
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+				var reponse = await _httpClient.GetAsync(($"plats{pageRequest.ToUriQuery()}"));
+
+				if (reponse.IsSuccessStatusCode)
+				{
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						var plats = await JsonSerializer.DeserializeAsync<PageResponse<Plat>>(stream,
+							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+						return plats;
+					}
+				}
+				else
+				{
+					return null;
+				}
+			}
+
+
+			return null;
+
+		}
+
+		public async Task<PageResponse<Ingredient>> GetAllIngredients(PageRequest pageRequest)
+		{
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+				var reponse = await _httpClient.GetAsync(($"ingredients{pageRequest.ToUriQuery()}"));
+
+				if (reponse.IsSuccessStatusCode)
+				{
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						var ingredients = await JsonSerializer.DeserializeAsync<PageResponse<Ingredient>>(stream,
+							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+						return ingredients;
+					}
+				}
+				else
+				{
+					return null;
+				}
+			}
+
+
+			return null;
+
+		}
+
+
+		public async Task<Ingredient> GetIngredientById(int idIngredient)
+		{
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+				var reponse = await _httpClient.GetAsync($"ingredients/" + idIngredient);
+
+				if (reponse.IsSuccessStatusCode)
+				{
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						Ingredient ingredient = await JsonSerializer.DeserializeAsync<Ingredient>(stream,
+							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+						return ingredient;
+					}
+				}
+				else
+				{
+					return null;
+				}
+			}
+
+
+			return null;
+
+		}
+
+
 
 
 		public async Task<Service> GetServiceById(int idService)
@@ -120,15 +220,24 @@ namespace BLLC.Services
 	public async Task<IEnumerable<Plat>> GetAllPlatsByType(int typePlat)
 	{
 
-		var reponse = await _httpClient.GetAsync($"plats/type/" + typePlat);
 
-		if (reponse.IsSuccessStatusCode)
+		if (AuthentificationService.Getinstance().IsLogged)
 		{
-			using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+			var reponse = await _httpClient.GetAsync($"plats/type/" + typePlat);
+
+			if (reponse.IsSuccessStatusCode)
 			{
-				List<Plat> plats = await JsonSerializer.DeserializeAsync<List<Plat>>(stream,
-					new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-				return plats;
+				using (var stream = await reponse.Content.ReadAsStreamAsync())
+				{
+					List<Plat> plats = await JsonSerializer.DeserializeAsync<List<Plat>>(stream,
+						new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+					return plats;
+				}
+			}
+			else
+			{
+				return null;
 			}
 		}
 		else
@@ -136,12 +245,27 @@ namespace BLLC.Services
 			return null;
 		}
 
+	}
 
 
+
+	public async Task<Plat> CreatePlat(Plat newPlat)
+	{
+		try
+		{
+			var reponse = await _httpClient.PostAsJsonAsync($"plats", newPlat);
+			using (var stream = await reponse.Content.ReadAsStreamAsync())
+			{
+				return await JsonSerializer.DeserializeAsync<Plat>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+			}
 		}
+		catch (Exception)
+		{
+			return null;
+		}
+	}
 
-
-	public async Task<Service> CreateMenu(Service newService)
+		public async Task<Service> CreateMenu(Service newService)
 		{
 			try
 			{

@@ -116,13 +116,13 @@ namespace API.Controllers.V1
 		/// <param name="idMenu"></param>
 		/// <param name="service"></param>
 		/// <returns>retroune un code en fonction du résultat</returns>
-		[HttpPut("{id}")]
+		[HttpPut("{idService}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> ModifyService([FromRoute] int idMenu, [FromBody] Service service)
+		public async Task<IActionResult> ModifyService([FromRoute] int idService, [FromBody] Service service)
 		{
-			if (service == null || idMenu != service.IdService)
+			if (service == null || idService != service.IdService)
 			{
 				// Retourne un code 400  Bad Request
 				return BadRequest();

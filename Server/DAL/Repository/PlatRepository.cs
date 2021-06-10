@@ -55,7 +55,7 @@ namespace DAL.Repository
 		}
 		public async Task<Plat> InsertAsync(Plat platToCreate)
 		{
-			var stmt = @"insert into plat(Nom,score,IdTypePlat) output INSERTED.ID values (@nom,@score, @IdTypePlat)";
+			var stmt = @"insert into plat(Nom,Score,IdTypePlat) output INSERTED.IdPlat values (@nom,@score,2);";
 			try
 			{
 				int i = await _session.Connection.QuerySingleAsync<int>(stmt, platToCreate, _session.Transaction);
@@ -66,6 +66,26 @@ namespace DAL.Repository
 				return null;
 			}
 		}
+
+		public async Task<PlatIngredient> InsertIngredientsAsync(Ingredient ingredientToAdd)
+		{
+			//var stmt =
+			//	@"insert into PlatIngredient(IdPlat, IdIngredient,Quantite) values (@Idplat,@IdIngredient,@Quantite);";
+			//try
+			//{
+			//	int i = await _session.Connection.QuerySingleAsync<int>(stmt, platToCreate, _session.Transaction);
+			//	return await GetAsync(i);
+			//}
+
+			//catch
+			//{
+			//	return null;
+			//}
+			return new();
+
+			//TODO Finir la methode d'ajout de plat (et d'ingredients)
+		}
+
 		public async Task<bool> DeleteAsync(int idPlat)
 		{
 			var stmt = @"delete from plat where IdPlat = @IdPlat";

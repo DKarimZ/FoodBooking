@@ -27,7 +27,7 @@ namespace BO.DTO.Requests
 		public PageRequest()
 		{
 			Page = 1;
-			PageSize = 10;
+			PageSize = 20;
 		}
 
 		/// <summary>

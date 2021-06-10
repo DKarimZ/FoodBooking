@@ -110,6 +110,19 @@ namespace BLL.Services
 
 			
 		}
+		public async Task<List<Plat>> GetAllPlats()
+		{
+			//Utilisation de la méthode GetAllAsync du repository IMenurepository
+			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();
+			IEnumerable<Plat> plats = await _plats.GetAllAsync();
+
+			return plats.ToList();
+
+		}
+
+
+
+
 		public async Task<Plat> GetPlatById(int IdPlat)
 		{
 			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();

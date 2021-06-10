@@ -25,43 +25,71 @@ namespace DAL.Repository
 			_logger = logger;
 		}
 
-		public async Task <IEnumerable<Service>> GetAllAsync() 
+		public async Task<IEnumerable<Service>> GetAllAsync()
 		{
 			var stmt = @"select * from Services";
 			return await _session.Connection.QueryAsync<Service>(stmt, null, _session.Transaction);
 		}
-		public async Task<Service> GetAsync(int id) 
+
+		public async Task<Service> GetAsync(int id)
 		{
 			var stmt = @"select * from Services where IdService = @id";
-			var r =  await _session.Connection.QueryFirstOrDefaultAsync<Service>(stmt, new { Id = id }, _session.Transaction);
+			var r = await _session.Connection.QueryFirstOrDefaultAsync<Service>(stmt, new {Id = id},
+				_session.Transaction);
 			return r;
 		}
+
 		public async Task<bool> UpdateAsync(Service menuToUpdate)
 		{
-			var stmt = @"update menu set firstDayWeek = @firstDayweek, Plats = @Plats from menu join plat where IdMenu = @IdMenu";
+			Service oldService = await GetAsync(menuToUpdate.IdService);
 
-			try
-			{
-				int i = await _session.Connection.ExecuteAsync(stmt, menuToUpdate, _session.Transaction);
-				return i > 0;
-			}
-			catch
-			{
-				return false;
-			}
-		}
-		public async Task<Service> InsertAsync(Service menuToCreate)
-		{
-			var stmt = @"insert into Services (Midi, dateJourservice) output INSERTED.IdService values ( @Midi, @datejourservice)";
+			var queryParameters = new DynamicParameters();
+
+			queryParameters.Add("IdService", menuToUpdate.IdService);
+
+			queryParameters.Add("IdPlat1Old", oldService.Plats[0].IdPlat);
+			queryParameters.Add("IdPlat2Old", oldService.Plats[1].IdPlat);
+			queryParameters.Add("IdPlat3Old", oldService.Plats[2].IdPlat);
+
+			queryParameters.Add("IdPlat1New", menuToUpdate.Plats[0].IdPlat);
+			queryParameters.Add("IdPlat2New", menuToUpdate.Plats[1].IdPlat);
+			queryParameters.Add("IdPlat3new", menuToUpdate.Plats[2].IdPlat);
 			
 			try
 			{
+				var i = await _session.Connection.ExecuteAsync(
+					"ModifierUnService",
+					queryParameters,
+					commandType: CommandType.StoredProcedure, transaction: _session.Transaction);
+
+
+				return i > 0;
+
+			}
+			catch (Exception e)
+			{
+				_logger.LogWarning(e.Message);
+				return false;
+
+			}
+
+		}
+
+		public async Task<Service> InsertAsync(Service menuToCreate)
+		{
+			var stmt =
+				@"insert into Services (Midi, dateJourservice) output INSERTED.IdService values ( @Midi, @datejourservice)";
+
+			try
+			{
 				var i = await _session.Connection.QuerySingleAsync<int>(stmt, menuToCreate, _session.Transaction);
-				
-				var stmtServicePlat = @"insert into ServicePlat (IdService, IdPlat) output INSERTED.IdService values (@idService, @idPlat)";
+
+				var stmtServicePlat =
+					@"insert into ServicePlat (IdService, IdPlat) output INSERTED.IdService values (@idService, @idPlat)";
 				menuToCreate.Plats.ForEach(async plat =>
 				{
-					await _session.Connection.QuerySingleAsync<int>(stmtServicePlat, new{ idService  = i, idPlat = plat.IdPlat}, _session.Transaction);
+					await _session.Connection.QuerySingleAsync<int>(stmtServicePlat,
+						new {idService = i, idPlat = plat.IdPlat}, _session.Transaction);
 				});
 
 				return await GetAsync(i);
@@ -71,17 +99,18 @@ namespace DAL.Repository
 				return null;
 			}
 		}
-		public async  Task<bool> DeleteAsync(int idService)
+
+		public async Task<bool> DeleteAsync(int idService)
 		{
 
 			var queryParameters = new DynamicParameters();
-			queryParameters.Add("IdService",idService);
+			queryParameters.Add("IdService", idService);
 
 
 
 			try
 			{
-				var i = 	await _session.Connection.ExecuteAsync(
+				var i = await _session.Connection.ExecuteAsync(
 					"EffacerUnService",
 					queryParameters,
 					commandType: CommandType.StoredProcedure, transaction: _session.Transaction);
@@ -90,28 +119,14 @@ namespace DAL.Repository
 				return i > 0;
 
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				_logger.LogWarning(e.Message);
 				return false;
-			
+
 			}
 		}
 
-		//public async Task<PageResponse<Menu>> GetAllAsync(PageRequest pageRequest)
-		//{
-		//	var stmt = @"select * from menu
-		//				ORDER BY IdMenu
-		//				OFFSET @PageSize * (@Page - 1) rows
-		//				FETCH NEXT @PageSize rows only";
-
-		//	string queryCount = " SELECT COUNT(*) FROM menu ";
-
-		//	IEnumerable<Menu> menuTask = await _session.Connection.QueryAsync<Menu>(stmt, pageRequest, _session.Transaction);
-		//	int countTask = await _session.Connection.ExecuteScalarAsync<int>(queryCount, null, _session.Transaction);
-
-		//	return new PageResponse<Menu>(pageRequest.Page, pageRequest.PageSize, countTask, (menuTask).ToList());
-		//}
-
+		
 	}
 }

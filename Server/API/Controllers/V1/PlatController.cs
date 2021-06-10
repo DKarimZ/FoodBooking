@@ -19,7 +19,7 @@ namespace API.Controllers.V1
 	[Route("api/v{version:apiVersion}/plats")]
 	[Produces(MediaTypeNames.Application.Json)]
 	[Consumes(MediaTypeNames.Application.Json)]
-	[Authorize(Roles = "Restaurateur")]
+	[Authorize(Roles = "Restaurateur, user")]
 
 	public class PlatController : ControllerBase
 	{
@@ -37,11 +37,20 @@ namespace API.Controllers.V1
 		/// <returns>retourne le liste des plats</returns>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		
+
 		public async Task<ActionResult<PageResponse<Plat>>> GetAllPlats([FromQuery] PageRequest pagerequest)
 		{
-			return Ok(await _restaurationService.GetAllPlats(pagerequest));
+			return Ok(await _restaurationService.GetAllPlats(pagerequest));		 
 		}
+
+
+		//[HttpGet]
+		//[ProducesResponseType(StatusCodes.Status200OK)]
+		//public async Task<ActionResult<Plat>> GetAllPlatss([FromQuery] Plat platRequest)
+		//{
+		//	return Ok(await _restaurationService.GetAllPlatss());
+		//}
+
 
 		[HttpGet("type/{idType}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -60,7 +69,7 @@ namespace API.Controllers.V1
 		[HttpGet("{id}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-
+		[Authorize(Roles = "Restaurateur, user")]
 		public async Task<IActionResult> GetPlatById([FromRoute] int id)
 		{
 			Plat plat = await _restaurationService.GetPlatById(id);
@@ -89,7 +98,7 @@ namespace API.Controllers.V1
 			if (newPlat != null)
 			{
 				// Créer une redirection vers GetPlatById(newplat.IdPlat);
-				return CreatedAtAction(nameof(GetPlatById), new { id = newPlat.IdPlat }, newPlat);
+				return CreatedAtAction(nameof(GetPlatById),  new { id = newPlat.IdPlat }, newPlat);
 			}
 			else
 			{

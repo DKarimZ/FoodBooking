@@ -59,16 +59,12 @@ namespace ClientDesktop
 			menu.Plats = plats;
 			menu.IdService = Convert.ToInt32(menuGridView.Rows[menuGridView.CurrentRow.Index].Cells[0].Value);
 
-
+			
 
 			plats[0].IdPlat =  Convert.ToInt32(entreegridview.Rows[entreegridview.CurrentRow.Index].Cells[0].Value);
 			plats[1].IdPlat = Convert.ToInt32(platGridView.Rows[platGridView.CurrentRow.Index].Cells[0].Value);
 			plats[2].IdPlat = Convert.ToInt32(dessertGridView.Rows[dessertGridView.CurrentRow.Index].Cells[0].Value);
-			//plats[0].Nom = listentrees.GetItemText(listentrees.SelectedValue);
-
-			//plats[1].Nom = listPlats.GetItemText(listPlats.SelectedValue);
-
-			//plats[2].Nom = listDesserts.GetItemText(listDesserts.SelectedValue);
+			
 
 			return menu;
 
@@ -145,6 +141,20 @@ namespace ClientDesktop
 			catch (Exception exception)
 			{
 				MessageBox.Show("Ce menu n'a pas pu être supprimé");
+			}
+		}
+
+		private async void btnModifMenu_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				await _restaurationService.UpdateMenu(Compute());
+				MessageBox.Show("ce service a bien été modifié");
+				;
+			}
+			catch (Exception exception)
+			{
+				MessageBox.Show("Ce menu n'a pas pu être modifié");
 			}
 		}
 	}

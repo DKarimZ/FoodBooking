@@ -143,6 +143,7 @@ namespace ClientDesktop
 			this.btnModifMenu.TabIndex = 1;
 			this.btnModifMenu.Text = "ModifierMenu";
 			this.btnModifMenu.UseVisualStyleBackColor = true;
+			this.btnModifMenu.Click += new System.EventHandler(this.btnModifMenu_Click);
 			// 
 			// btnSuppMenu
 			// 

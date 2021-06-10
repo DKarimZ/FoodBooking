@@ -15,7 +15,7 @@ namespace BO.Entity
 		/// <summary>
 		/// identifiant du Services
 		/// </summary>
-		public int? IdService { get; set; }
+		public int IdService { get; set; }
 
 		/// <summary>
 		/// Premier jour de la semaine ou est proposé le Service
@@ -41,7 +41,7 @@ namespace BO.Entity
 
 		}
 
-		public Service(int? idService, bool midi, DateTime dateJourservice,List<Plat> plats)
+		public Service(int idService, bool midi, DateTime dateJourservice,List<Plat> plats)
 		{
 			IdService = idService;
 			Midi = midi;
@@ -49,7 +49,7 @@ namespace BO.Entity
 			Plats = plats;
 		}
 
-		public Service(int? idService, bool midi, DateTime dateJourservice)
+		public Service(int idService, bool midi, DateTime dateJourservice)
 		{
 			IdService = idService;
 			Midi = midi;
