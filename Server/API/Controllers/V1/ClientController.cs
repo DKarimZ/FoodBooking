@@ -29,6 +29,7 @@ namespace API.Controllers.V1
 			_reservationService = reservationService;
 		}
 
+
 		/// <summary>
 		/// Permet de récupérer la liste des clients
 		/// </summary>
@@ -40,6 +41,7 @@ namespace API.Controllers.V1
 		{
 			return Ok(await _reservationService.GetAllClients());
 		}
+
 
 		/// <summary>
 		/// Permet de récupérer un client en fonction de son Identifiant
@@ -61,6 +63,7 @@ namespace API.Controllers.V1
 				return Ok(client); // StatusCode = 200
 			}
 		}
+
 
 		/// <summary>
 		/// Permet de créer un client en BDD
@@ -86,6 +89,7 @@ namespace API.Controllers.V1
 			}
 		}
 
+
 		/// <summary>
 		/// Permet de supprimer un client en BDD
 		/// </summary>
@@ -107,6 +111,7 @@ namespace API.Controllers.V1
 				return NotFound();
 			}
 		}
+
 
 		/// <summary>
 		/// Permet de modifier un client en BDD

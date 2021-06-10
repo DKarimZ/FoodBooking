@@ -31,6 +31,7 @@ namespace API.Controllers.V1
 			_reservationService = reservationService;
 		}
 
+
 		/// <summary>
 		/// Permet de récupérer la liste des commandes
 		/// </summary>
@@ -42,6 +43,7 @@ namespace API.Controllers.V1
 		{
 			return Ok(await _reservationService.GetAllCommandes());
 		}
+
 
 		/// <summary>
 		/// Permet de récupérer une commande en fonction de son Identifiant
@@ -63,6 +65,7 @@ namespace API.Controllers.V1
 				return Ok(commande); // StatusCode = 200
 			}
 		}
+
 
 		/// <summary>
 		/// Permet de créer une commande en BDD

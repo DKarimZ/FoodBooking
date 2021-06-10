@@ -28,21 +28,40 @@ namespace BLL.Services
 		}
 
 		// Methodes liées aux services de gestion des menus
-		#region Menu
+		#region Service
+
+		/// <summary>
+		/// Methode permettant d'afficher tous les services sans pagination
+		/// </summary>
+		/// <returns>Retourne une liste de services</returns>
 		public async Task <List<Service>> GetAllServices()
 		{
 			//Utilisation de la méthode GetAllAsync du repository IMenurepository
-			IServiceRepository _menus = _db.GetRepository<IServiceRepository>();
-			IEnumerable<Service> menus = await _menus.GetAllAsync();
+			IServiceRepository _services = _db.GetRepository<IServiceRepository>();
+			IEnumerable<Service> services = await _services.GetAllAsync();
 
-			return menus.ToList();
+			return services.ToList();
 
 		}
+
+
+		/// <summary>
+		/// Methode de service restauration permettant d'afficher un service en fonction de son identifiant
+		/// </summary>
+		/// <param name="IdMenu"></param>
+		/// <returns></returns>
 		public async Task<Service> GetServiceById(int IdMenu)
 		{
 			IServiceRepository _menus = _db.GetRepository<IServiceRepository>();
 			return await _menus.GetAsync(IdMenu);
 		}
+
+
+		/// <summary>
+		/// Methode de service restauration permettant d'ajouter un nouveau service
+		/// </summary>
+		/// <param name="newMenu"></param>
+		/// <returns>retourne le nouveau service</returns>
 		public async Task<Service> CreateService(Service newMenu)
 		{
 			//La methode InsertAsync est appelé dans une transaction
@@ -50,11 +69,17 @@ namespace BLL.Services
 			
 			IServiceRepository _menus = _db.GetRepository<IServiceRepository>();
 			Service nouvMenu = await _menus.InsertAsync(newMenu);
-			//if(nouvMenu.Plats[0]!= null && nouvMenu.Plats[1]!= null && nouvMenu.Plats[2]!=null) 
-				_db.Commit();
+			_db.Commit();
 			return nouvMenu;
 
 		}
+
+
+		/// <summary>
+		/// Methode de service resturation permettant  de mettre a jour un service
+		/// </summary>
+		/// <param name="menuToUpdate"></param>
+		/// <returns>Retourne un service mis à jour</returns>
 		public async Task<Service> UpdateService(Service menuToUpdate)
 		{
 			_db.BeginTransaction();
@@ -85,6 +110,13 @@ namespace BLL.Services
 			}
 
 		}
+
+
+		/// <summary>
+		/// Methode permettant  de supprimer un service
+		/// </summary>
+		/// <param name="IdService"></param>
+		/// <returns>Retounre un boolean selon le resultat de la suppression</returns>
 		public async Task<bool> RemoveService(int IdService)
 		{
 			//La methode DeleteAsync est appelée dans une transaction
@@ -101,6 +133,12 @@ namespace BLL.Services
 
 		// Methodes liées aux services de gestion des plats
 		#region Plat
+
+		/// <summary>
+		/// Méthode de service restauration permettant d'afficher tous les plats avec une pagination
+		/// </summary>
+		/// <param name="pageRequest"></param>
+		/// <returns>Retourne un DTO page response de plat</returns>
 		public async Task<PageResponse<Plat>> GetAllPlats(PageRequest pageRequest)
 		{
 			//Utilisation de la méthode GetAllAsync du repository IPlatrepository
@@ -110,6 +148,11 @@ namespace BLL.Services
 
 			
 		}
+
+		/// <summary>
+		/// Methode de service restauraion permettant d'afficher tous les plats sans pagination
+		/// </summary>
+		/// <returns>Retourne une liste de plats</returns>
 		public async Task<List<Plat>> GetAllPlats()
 		{
 			//Utilisation de la méthode GetAllAsync du repository IMenurepository
@@ -121,13 +164,23 @@ namespace BLL.Services
 		}
 
 
-
-
+		/// <summary>
+		/// Méthode de service restauration permettant d'afficher un plat a partir de son indentifiant
+		/// </summary>
+		/// <param name="IdPlat"></param>
+		/// <returns>retourne un plat</returns>
 		public async Task<Plat> GetPlatById(int IdPlat)
 		{
 			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();
 			return await _plats.GetAsync(IdPlat);
 		}
+
+
+		/// <summary>
+		/// Méthode de service permettant d'ajouter un plat
+		/// </summary>
+		/// <param name="newPlat"></param>
+		/// <returns>Retourne un plat</returns>
 		public async Task<Plat> CreatePlat(Plat newPlat)
 		{
 			//La methode InsertAsync est appelé dans une transaction
@@ -138,6 +191,11 @@ namespace BLL.Services
 			return nouvPlat;
 		}
 
+		/// <summary>
+		/// Methode du service restauration permettant d'afficher la liste des plats par type
+		/// </summary>
+		/// <param name="idType"></param>
+		/// <returns>Retourne une liste de plats</returns>
 		public async Task<List<Plat>> GetAllPlatsByType(int idType)
 		{
 			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();
@@ -145,7 +203,11 @@ namespace BLL.Services
 	}
 
 
-
+		/// <summary>
+		/// Methode de service permettant de mettre a jour un plat
+		/// </summary>
+		/// <param name="platToUpdate"></param>
+		/// <returns>Retourne un plat</returns>
 		public async Task<Plat> UpdatePlat(Plat platToUpdate)
 		{
 			_db.BeginTransaction();
@@ -175,6 +237,13 @@ namespace BLL.Services
 			}
 
 		}
+
+
+		/// <summary>
+		/// Methode de service permettant de supprimer un  plat
+		/// </summary>
+		/// <param name="IdPlat"></param>
+		/// <returnsRetourne un boolean></returns>
 		public async Task<bool> RemovePlat(int IdPlat)
 		{
 			//La methode DeleteAsync est appeléee dans une transaction

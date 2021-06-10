@@ -30,6 +30,7 @@ namespace API.Controllers.V1
 			_restaurationService = restaurationService;
 		}
 
+
 		/// <summary>
 		/// Permet de récupérer la liste des plats
 		/// </summary>
@@ -37,24 +38,14 @@ namespace API.Controllers.V1
 		/// <returns>retourne le liste des plats</returns>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-
 		public async Task<ActionResult<PageResponse<Plat>>> GetAllPlats([FromQuery] PageRequest pagerequest)
 		{
 			return Ok(await _restaurationService.GetAllPlats(pagerequest));		 
 		}
 
 
-		//[HttpGet]
-		//[ProducesResponseType(StatusCodes.Status200OK)]
-		//public async Task<ActionResult<Plat>> GetAllPlatss([FromQuery] Plat platRequest)
-		//{
-		//	return Ok(await _restaurationService.GetAllPlatss());
-		//}
-
-
 		[HttpGet("type/{idType}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-
 		public async Task<ActionResult<PageResponse<Plat>>> GetAllPlats([FromRoute] int idType)
 		{
 			return Ok(await _restaurationService.GetAllPlatsByType(idType));
@@ -83,6 +74,7 @@ namespace API.Controllers.V1
 			}
 		}
 
+
 		/// <summary>
 		/// Permet de créer un nouveau plat en BDD
 		/// </summary>
@@ -107,6 +99,7 @@ namespace API.Controllers.V1
 			}
 		}
 
+
 		/// <summary>
 		/// Permet de supprimer un plat en BDD
 		/// </summary>
@@ -128,6 +121,7 @@ namespace API.Controllers.V1
 				return NotFound();
 			}
 		}
+
 
 		/// <summary>
 		/// Permet de modifier un plat en BDD

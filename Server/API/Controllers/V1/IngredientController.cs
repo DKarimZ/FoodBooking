@@ -30,6 +30,7 @@ namespace API.Controllers.V1
 			_restaurationService = restaurationService;
 		}
 
+
 		/// <summary>
 		/// Permet de récupérer la liste des ingrédients
 		/// </summary>
@@ -41,6 +42,7 @@ namespace API.Controllers.V1
 		{
 			return Ok(await _restaurationService.GetAllIngredients(pagerequest));
 		}
+
 
 		/// <summary>
 		/// Permet de récupérer un ingrédient en fonction de son Identifiant
@@ -62,6 +64,7 @@ namespace API.Controllers.V1
 				return Ok(ingredient); // StatusCode = 200
 			}
 		}
+
 
 		/// <summary>
 		/// Permet de créer un ingrédient en BDD
@@ -87,6 +90,7 @@ namespace API.Controllers.V1
 			}
 		}
 
+
 		/// <summary>
 		/// Permet de supprimer un igrédient en BDD
 		/// </summary>
@@ -108,6 +112,7 @@ namespace API.Controllers.V1
 				return NotFound();
 			}
 		}
+
 
 		/// <summary>
 		/// Permet de modifier un ingrédient en BDD

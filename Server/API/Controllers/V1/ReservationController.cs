@@ -30,6 +30,7 @@ namespace API.Controllers.V1
 			_reservationService = reservationService;
 		}
 
+
 		/// <summary>
 		/// Permet de récupérer la liste des réservations
 		/// </summary>
@@ -42,6 +43,7 @@ namespace API.Controllers.V1
 		{
 			return Ok(await _reservationService.GetAllReservations());
 		}
+
 
 		/// <summary>
 		/// Permet de récupérer une réservation avec son Identifiant
@@ -64,6 +66,7 @@ namespace API.Controllers.V1
 				return Ok(reservation); // StatusCode = 200
 			}
 		}
+
 
 		/// <summary>
 		/// Permet de créer une nouvelle réservation en BDD
@@ -90,6 +93,7 @@ namespace API.Controllers.V1
 			}
 		}
 
+
 		/// <summary>
 		/// Permet de supprimer une réservation en BDD en fonction de son Identifiant
 		/// </summary>
@@ -112,6 +116,7 @@ namespace API.Controllers.V1
 				return NotFound();
 			}
 		}
+
 
 		/// <summary>
 		/// Permet de mettre à jour un livre en BDD

@@ -13,6 +13,10 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BLL.Services
 {
+
+	/// <summary>
+	/// Permet de fournir les services liés àà l'authentification
+	/// </summary>
 	 class AccountService : IAccountService
 	{
 		private readonly IConfiguration _configuration;
@@ -24,6 +28,13 @@ namespace BLL.Services
 			this._unitofwork = _unitofwork;
 		}
 
+
+		/// <summary>
+		/// methode de service permettant de s'identifier
+		/// </summary>
+		/// <param name="nom"></param>
+		/// <param name="password"></param>
+		/// <returns>Retoune le dto loginreponse composé du nom et du Token</returns>
 		public async Task<LoginResponse> Login(string nom, string password)
 		{
 			//TODO : Rechercher dans la base de données l'utilisateer
@@ -47,6 +58,12 @@ namespace BLL.Services
 			}
 		}
 
+
+		/// <summary>
+		/// Methode de service permettant de générer le token jwt à partir duclient
+		/// </summary>
+		/// <param name="client"></param>
+		/// <returns>Retourne  le token généré</returns>
 		private string GenerateJwtToken(Client client)
 		{
 			// Add Users infos
@@ -56,9 +73,6 @@ namespace BLL.Services
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 				new Claim(ClaimTypes.NameIdentifier, client.nom),
 				
-
-
-
 			};
 			
 			//Add Role

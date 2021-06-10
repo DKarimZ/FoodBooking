@@ -30,6 +30,7 @@ namespace API.Controllers.V1
 			_restaurationService = restaurationService;
 		}
 
+
 		/// <summary>
 		/// Permet de récupérer la liste des services
 		/// </summary>
@@ -41,6 +42,7 @@ namespace API.Controllers.V1
 		{
 			return Ok(await _restaurationService.GetAllServices());
 		}
+
 
 		/// <summary>
 		/// Permet de retourner un livre en fonction de son Identifiant
@@ -88,6 +90,7 @@ namespace API.Controllers.V1
 			}
 		}
 
+
 		/// <summary>
 		/// Permet de supprimer un service en BDD
 		/// </summary>
@@ -109,6 +112,7 @@ namespace API.Controllers.V1
 				return NotFound();
 			}
 		}
+
 
 		/// <summary>
 		/// Permet de modifier un livre en BDD

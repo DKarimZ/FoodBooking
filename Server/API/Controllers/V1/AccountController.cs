@@ -28,9 +28,13 @@ namespace API.Controllers.V1
 
 		}
 
+		/// <summary>
+		/// Permet de loger un utilisateur 
+		/// </summary>
+		/// <param name="loginRequest">Les informations de connexion : ici username et password</param>
+		/// <returns></returns>
 		[HttpPost("login")]
 		[AllowAnonymous]
-
 		public async Task<IActionResult> login([FromBody] LoginRequest loginRequest)
 		{
 			LoginResponse loginResponse = await _accountService.Login(loginRequest.Username, loginRequest.Password);
@@ -45,7 +49,6 @@ namespace API.Controllers.V1
 			}
 
 		}
-
 
 	}
 }
