@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
+	/// <summary>
+	/// Interface du repository Client implémentant les interfaces IGeneric Repository 
+	/// </summary>
 	public interface IServiceRepository : IgenericRepository<Service>
 	{
 	

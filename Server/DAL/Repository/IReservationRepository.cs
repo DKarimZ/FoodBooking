@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
+	/// <summary>
+	/// Interface du repository Reservation implémentant les interfaces IGeneric Repository et IPageableRepository
+	/// </summary>
 	public interface IReservationRepository : IgenericRepository<Reservation>, IpageableRepository<Reservation>
 	{
 

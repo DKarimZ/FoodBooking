@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DAL.Repository
 {
 	/// <summary>
-	/// Interface du repository Client
+	/// Interface du repository Client implémentant les interfaces IGeneric Repository et IPageableRepository
 	/// </summary>
 	public interface IClientRepository : IgenericRepository<Client>, IpageableRepository<Client>
 	{

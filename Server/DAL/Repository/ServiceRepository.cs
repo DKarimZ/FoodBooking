@@ -25,12 +25,25 @@ namespace DAL.Repository
 			_logger = logger;
 		}
 
+
+
+		/// <summary>
+		/// Permet d'obtenir la liste de tous les services de la BDD sans pagination
+		/// </summary>
+		/// <returns>Retourne le liste des services de la BDD</returns>
 		public async Task<IEnumerable<Service>> GetAllAsync()
 		{
 			var stmt = @"select * from Services";
 			return await _session.Connection.QueryAsync<Service>(stmt, null, _session.Transaction);
 		}
 
+
+
+		/// <summary>
+		/// Permet d'obtenir un service de la BDD en fonction de son identifiant
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Retourne le service identifié</returns>
 		public async Task<Service> GetAsync(int id)
 		{
 			var stmt = @"select * from Services where IdService = @id";
@@ -39,6 +52,13 @@ namespace DAL.Repository
 			return r;
 		}
 
+
+
+		/// <summary>
+		/// Permet de mettre a jour un service de la BDD en utilisant une procédure stockéd
+		/// </summary>
+		/// <param name="menuToUpdate"></param>
+		/// <returns>Retourne un boolean selon le resultat de la mise à jour</returns>
 		public async Task<bool> UpdateAsync(Service menuToUpdate)
 		{
 			Service oldService = await GetAsync(menuToUpdate.IdService);
@@ -75,6 +95,13 @@ namespace DAL.Repository
 
 		}
 
+
+
+		/// <summary>
+		/// Permet d'ajouter un service en BDD 
+		/// </summary>
+		/// <param name="menuToCreate"></param>
+		/// <returns></returns>
 		public async Task<Service> InsertAsync(Service menuToCreate)
 		{
 			var stmt =
@@ -100,6 +127,14 @@ namespace DAL.Repository
 			}
 		}
 
+
+
+
+		/// <summary>
+		/// Permet de supprimer un service en BDD en fonction de son identifiant
+		/// </summary>
+		/// <param name="idService"></param>
+		/// <returns>Retourne un boolean selon le resultat ded la suppression</returns>
 		public async Task<bool> DeleteAsync(int idService)
 		{
 

@@ -20,11 +20,21 @@
 		/// </summary>
 		float Quantite { get; set; }
 
+		/// <summary>
+		/// constructeur par defaut de PlatIngredient
+		/// </summary>
+
 		public PlatIngredient()
 		{
 
 		}
 
+
+		/// <summary>
+		/// Constructeur full properties de platingredient
+		/// </summary>
+		/// <param name="ingredient"></param>
+		/// <param name="quantite"></param>
 		public PlatIngredient(Ingredient ingredient, float quantite)
 		{
 			Ingredient = ingredient;

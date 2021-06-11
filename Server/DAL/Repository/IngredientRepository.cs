@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
+	/// <summary>
+	/// Permet l'accès aux données Ingredient de la BDD
+	/// </summary>
 	public class IngredientRepository : IIngredientRepository
 	{
 		private readonly DbSession _session;
@@ -23,17 +26,36 @@ namespace DAL.Repository
 			_logger = logger;
 		}
 
+
+		/// <summary>
+		/// Permet d'obtenir la liste des ingrédients présents en BDD
+		/// </summary>
+		/// <returns>Retourne la liste des ingrédients</returns>
 		public async Task<IEnumerable<Ingredient>> GetAllAsync()
 		{
 			var stmt = @"select * from Ingredient";
 			return await _session.Connection.QueryAsync<Ingredient>(stmt, null, _session.Transaction);
 		}
+
+
+		/// <summary>
+		/// Permet d'obtenir un ingrédient présent en BDD en foonction de son identifiant
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Retourne l'ingrédient identifié</returns>
 		public async Task<Ingredient> GetAsync(int id)
 		{
 			var stmt = @"select * from ingredient where IdIngredient = @id";
 			return await _session.Connection.QueryFirstOrDefaultAsync<Ingredient>(stmt, new { @id = id }, _session.Transaction);
 
 		}
+
+
+		/// <summary>
+		/// Permet de mettre à jour un ingrédient présent en BDD
+		/// </summary>
+		/// <param name="ingredientToUpdate"></param>
+		/// <returns>Retourne un boolean en fonction de la réussite de la mise à jour</returns>
 		public async Task<bool> UpdateAsync(Ingredient ingredientToUpdate)
 		{
 			var stmt = @"update ingredient set NomIngredient = @NomIngredient, PrixMoyen = @PrixMoyen from ingredient where IdIngredient = @Idingredient";
@@ -48,6 +70,13 @@ namespace DAL.Repository
 				return false;
 			}
 		}
+
+
+		/// <summary>
+		/// Permet d'ajouter un ingrédient en BDD
+		/// </summary>
+		/// <param name="ingredientToCreate"></param>
+		/// <returns>Retourne l'ingrédient créé</returns>
 		public async Task<Ingredient> InsertAsync(Ingredient ingredientToCreate)
 		{
 			var stmt = @"insert into ingredient(NomIngredient, PrixMoyen) output INSERTED.ID values (@NomIngredient, @PrixMoyen)";
@@ -61,6 +90,13 @@ namespace DAL.Repository
 				return null;
 			}
 		}
+
+
+		/// <summary>
+		/// Permet de supprimer un ingrédient en fonctionde son identifiant
+		/// </summary>
+		/// <param name="idIngredient"></param>
+		/// <returns></returns>
 		public async Task<bool> DeleteAsync(int idIngredient)
 		{
 			var stmt = @"delete from ingredient where Idingredient = @IdIngredient";
@@ -77,6 +113,12 @@ namespace DAL.Repository
 			}
 		}
 
+
+		/// <summary>
+		/// Permet d'obtenir la liste de tous les ingrédients en base de données de façon paginée
+		/// </summary>
+		/// <param name="pageRequest"></param>
+		/// <returns></returns>
 		public async Task<PageResponse<Ingredient>> GetAllAsync(PageRequest pageRequest)
 		{
 			var stmt = @"select * from Ingredient

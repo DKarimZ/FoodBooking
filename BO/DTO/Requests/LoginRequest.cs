@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BO.DTO.Requests
 {
+	/// <summary>
+	/// DTO loginRequest comportant les informations nécessaires à l'authentification
+	/// </summary>
 	public class LoginRequest
 	{
 		[Required]

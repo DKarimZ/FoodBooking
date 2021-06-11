@@ -23,16 +23,36 @@ namespace DAL.Repository
 			_logger = logger;
 		}
 
+
+		/// <summary>
+		/// Permet d'obtenir la liste de toutes les réservations présentes en BDD
+		/// </summary>
+		/// <returns>Retourne la liste des réservations</returns>
 		public async Task<IEnumerable<Reservation>> GetAllAsync()
 		{
 			var stmt = @"select * from reservation";
 			return await _session.Connection.QueryAsync<Reservation>(stmt, null, _session.Transaction);
 		}
+
+
+		/// <summary>
+		///¨Permet d'obtenir une réservation présente en BDD en fonction de son identifiant
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Retourne la reservation identifiée</returns>
 		public async Task<Reservation> GetAsync(int id)
 		{
 			var stmt = @"select * from reservation where id = @id";
 			return await _session.Connection.QueryFirstOrDefaultAsync<Reservation>(stmt, new { Id = id }, _session.Transaction);
 		}
+
+
+
+		/// <summary>
+		/// Permet de mettre à jour une réservation en BDD
+		/// </summary>
+		/// <param name="reservationToUpdate"></param>
+		/// <returns>Retourne une boolean en fonction du succes de la mise a jour</returns>
 		public async Task<bool> UpdateAsync(Reservation reservationToUpdate)
 		{
 			var stmt = @"update reservation set dateReservation = @dateReservation, repass = @repass from reservation join repas where IdReservation = @IdReservation";
@@ -47,6 +67,14 @@ namespace DAL.Repository
 				return false;
 			}
 		}
+
+
+
+		/// <summary>
+		/// Permet d'ajouter une reservation en BDD
+		/// </summary>
+		/// <param name="reservationToCreate"></param>
+		/// <returns>Retourne  la réservation nouvellement créée</returns>
 		public async Task<Reservation> InsertAsync(Reservation reservationToCreate)
 		{
 			var stmt = @"insert into reservation(dateReservation, repass) output INSERTED.ID values (@dateReservation, @repass)";
@@ -60,6 +88,14 @@ namespace DAL.Repository
 				return null;
 			}
 		}
+
+
+
+		/// <summary>
+		/// Permet de supprimer une reservation à partir de son identifiant
+		/// </summary>
+		/// <param name="idReservation"></param>
+		/// <returns>Retourne un boolean en fonction du succes de la suppression</returns>
 		public async Task<bool> DeleteAsync(int idReservation)
 		{
 			var stmt = @"delete from reservation where IdReservation = @IdReservation";
@@ -76,6 +112,12 @@ namespace DAL.Repository
 			}
 		}
 
+
+		/// <summary>
+		/// Permet d'obtenir la liste de toutes les reservations de façon paginée
+		/// </summary>
+		/// <param name="pageRequest"></param>
+		/// <returns>Retourne la liste des reservations de façon paginée</returns>
 		public async Task<PageResponse<Reservation>> GetAllAsync(PageRequest pageRequest)
 		{
 			var stmt = @"select * from reservation

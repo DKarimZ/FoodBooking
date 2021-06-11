@@ -24,7 +24,7 @@ namespace BO.Entity
 		/// <summary>
 		/// Liste des repas de la reservation
 		/// </summary>
-		public List<Repas> Repass { get; set; }
+		public List<Service>Services { get; set; }
 
 		/// <summary>
 		/// constructeur par defaut pour serialisation par l'API
@@ -40,12 +40,12 @@ namespace BO.Entity
 		/// <param name="idReservation"></param>
 		/// <param name="dateReservation"></param>
 		/// <param name="repass"></param>
-		public Reservation(int? idReservation, DateTime dateReservation, List<Repas> repass
+		public Reservation(int? idReservation, DateTime dateReservation, List<Service> services
 			)
 		{
 			IdReservation = idReservation;
 			this.dateReservation = dateReservation;
-			Repass = repass;
+			Services = services;
 		}
 
 		// Methode Equals (Si besoin de la redéfinir)
@@ -54,13 +54,13 @@ namespace BO.Entity
 			return obj is Reservation reservation &&
 				   IdReservation == reservation.IdReservation &&
 				   dateReservation == reservation.dateReservation &&
-				   EqualityComparer<List<Repas>>.Default.Equals(Repass, reservation.Repass);
+				   EqualityComparer<List<Service>>.Default.Equals(Services, reservation.Services);
 		}
 
 		// Methode GetHashCode (Si besoin de la redéfinir)
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(IdReservation, dateReservation, Repass);
+			return HashCode.Combine(IdReservation, dateReservation, Services);
 		}
 	}
 }

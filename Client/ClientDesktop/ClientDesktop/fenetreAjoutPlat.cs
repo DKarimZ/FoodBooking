@@ -84,7 +84,10 @@ namespace ClientDesktop
 			return AjouterIngredient();
 		}
 
-		
+		public List<PlatIngredient> GetlistePlatIngredients()
+		{
+			return compute().PlatIngredient;
+		}
 
 
 

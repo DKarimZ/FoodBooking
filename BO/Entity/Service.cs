@@ -17,21 +17,25 @@ namespace BO.Entity
 		/// </summary>
 		public int IdService { get; set; }
 
+
 		/// <summary>
 		/// Premier jour de la semaine ou est proposé le Service
 		/// </summary>
 		public Boolean Midi { get; set; }
 
-		/// <summary>
-		/// Liste des plats composants le Service
-		/// </summary>
-		/// 
-
 		
+		/// <summary>
+		/// Date correspondant au jour du service
+		/// </summary>
 		public DateTime dateJourservice { get; set; }
 
 
+		/// <summary>
+			/// Liste des plats composants le Service
+			/// </summary>
+			///
 		public List<Plat> Plats { get; set; }
+
 
 		/// <summary>
 		/// Constructeur par défaut pour serialisation par l'API
@@ -41,6 +45,14 @@ namespace BO.Entity
 
 		}
 
+
+		/// <summary>
+		/// Constructeur Full properties de l'entité service
+		/// </summary>
+		/// <param name="idService"></param>
+		/// <param name="midi"></param>
+		/// <param name="dateJourservice"></param>
+		/// <param name="plats"></param>
 		public Service(int idService, bool midi, DateTime dateJourservice,List<Plat> plats)
 		{
 			IdService = idService;
@@ -49,6 +61,13 @@ namespace BO.Entity
 			Plats = plats;
 		}
 
+
+		/// <summary>
+		/// Constructeur Service presque full proprties - sauf la liste de plats
+		/// </summary>
+		/// <param name="idService"></param>
+		/// <param name="midi"></param>
+		/// <param name="dateJourservice"></param>
 		public Service(int idService, bool midi, DateTime dateJourservice)
 		{
 			IdService = idService;
@@ -65,7 +84,6 @@ namespace BO.Entity
 				   Midi == service.Midi &&
 				   dateJourservice == service.dateJourservice;
 		}
-
 
 
 		// Methode GetHashCode (Si besoin de la redéfinir)
