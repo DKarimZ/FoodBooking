@@ -59,6 +59,12 @@ namespace BO.Entity
 			Midi = midi;
 			this.dateJourservice = dateJourservice;
 			Plats = plats;
+
+			foreach (Plat plat in Plats)
+			{
+				plat.Score++;
+			}
+
 		}
 
 
