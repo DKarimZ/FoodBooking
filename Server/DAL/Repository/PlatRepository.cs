@@ -6,6 +6,7 @@ using Dapper;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,31 +108,8 @@ namespace DAL.Repository
 
 
 
-		/// <summary>
-		/// Permet d'ajouter plusieurs ingredient - A redefinir
-		/// </summary>
-		/// <param name="ingredientToAdd"></param>
-		/// <returns></returns>
-
-		public async Task<PlatIngredient> InsertIngredientsAsync(Ingredient ingredientToAdd)
-		{
-			//var stmt =
-			//	@"insert into PlatIngredient(IdPlat, IdIngredient,Quantite) values (@Idplat,@IdIngredient,@Quantite);";
-			//try
-			//{
-			//	int i = await _session.Connection.QuerySingleAsync<int>(stmt, platToCreate, _session.Transaction);
-			//	return await GetAsync(i);
-			//}
-
-			//catch
-			//{
-			//	return null;
-			//}
-			return new();
-
-			//TODO Finir la methode d'ajout de plat (et d'ingredients)
-		}
-
+		
+		
 
 
 		/// <summary>
@@ -141,18 +119,32 @@ namespace DAL.Repository
 		/// <returns>Retourne un boolean en fonction du succes de la suppression</returns>
 		public async Task<bool> DeleteAsync(int idPlat)
 		{
-			var stmt = @"delete from plat where IdPlat = @IdPlat";
+			
+
+
+			var queryParameters = new DynamicParameters();
+			queryParameters.Add("IdPlat", idPlat);
+
+
 
 			try
 			{
-				int i = await _session.Connection.ExecuteAsync(stmt, new { idMenu = idPlat }, _session.Transaction);
+				var i = await _session.Connection.ExecuteAsync(
+					"SupprimerUnPlat",
+					queryParameters,
+					commandType: CommandType.StoredProcedure, transaction: _session.Transaction);
+
+
 				return i > 0;
+
 			}
-			catch
+			catch (Exception e)
 			{
+				_logger.LogWarning(e.Message);
 				return false;
 
 			}
+
 		}
 
 
@@ -177,15 +169,7 @@ namespace DAL.Repository
 			return new PageResponse<Plat>(pageRequest.Page, pageRequest.PageSize, countTask, (platTask).ToList());
 		}
 
-
-
-
-		/// <summary>
-		/// Permet d'obtenir la liste de tous les plats de façon paginée et triée
-		/// </summary>
-		/// <param name="pageRequestSortable"></param>
-		/// <returns></returns>
-		public async Task<PageResponseSortable<Plat>> GetAllAsync(PageRequestSortable pageRequestSortable)
+		public async Task<PageResponseSortable<Plat>> GetAllByAsync(PageRequestSortable pageRequestSortable)
 		{
 			var stmt = @"select * from plat
 						ORDER BY Score
@@ -202,7 +186,36 @@ namespace DAL.Repository
 		}
 
 
-		
+		/// <summary>
+		/// Permet d'obtenir la liste de tous les plats de façon paginée et triée
+		/// </summary>
+		/// <param name="pageRequestSortable"></param>
+		/// <returns></returns>
+		public async Task<IEnumerable<Plat>> GetAllScoreAsync()
+		{
+			var stmt = @"select * from plat
+						ORDER BY Score DESC";
+						
+			IEnumerable<Plat> platTask = await _session.Connection.QueryAsync<Plat>(stmt, null, _session.Transaction);
+
+			return await _session.Connection.QueryAsync<Plat>(stmt, null, _session.Transaction);
+
+			
+
+		}
+
+
+		public async Task<IEnumerable<Plat>> GetAllPLatswithIngredientX(int IdIngredient)
+		{
+
+			var stmt = @"select * from Plat P JOIN PlatIngredient Pg ON P.IdPlat = Pg.IdPlat
+					   JOIN Ingredient I ON Pg.IdIngredient = I.IdIngredient
+					    WHERE I.IdIngredient = @IdIngredient";
+
+			IEnumerable<Plat> platTask = await _session.Connection.QueryAsync<Plat>(stmt, new {@IdIngredient = IdIngredient}, _session.Transaction);
+
+			return platTask;
+		}
 
 
 	}

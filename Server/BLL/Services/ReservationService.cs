@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO.DTO;
 using BO.Entity;
 using DAL.UOW;
 using DAL.Repository;
@@ -26,7 +27,9 @@ namespace BLL.Services
 
 
 		// Methodes liées aux services de gestion des réservations
+
 		#region Reservation
+
 		public async Task<IEnumerable<Reservation>> GetAllReservations()
 		{
 			//Utilisation de la méthode GetAllAsync du repository IReservation
@@ -36,11 +39,13 @@ namespace BLL.Services
 			return reservations.ToList();
 
 		}
+
 		public async Task<Reservation> GetReservationById(int IdReservation)
 		{
 			IReservationRepository _reservations = _db.GetRepository<IReservationRepository>();
 			return await _reservations.GetAsync(IdReservation);
 		}
+
 		public async Task<Reservation> CreateReservation(Reservation newReservation)
 		{
 			// l'utilisation de la methode InsertAsync se fait à l'interieur d'une transaction
@@ -52,6 +57,7 @@ namespace BLL.Services
 
 
 		}
+
 		public async Task<Reservation> ModifyReservation(Reservation reservationToUpdate)
 		{
 			_db.BeginTransaction();
@@ -75,9 +81,10 @@ namespace BLL.Services
 			}
 			catch
 			{
-				return null;			
+				return null;
 			}
 		}
+
 		public async Task<bool> removeReservation(int Idreservation)
 		{
 			// La méthode DeleteAsync se passe dans une transaction (eviter les problemes de clés primaires- etrangères,...)
@@ -92,6 +99,7 @@ namespace BLL.Services
 		#endregion
 
 		//Méthodes liés aux services de gestion clients
+
 		#region Client
 
 		public async Task<IEnumerable<Client>> GetAllClients()
@@ -103,11 +111,13 @@ namespace BLL.Services
 			return clients.ToList();
 
 		}
+
 		public async Task<Client> GetClientById(int IdClient)
 		{
 			IClientRepository _clients = _db.GetRepository<IClientRepository>();
 			return await _clients.GetAsync(IdClient);
 		}
+
 		public async Task<Client> CreateClient(Client newClient)
 		{
 			//La creation du nouveau client se passe dans une transaction
@@ -119,6 +129,7 @@ namespace BLL.Services
 
 
 		}
+
 		public async Task<bool> RemoveClientById(int IdClient)
 		{
 			// la méthode de suppression d'un client se passe dans une transaction
@@ -129,6 +140,7 @@ namespace BLL.Services
 			return isRemoved;
 
 		}
+
 		public async Task<Client> ModifyClient(Client clientToUpdate)
 		{
 			_db.BeginTransaction();
@@ -160,7 +172,9 @@ namespace BLL.Services
 		#endregion
 
 		//Méthodes liés aux services de gestion des commandes
+
 		#region Commande
+
 		public async Task<IEnumerable<Commande>> GetAllCommandes()
 		{
 			//Utilisation de la méthode GetAllAsync du repository ICommandeRepository
@@ -171,23 +185,33 @@ namespace BLL.Services
 			return commandes.ToList();
 
 		}
-		public async Task<Commande> GetCommandeById(int IdCommande)
+
+		//public async Task<Commande> GetCommandeById(int IdCommande)
+		//{
+		//	ICommandeRepository _commandes = _db.GetRepository<ICommandeRepository>();
+		//	return await _commandes.GetAsync(IdCommande);
+		//}
+
+		//public async Task<Commande> CreateCommande(Commande newCommande)
+		//{
+		//	//La methode InsertAsync est appelé dans une transaction
+		//	_db.BeginTransaction();
+		//	ICommandeRepository _commandes = _db.GetRepository<ICommandeRepository>();
+		//	Commande nouvCommande = await _commandes.InsertAsync(newCommande);
+		//	_db.Commit();
+		//	return nouvCommande;
+
+
+		//}
+
+		public async Task<CommandDTO> GetCommande()
 		{
-			ICommandeRepository _commandes = _db.GetRepository<ICommandeRepository>();
-			return await _commandes.GetAsync(IdCommande);
+			ICommandeRepository _commande = _db.GetRepository<ICommandeRepository>();
+			CommandDTO commande = await _commande.GetAsync();
+
+			return commande;
+
+			#endregion
 		}
-		public async Task<Commande> CreateCommande(Commande newCommande)
-		{
-			//La methode InsertAsync est appelé dans une transaction
-			_db.BeginTransaction();
-			ICommandeRepository _commandes = _db.GetRepository<ICommandeRepository>();
-			Commande nouvCommande = await _commandes.InsertAsync(newCommande);
-			_db.Commit();
-			return nouvCommande;
-
-
-		}
-
-		#endregion
 	}
 }

@@ -14,7 +14,7 @@ namespace BO.Entity
 		/// <summary>
 		/// Identifiant de la commande
 		/// </summary>
-		public int? IdCommande { get; set; }
+		//public int? IdCommande { get; set; }
 
 		/// <summary>
 		/// Jour de la commande
@@ -24,7 +24,9 @@ namespace BO.Entity
 		/// <summary>
 		/// liste d'ingrédients de la commande
 		/// </summary>
-		public List<Ingredient> Ingredients { get; set; }
+		public Ingredient Ingredients { get; set; }
+
+		public float Quantite { get; set; }
 
 		/// <summary>
 		/// Constructeur par défaut pour sérialisation par l'API
@@ -39,27 +41,27 @@ namespace BO.Entity
 		/// </summary>
 		/// <param name="idCommande"></param>
 		/// <param name="ingredients"></param>
-		public Commande(int? idCommande, List<Ingredient> ingredients)
+		public Commande( Ingredient ingredients, float quantite)
 		{
 			jourCommande = DateTime.Now;
-			IdCommande = idCommande;
 			Ingredients = ingredients;
+			Quantite = quantite;
 		}
 
 		// Methode Equals (Si besoin de la redéfinir)
 
-		public override bool Equals(object obj)
-		{
-			return obj is Commande commande &&
-				   IdCommande == commande.IdCommande &&
-				   EqualityComparer<List<Ingredient>>.Default.Equals(Ingredients, commande.Ingredients);
-		}
+		//public override bool Equals(object obj)
+		//{
+		//	return obj is Commande commande &&
+		//		   IdCommande == commande.IdCommande &&
+		//		   EqualityComparer<List<Ingredient>>.Default.Equals(Ingredients, commande.Ingredients);
+		//}
 
 		// Methode GetHashCode (Si besoin de la redéfinir)
 
-		public override int GetHashCode()
-		{
-			return HashCode.Combine(IdCommande, Ingredients);
-		}
+		//public override int GetHashCode()
+		//{
+		//	return HashCode.Combine(IdCommande, Ingredients);
+		//}
 	}
 }

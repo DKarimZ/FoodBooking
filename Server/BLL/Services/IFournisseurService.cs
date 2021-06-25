@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO.DTO;
 using BO.Entity;
 
 namespace BLL.Services
@@ -19,7 +20,9 @@ namespace BLL.Services
 		/// </summary>
 		/// <param name="newCommande"></param>
 		/// <returns>retourne une nouvelle commande</returns>
-		Task<Commande> CreateCommande(Commande commande);
+		//Task<Commande> CreateCommande(Commande commande);
+
+		Task<CommandDTO> GetCommande();
 
 		#endregion
 	}

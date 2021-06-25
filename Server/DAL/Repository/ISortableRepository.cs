@@ -15,7 +15,7 @@ namespace DAL.Repository
 		/// </summary>
 		/// <param name="PageRequestSortable"></param>
 		/// <returns>Retourne une liste d'entité de façon paginée et triée</returns>
-		Task<PageResponseSortable<TEntity>> GetAllAsync(PageRequestSortable PageRequestSortable);
+		
 		
 		//Task<TEntity> GetAsync(TEntity Entity);
 	}

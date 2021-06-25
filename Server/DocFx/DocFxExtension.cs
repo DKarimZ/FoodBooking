@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace DocFx
 {
+
+	/// <summary>
+	/// classe concernat la classe d'extension DOCFX
+	/// </summary>
 	public static class DocFxExtension
 	{
 		/// <summary>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO.DTO;
 
 namespace BLL.Services
 {
@@ -28,21 +29,35 @@ namespace BLL.Services
 
 		//méthodes liés aux services de gestion des commandes
 		#region Commmande
-		public async Task<Commande> CreateCommande(Commande newCommande)
+		//public async Task<Commande> CreateCommande(Commande newCommande)
+		//{
+		//	//debut Transaction
+		//	_db.BeginTransaction();
+		//	//Récupération de l'Interface du repository Commande (ICommandeRepository)
+		//	ICommandeRepository _commandes = _db.GetRepository<ICommandeRepository>();
+		//	//Utilisation de sa méthode Insert
+		//	Commande nouvCommande = await _commandes.InsertAsync(newCommande);
+		//	//Fin transaction
+		//	_db.Commit();
+		//	//retour de la nouvelle commande 
+		//	return nouvCommande;
+
+
+		//}
+
+		public async Task<CommandDTO> GetCommande( )
 		{
-			//debut Transaction
 			_db.BeginTransaction();
 			//Récupération de l'Interface du repository Commande (ICommandeRepository)
 			ICommandeRepository _commandes = _db.GetRepository<ICommandeRepository>();
 			//Utilisation de sa méthode Insert
-			Commande nouvCommande = await _commandes.InsertAsync(newCommande);
+			CommandDTO Commande = await _commandes.GetAsync();
 			//Fin transaction
 			_db.Commit();
 			//retour de la nouvelle commande 
-			return nouvCommande;
-
-
+			return Commande;
 		}
+
 
 		#endregion
 

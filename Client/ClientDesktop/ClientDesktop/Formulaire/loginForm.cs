@@ -31,8 +31,8 @@ namespace ClientDesktop.Formulaire
 
 			 if (result)
 			 {
-				fenetreAjoutPlat fenMenu = new fenetreAjoutPlat();
-				fenMenu.Show();
+				FenetreCommande fenCommande = new FenetreCommande();
+				fenCommande.Show();
 			}
 			 else
 			 {

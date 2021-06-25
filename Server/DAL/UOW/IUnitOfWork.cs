@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace DAL.UOW
 {
+
+	/// <summary>
+	/// Interface IUnitOfWork avec les opérations concernant les transactions
+	/// </summary>
+
 	public interface IUnitOfWork : IDisposable
 	{
 		void BeginTransaction();

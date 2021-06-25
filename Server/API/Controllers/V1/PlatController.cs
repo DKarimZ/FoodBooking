@@ -44,6 +44,23 @@ namespace API.Controllers.V1
 		}
 
 
+		[HttpGet("pop")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<Plat>> GetAllPlatsScore([FromQuery] Plat platRequest)
+		{
+			return Ok(await _restaurationService.GetAllPlatsScore());
+		}
+
+
+		[HttpGet("ingredientATrouver/{IdIngredient}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<IEnumerable<Plat>>> GetAllPlatsByIngredient([FromRoute] int IdIngredient)
+		{
+			return Ok(await _restaurationService.GetAllPlatsByIngredients(IdIngredient));
+		}
+
+
+
 		[HttpGet("type/{idType}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<PageResponse<Plat>>> GetAllPlats([FromRoute] int idType)
@@ -105,7 +122,7 @@ namespace API.Controllers.V1
 		/// </summary>
 		/// <param name="idPlat"></param>
 		/// <returns>retourne un code en fonction du résultat</returns>
-		[HttpDelete("{id}")]
+		[HttpDelete("{idPlat}")]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> DeletePlat([FromRoute] int idPlat)

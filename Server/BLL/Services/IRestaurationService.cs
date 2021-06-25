@@ -66,6 +66,11 @@ namespace BLL.Services
 		Task<PageResponse<Plat>> GetAllPlats(PageRequest pageRequest);
 
 
+
+		Task<IEnumerable<Plat>> GetAllPlatsByIngredients(int IdIngredient);
+
+		Task<IEnumerable<Plat>> GetAllPlatsScore();
+
 		Task<List<Plat>> GetAllPlats();
 
 		/// <summary>

@@ -53,6 +53,7 @@ namespace ClientDesktop
 			this.btnAjouterplat = new System.Windows.Forms.Button();
 			this.IngredientGridView = new System.Windows.Forms.DataGridView();
 			this.platGridView = new System.Windows.Forms.DataGridView();
+			this.btnSupprimer = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
@@ -79,6 +80,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel7, 0, 2);
 			this.tableLayoutPanel1.Controls.Add(this.IngredientGridView, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.platGridView, 2, 1);
+			this.tableLayoutPanel1.Controls.Add(this.btnSupprimer, 2, 2);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -359,8 +361,19 @@ namespace ClientDesktop
 			this.platGridView.ReadOnly = true;
 			this.platGridView.RowHeadersWidth = 51;
 			this.platGridView.RowTemplate.Height = 29;
+			this.platGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.platGridView.Size = new System.Drawing.Size(294, 436);
 			this.platGridView.TabIndex = 6;
+			// 
+			// btnSupprimer
+			// 
+			this.btnSupprimer.Location = new System.Drawing.Point(603, 500);
+			this.btnSupprimer.Name = "btnSupprimer";
+			this.btnSupprimer.Size = new System.Drawing.Size(142, 50);
+			this.btnSupprimer.TabIndex = 7;
+			this.btnSupprimer.Text = "Supprimer Plat";
+			this.btnSupprimer.UseVisualStyleBackColor = true;
+			this.btnSupprimer.Click += new System.EventHandler(this.btnSupprimer_Click);
 			// 
 			// fenetreAjoutPlat
 			// 
@@ -416,5 +429,6 @@ namespace ClientDesktop
 		private System.Windows.Forms.TextBox tbquantiteingredientaajouter;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
 		private System.Windows.Forms.DataGridView dgvIngredientsinnewplat;
+		private System.Windows.Forms.Button btnSupprimer;
 	}
 }

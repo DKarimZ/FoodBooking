@@ -56,6 +56,74 @@ namespace BLLC.Services
 		}
 
 
+		public async Task<IEnumerable<Plat>> GetAllPlatsByIngredient(int IdIngredient)
+		{
+
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+				var reponse = await _httpClient.GetAsync(($"plats/ingredientATrouver/" + IdIngredient));
+
+				if (reponse.IsSuccessStatusCode)
+				{
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						var plats = await JsonSerializer.DeserializeAsync<IEnumerable<Plat>>(stream,
+							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+						return plats;
+					}
+				}
+				else
+				{
+					return null;
+				}
+
+			}
+
+			return null;
+
+		}
+
+
+
+
+
+
+		public async Task<IEnumerable<Plat>> GetAllPlatsByPopularity()
+		{
+
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				    _httpClient.DefaultRequestHeaders.Authorization = 
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+					var reponse = await _httpClient.GetAsync(($"plats/pop"));
+
+					if (reponse.IsSuccessStatusCode)
+					{
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							var plats = await JsonSerializer.DeserializeAsync<IEnumerable<Plat>>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return plats;
+						}
+					}
+					else
+					{
+						return null;
+					}
+
+			}
+
+			return null;
+
+		}
 
 		public async Task<PageResponse<Plat>> GetAllPlats(PageRequest pageRequest)
 		{
@@ -73,7 +141,7 @@ namespace BLLC.Services
 					using (var stream = await reponse.Content.ReadAsStreamAsync())
 					{
 						var plats = await JsonSerializer.DeserializeAsync<PageResponse<Plat>>(stream,
-							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
 						return plats;
 					}
 				}
@@ -104,7 +172,7 @@ namespace BLLC.Services
 					using (var stream = await reponse.Content.ReadAsStreamAsync())
 					{
 						var ingredients = await JsonSerializer.DeserializeAsync<PageResponse<Ingredient>>(stream,
-							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
 						return ingredients;
 					}
 				}
@@ -136,7 +204,7 @@ namespace BLLC.Services
 					using (var stream = await reponse.Content.ReadAsStreamAsync())
 					{
 						Ingredient ingredient = await JsonSerializer.DeserializeAsync<Ingredient>(stream,
-							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
 						return ingredient;
 					}
 				}
@@ -184,86 +252,88 @@ namespace BLLC.Services
 			return null;
 
 		}
-	
 
-	public async Task<Plat> GetPlatById(int idplat)
-	{
-		if (AuthentificationService.Getinstance().IsLogged)
+
+		public async Task<Plat> GetPlatById(int idplat)
+		{
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+				var reponse = await _httpClient.GetAsync($"plats/" + idplat);
+
+				if (reponse.IsSuccessStatusCode)
+				{
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						Plat plat = await JsonSerializer.DeserializeAsync<Plat>(stream,
+							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+						return plat;
+					}
+				}
+				else
+				{
+					return null;
+				}
+			}
+
+
+			return null;
+
+		}
+
+
+		public async Task<IEnumerable<Plat>> GetAllPlatsByType(int typePlat)
 		{
 
-			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
 
-
-			var reponse = await _httpClient.GetAsync($"plats/" + idplat);
-
-			if (reponse.IsSuccessStatusCode)
+			if (AuthentificationService.Getinstance().IsLogged)
 			{
-				using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+				var reponse = await _httpClient.GetAsync($"plats/type/" + typePlat);
+
+				if (reponse.IsSuccessStatusCode)
 				{
-					Plat plat = await JsonSerializer.DeserializeAsync<Plat>(stream,
-						new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-					return plat;
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						List<Plat> plats = await JsonSerializer.DeserializeAsync<List<Plat>>(stream,
+							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+						return plats;
+					}
+				}
+				else
+				{
+					return null;
 				}
 			}
 			else
 			{
 				return null;
 			}
+
 		}
 
 
-		return null;
 
-	}
-
-
-	public async Task<IEnumerable<Plat>> GetAllPlatsByType(int typePlat)
-	{
-
-
-		if (AuthentificationService.Getinstance().IsLogged)
+		public async Task<Plat> CreatePlat(Plat newPlat)
 		{
-
-			var reponse = await _httpClient.GetAsync($"plats/type/" + typePlat);
-
-			if (reponse.IsSuccessStatusCode)
+			try
 			{
+				var reponse = await _httpClient.PostAsJsonAsync($"plats", newPlat);
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
-					List<Plat> plats = await JsonSerializer.DeserializeAsync<List<Plat>>(stream,
+					return await JsonSerializer.DeserializeAsync<Plat>(stream,
 						new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-					return plats;
 				}
 			}
-			else
+			catch (Exception)
 			{
 				return null;
 			}
 		}
-		else
-		{
-			return null;
-		}
-
-	}
-
-
-
-	public async Task<Plat> CreatePlat(Plat newPlat)
-	{
-		try
-		{
-			var reponse = await _httpClient.PostAsJsonAsync($"plats", newPlat);
-			using (var stream = await reponse.Content.ReadAsStreamAsync())
-			{
-				return await JsonSerializer.DeserializeAsync<Plat>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-			}
-		}
-		catch (Exception)
-		{
-			return null;
-		}
-	}
 
 		public async Task<Service> CreateMenu(Service newService)
 		{
@@ -272,7 +342,8 @@ namespace BLLC.Services
 				var reponse = await _httpClient.PostAsJsonAsync($"services", newService);
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
-					return await JsonSerializer.DeserializeAsync<Service>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+					return await JsonSerializer.DeserializeAsync<Service>(stream,
+						new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
 				}
 			}
 			catch (Exception)
@@ -280,6 +351,7 @@ namespace BLLC.Services
 				return null;
 			}
 		}
+
 		public async Task<Service> UpdateMenu(Service menuToUpdate)
 		{
 			try
@@ -292,7 +364,8 @@ namespace BLLC.Services
 				var reponse = await _httpClient.PostAsJsonAsync($"services/{menuToUpdate.IdService}", menuToUpdate);
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
-					return await JsonSerializer.DeserializeAsync<Service>(stream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+					return await JsonSerializer.DeserializeAsync<Service>(stream,
+						new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
 				}
 			}
 			catch (Exception)
@@ -302,6 +375,7 @@ namespace BLLC.Services
 			}
 
 		}
+
 		public async Task<bool> RemoveMenu(Service menuToDelete)
 		{
 			if (menuToDelete.IdService != null)
@@ -309,7 +383,7 @@ namespace BLLC.Services
 				try
 				{
 					var response = await _httpClient.DeleteAsync($"services/{menuToDelete.IdService}");
-					if(response.IsSuccessStatusCode) 
+					if (response.IsSuccessStatusCode)
 						return true;
 				}
 				catch (Exception)
@@ -319,8 +393,33 @@ namespace BLLC.Services
 				}
 
 			}
+
 			return false;
 		}
 
+		public async Task<bool> removePlat(Plat platToRemove)
+		{
+
+			if (platToRemove.IdPlat != null)
+			{
+				try
+				{
+					var response = await _httpClient.DeleteAsync($"plats/{platToRemove.IdPlat}");
+					if (response.IsSuccessStatusCode)
+						return true;
+
+				}
+				catch (Exception e)
+				{
+					return false;
+				}
+			}
+
+			return false;
+
+		}
 	}
+
+
+
 }

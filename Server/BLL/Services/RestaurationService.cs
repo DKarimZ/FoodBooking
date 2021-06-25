@@ -134,6 +134,14 @@ namespace BLL.Services
 		// Methodes liées aux services de gestion des plats
 		#region Plat
 
+
+
+		public async Task<IEnumerable<Plat>> GetAllPlatsScore()
+		{
+			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();
+			return await _plats.GetAllScoreAsync();
+		}
+
 		/// <summary>
 		/// Méthode de service restauration permettant d'afficher tous les plats avec une pagination
 		/// </summary>
@@ -147,6 +155,12 @@ namespace BLL.Services
 			return await _plats.GetAllAsync(pageRequest);
 
 			
+		}
+
+		public async Task<IEnumerable<Plat>> GetAllPlatsByIngredients(int Idingredient)
+		{
+			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();
+			return await _plats.GetAllPLatswithIngredientX(Idingredient);
 		}
 
 		/// <summary>

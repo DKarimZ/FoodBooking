@@ -33,7 +33,7 @@ namespace BO.DTO.Responses
 		/// <param name="pageSize"></param>
 		/// <param name="totalRecords"></param>
 		/// <param name="data"></param>
-		public PageResponseSortable(int score, int page, int pageSize, int? totalRecords, List<T> data) : base(page,pageSize,totalRecords,data)
+		public PageResponseSortable(int score, int page, int pageSize, int totalRecords, List<T> data) : base(page,pageSize,totalRecords,data)
 		{
 			Score = score;
 		}

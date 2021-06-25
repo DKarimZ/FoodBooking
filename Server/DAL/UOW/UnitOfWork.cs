@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace DAL.UOW
 {
+
+	/// <summary>
+	/// Classe UnitOfwork ou sont définies les méthodes propres aux transactions
+	/// </summary>
 	sealed class UnitOfWork :IUnitOfWork
 	{
 		private readonly DbSession _session;

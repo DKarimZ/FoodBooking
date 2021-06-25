@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO.DTO;
+using BO.Entity;
 
 namespace BLLC.Services
 {
-	interface IFournisseurService
+	public interface IFournisseurService
 	{
+		Task<CommandDTO> GetCommande();
 	}
 }

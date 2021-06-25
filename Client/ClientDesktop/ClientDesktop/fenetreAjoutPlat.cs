@@ -78,21 +78,33 @@ namespace ClientDesktop
 		}
 
 
-		public Plat compute()
+		public List<PlatIngredient> compute()
 		{
 
-			return AjouterIngredient();
+			return CreateListIngredient();
 		}
 
-		public List<PlatIngredient> GetlistePlatIngredients()
+	
+
+
+
+		public List<PlatIngredient> CreateListIngredient()
 		{
-			return compute().PlatIngredient;
+
+
+			float quantite = Convert.ToSingle(tbquantiteingredientaajouter.Text);
+
+
+
+			Ingredient ingredient = bindingSourceIngredients.Current as Ingredient;
+
+			List<PlatIngredient> liste = new List<PlatIngredient>();
+			liste.Add(new PlatIngredient(ingredient, quantite));
+			return liste;
+
+
 		}
 
-
-
-
-		
 
 		public Plat AjouterIngredient()
 		{
@@ -142,26 +154,28 @@ namespace ClientDesktop
 
 		private async void btnAjouterplat_Click(object sender, EventArgs e)
 		{
-			try
-			{
+			//try
+			//{
 
 
 
-				await _restaurationService.CreatePlat(compute());
-				MessageBox.Show("Votre nouveau plat a bien été ajouté");
-			}
-			catch (Exception)
-			{
+			//	await _restaurationService.CreatePlat(compute());
+			//	MessageBox.Show("Votre nouveau plat a bien été ajouté");
+			//}
+			//catch (Exception)
+			//{
 
-				MessageBox.Show("Votre nouveau plat n'a pas pu être ajouté");
-			}
+			//	MessageBox.Show("Votre nouveau plat n'a pas pu être ajouté");
+			//}
 		}
 
 		private void btnAjouteringredient_Click(object sender, EventArgs e)
 		{
-			
-			AjouterIngredient();
-			
+
+			//AjouterIngredient();
+
+			//CreateListIngredientAsync();
+
 
 			dgvIngredientsinnewplat.Refresh();
 
@@ -179,8 +193,24 @@ namespace ClientDesktop
 			
 		}
 
+		private async void btnSupprimer_Click(object sender, EventArgs e)
+		{
 
-		
+
+			
+			Plat platToRemove = bindingSourcePlats.Current as Plat;
+
+			try
+			{
+				await _restaurationService.removePlat(platToRemove);
+				MessageBox.Show("Ce plat a bien été supprimé");
+			}
+			catch (Exception exception)
+			{
+
+				MessageBox.Show("La suppression de ce plat n'a pas fonctionnée");
+			}
+		}
 	}
 	
 }

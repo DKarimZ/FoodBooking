@@ -13,6 +13,13 @@ namespace DAL
 	public static class DALExtension
 	{
 
+
+		/// <summary>
+		/// Méthode d'extension de la DAL qui lui permet d'ajouter les services (transient) des repositories
+		/// </summary>
+		/// <param name="services"></param>
+		/// <returns></returns>
+
 		public static IServiceCollection AddDAL(this IServiceCollection services)
 		{
 			services.AddScoped<DbSession>((services) => new DbSession(services.GetRequiredService<IConfiguration>(), "DefaultConnection"));

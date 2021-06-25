@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace DAL.UOW
 {
+
+    /// <summary>
+    /// Permet d'ouvrir une connection à la base de donnes ainsi que de faire une transaction
+    /// </summary>
 	public class DbSession
 	{
         public IDbConnection Connection { get; }

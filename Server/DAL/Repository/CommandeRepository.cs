@@ -1,5 +1,6 @@
 ﻿using BO.DTO.Requests;
 using BO.DTO.Responses;
+using BO.DTO; 
 using BO.Entity;
 using DAL.UOW;
 using Dapper;
@@ -32,19 +33,19 @@ namespace DAL.Repository
 		/// </summary>
 		/// <param name="commandeToCreate"></param>
 		/// <returns>Retourne la commande ajoutée</returns>
-		public async Task<Commande> InsertAsync(Commande commandeToCreate)
-		{
-			var stmt = @"insert into commande(jourCommande, Ingredients) output INSERTED.ID values (@jourCommande, @Ingredients)";
-			try
-			{
-				int i = await _session.Connection.QuerySingleAsync<int>(stmt, commandeToCreate, _session.Transaction);
-				return await GetAsync(i);
-			}
-			catch
-			{
-				return null;
-			}
-		}
+		//public async Task<Commande> InsertAsync(Commande commandeToCreate)
+		//{
+		//	var stmt = @"insert into commande(jourCommande, Ingredients) output INSERTED.ID values (@jourCommande, @Ingredients)";
+		//	try
+		//	{
+		//		int i = await _session.Connection.QuerySingleAsync<int>(stmt, commandeToCreate, _session.Transaction);
+		//		return await GetAsync(i);
+		//	}
+		//	catch
+		//	{
+		//		return null;
+		//	}
+		//}
 
 
 
@@ -75,10 +76,22 @@ namespace DAL.Repository
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns>Retoune la commande identifiée</returns>
-		public async Task<Commande> GetAsync(int id)
+		public async Task<CommandDTO> GetAsync()
 		{
-			var stmt = @"select * from commande where id = @id";
-			return await _session.Connection.QueryFirstOrDefaultAsync<Commande>(stmt, new { Id = id }, _session.Transaction);
+			var stmt = @"select NomIngredient, Sum(Quantite) AS Quantite,Sum(Quantite*prixMoyen) AS Price
+				  From Ingredient I JOIN PlatIngredient Pg ON I.IdIngredient = Pg.IdIngredient
+				  JOIN Plat P ON Pg.IdPlat = P.IdPlat
+				  JOIN ServicePlat SP ON P.IdPlat = SP.IdPlat
+				  JOIN Services S ON SP.IdService = S.IdService
+				  JOIN Reservation R ON S.IdService = R.IdService
+				  GROUP BY NomIngredient;";
+			List<EntryCommandDTO>  entries = (await _session.Connection.QueryAsync<EntryCommandDTO>(stmt,null, _session.Transaction)).ToList();
+
+			return new CommandDTO()
+			{
+				TotalPrice = entries.Select(e => e.Price).Aggregate((p1, p2) => p1 + p2),
+				Entries = entries
+			};
 		}
 
 

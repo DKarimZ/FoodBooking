@@ -20,12 +20,12 @@ namespace BO.DTO.Requests
 		/// <summary>
 		/// type de Plat (pour tri) : entrée, plat, dessert
 		/// </summary>
-		public int typePlat { get; set; }
+		public TypePlat TypePlat { get; set; }
 
 		/// <summary>
 		/// Ingredient (pour tri)
 		/// </summary>
-		public Ingredient ingredient { get; set; }
+		public Ingredient Ingredient { get; set; }
 
 		/// <summary>
 		/// Constructeur par defaut  pour serialisation (avec heritage de PageRequest)
@@ -43,13 +43,34 @@ namespace BO.DTO.Requests
 		/// <param name="ingredient"></param>
 		/// <param name="Page"></param>
 		/// <param name="PageSize"></param>
-		public PageRequestSortable(int score, int typePlat, Ingredient ingredient, int Page, int PageSize) : base(Page, PageSize)
+		//public PageRequestSortable(int score, int typePlat, Ingredient ingredient, int Page, int PageSize) : base(Page, PageSize)
+		//{
+		//	Score = score;
+		//	this.typePlat = typePlat;
+		//	this.ingredient = ingredient;
+		//}
+
+		public PageRequestSortable(int score, int Page, int PageSize) : base(Page, PageSize)
 		{
 			Score = score;
-			this.typePlat = typePlat;
-			this.ingredient = ingredient;
+
 		}
 
-		
+		public PageRequestSortable(TypePlat typePlat, int Page, int PageSize) : base(Page, PageSize)
+		{
+			TypePlat = typePlat;
+
+		}
+
+		public PageRequestSortable(Ingredient ingredient, int Page, int PageSize) : base(Page, PageSize)
+		{
+			Ingredient = ingredient;
+
+		}
+
+		public PageRequestSortable(int Page, int PageSize) : base(Page, PageSize)
+		{
+
+		}
 	}
 }

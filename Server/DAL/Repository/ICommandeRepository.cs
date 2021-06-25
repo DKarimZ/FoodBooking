@@ -3,6 +3,7 @@ using BO.DTO.Responses;
 using BO.Entity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BO.DTO;
 
 namespace DAL.Repository
 {
@@ -10,7 +11,7 @@ namespace DAL.Repository
 	{
 		Task<IEnumerable<Commande>> GetAllAsync();
 		Task<PageResponse<Commande>> GetAllAsync(PageRequest pageRequest);
-		Task<Commande> GetAsync(int id);
-		Task<Commande> InsertAsync(Commande commandeToCreate);
+		Task<CommandDTO> GetAsync();
+	//	Task<Commande> InsertAsync(Commande commandeToCreate);
 	}
 }
