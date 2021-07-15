@@ -20,7 +20,16 @@ namespace BLLC.Services
 
 		public RestaurationService()
 		{
-			_httpClient = new HttpClient();
+
+// BYPASS SSL Verification self signed
+			HttpClientHandler handler = new HttpClientHandler() { 
+				ClientCertificateOptions = ClientCertificateOption.Manual,
+				ServerCertificateCustomValidationCallback = delegate { return true; }
+			};
+
+//END
+
+			_httpClient = new HttpClient(handler);
 			_httpClient.BaseAddress = new Uri("https://localhost:5001/api/v1/");
 		}
 

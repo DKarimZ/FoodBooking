@@ -91,13 +91,19 @@ namespace BO.Entity
 				   dateJourservice == service.dateJourservice;
 		}
 
+		public override int GetHashCode()
+		{
+			int hashCode = 717657432;
+			hashCode = hashCode * -1521134295 + IdService.GetHashCode();
+			hashCode = hashCode * -1521134295 + Midi.GetHashCode();
+			hashCode = hashCode * -1521134295 + dateJourservice.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<List<Plat>>.Default.GetHashCode(Plats);
+			return hashCode;
+		}
+
 
 		// Methode GetHashCode (Si besoin de la redéfinir)
 
-		public override int GetHashCode()
-		{
-			return HashCode.Combine(IdService, Midi, dateJourservice);
-		}
 
 
 

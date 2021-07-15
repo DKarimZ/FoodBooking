@@ -1,4 +1,6 @@
-﻿namespace BO.Entity
+﻿using System.Collections.Generic;
+
+namespace BO.Entity
 {
 	/// <summary>
 	/// Entité correspondant à la table d'association entre plat et ingrédient
@@ -41,6 +43,19 @@
 			Quantite = quantite;
 		}
 
+		public override bool Equals(object obj)
+		{
+			return obj is PlatIngredient ingredient &&
+				   EqualityComparer<Ingredient>.Default.Equals(Ingredient, ingredient.Ingredient) &&
+				   Quantite == ingredient.Quantite;
+		}
 
+		public override int GetHashCode()
+		{
+			int hashCode = 1537735546;
+			hashCode = hashCode * -1521134295 + EqualityComparer<Ingredient>.Default.GetHashCode(Ingredient);
+			hashCode = hashCode * -1521134295 + Quantite.GetHashCode();
+			return hashCode;
+		}
 	}
 }

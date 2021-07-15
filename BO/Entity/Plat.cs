@@ -73,10 +73,18 @@ namespace BO.Entity
 				   EqualityComparer<List<PlatIngredient>>.Default.Equals(PlatIngredient, plat.PlatIngredient);
 		}
 
-		// Methode GetHashCode (Si besoin de la redéfinir)
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(IdPlat, Nom, typePlat, Score, PlatIngredient);
+			int hashCode = -1500760494;
+			hashCode = hashCode * -1521134295 + IdPlat.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Nom);
+			hashCode = hashCode * -1521134295 + EqualityComparer<TypePlat>.Default.GetHashCode(typePlat);
+			hashCode = hashCode * -1521134295 + Score.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<List<PlatIngredient>>.Default.GetHashCode(PlatIngredient);
+			return hashCode;
 		}
+
+		// Methode GetHashCode (Si besoin de la redéfinir)
+
 	}
 }

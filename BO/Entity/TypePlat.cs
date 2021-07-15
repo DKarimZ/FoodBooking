@@ -48,11 +48,16 @@ namespace BO.Entity
 				   IdTypePlat == plat.IdTypePlat &&
 				   libelle == plat.libelle;
 		}
-		//Methoode GetHashCode pour réécriture
 
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(IdTypePlat, libelle);
+			int hashCode = -932488181;
+			hashCode = hashCode * -1521134295 + IdTypePlat.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(libelle);
+			return hashCode;
 		}
+		//Methoode GetHashCode pour réécriture
+
+
 	}
 }

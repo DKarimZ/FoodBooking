@@ -69,10 +69,19 @@ namespace BO.Entity
 				   telephone == client.telephone;
 		}
 
-		// Methode GetHashCode (si besoin de la redéfinir)
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(IdClient, nom, prenom, telephone);
+			int hashCode = 1551227788;
+			hashCode = hashCode * -1521134295 + IdClient.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(nom);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(prenom);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(telephone);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(role);
+			return hashCode;
 		}
+
+		// Methode GetHashCode (si besoin de la redéfinir)
+
+
 	}
 }

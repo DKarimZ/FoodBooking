@@ -56,10 +56,16 @@ namespace BO.Entity
 				   PrixMoyen == ingredient.PrixMoyen;
 		}
 
-		// Methode GetHashCode (Si besoin de la redéfinir)
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(IdIngredient, NomIngredient, PrixMoyen);
+			int hashCode = -1431934069;
+			hashCode = hashCode * -1521134295 + IdIngredient.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(NomIngredient);
+			hashCode = hashCode * -1521134295 + PrixMoyen.GetHashCode();
+			return hashCode;
 		}
+
+		// Methode GetHashCode (Si besoin de la redéfinir)
+
 	}
 }

@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BO\BO.csproj" />
-    <ProjectReference Include="..\..\..\FoodBookingServer\BO\BO.csproj" />
-    <ProjectReference Include="..\BLLC\BLLC.csproj" />
+	  <ProjectReference Include="..\..\BO\BO.csproj" />
+	  <ProjectReference Include="..\BLLC\BLLC.csproj" />
+	 
   </ItemGroup>
 
   <ItemGroup>

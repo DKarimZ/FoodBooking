@@ -57,10 +57,16 @@ namespace BO.Entity
 				   EqualityComparer<List<Service>>.Default.Equals(Services, reservation.Services);
 		}
 
-		// Methode GetHashCode (Si besoin de la redéfinir)
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(IdReservation, dateReservation, Services);
+			int hashCode = 1121000728;
+			hashCode = hashCode * -1521134295 + IdReservation.GetHashCode();
+			hashCode = hashCode * -1521134295 + dateReservation.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<List<Service>>.Default.GetHashCode(Services);
+			return hashCode;
 		}
+
+		// Methode GetHashCode (Si besoin de la redéfinir)
+
 	}
 }

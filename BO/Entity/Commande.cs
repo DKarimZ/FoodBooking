@@ -48,6 +48,24 @@ namespace BO.Entity
 			Quantite = quantite;
 		}
 
+		public override bool Equals(object obj)
+		{
+			return obj is Commande commande &&
+				   jourCommande == commande.jourCommande &&
+				   EqualityComparer<Ingredient>.Default.Equals(Ingredients, commande.Ingredients) &&
+				   Quantite == commande.Quantite;
+		}
+
+		public override int GetHashCode()
+		{
+			int hashCode = 243418636;
+			hashCode = hashCode * -1521134295 + jourCommande.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<Ingredient>.Default.GetHashCode(Ingredients);
+			hashCode = hashCode * -1521134295 + Quantite.GetHashCode();
+			return hashCode;
+		}
+
+
 		// Methode Equals (Si besoin de la redéfinir)
 
 		//public override bool Equals(object obj)
