@@ -72,12 +72,12 @@ namespace BLL.Services
 				new Claim(JwtRegisteredClaimNames.Sub, client.nom),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 				new Claim(ClaimTypes.NameIdentifier, client.nom),
-				
-			};
+							};
 			
 			//Add Role
 			
 			claims.Add(new Claim(ClaimTypes.Role, client.role));
+			claims.Add(new Claim("clientId", client.IdClient.ToString()));
 
 				//Signing key
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));

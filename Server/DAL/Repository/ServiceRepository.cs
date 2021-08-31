@@ -52,7 +52,86 @@ namespace DAL.Repository
 			return r;
 		}
 
+		public async Task<Plat> GetAsyncPlat0(int id)
+		{
+			var stmt = @"select * from ServicePlat where IdService = @id and IdPlat = (Select MIN(IdPlat) from ServicePlat where IdService = @id)";
+			var r = await _session.Connection.QueryFirstOrDefaultAsync<Plat>(stmt, new { Id = id },
+				_session.Transaction);
+			return r;
 
+		}
+
+		public async Task<Plat> GetAsyncPlat1(int id)
+		{
+			var stmt = @"select * from ServicePlat where IdService = @id and IdPlat NOT IN ((Select MIN(IdPlat) from ServicePlat where IdService = @id), (Select MAX(IdPlat) from ServicePlat where IdService = @id))";
+			var r = await _session.Connection.QueryFirstOrDefaultAsync<Plat>(stmt, new { Id = id },
+				_session.Transaction);
+			return r;
+
+		}
+
+		public async Task<Plat> GetAsyncPlat2(int id)
+		{
+			var stmt = @"select * from ServicePlat where IdService = @id and IdPlat = (Select MAX(IdPlat) from ServicePlat where IdService = @id)";
+			var r = await _session.Connection.QueryFirstOrDefaultAsync<Plat>(stmt, new { Id = id },
+				_session.Transaction);
+			return r;
+
+		}
+
+
+		public async Task<Service> GetServiceByDateAndMidi(DateTime date, bool midi)
+		{
+			var stmt = @"select s.*, sp.*,p.*,tp.* from Services s 
+						left join ServicePlat sp ON s.Idservice = sp.IdService
+						left join Plat p ON sp.IdPlat = p.IdPlat
+						left join TypePlat tp on p.IdTypePlat = tp.IdTypePlat
+						where dateJourService = @date and Midi = @midi";
+			var service = await _session.Connection.QueryAsync<Service,Plat,TypePlat,Service>(stmt,(service,plat,typePlat) =>
+				{
+				service.Plats = service.Plats ?? new List<Plat>();
+				service.Plats.Add(plat);
+				plat.typePlat = typePlat;
+				return service;
+				},new { midi = midi, date = date }, _session.Transaction, splitOn: "IdPlat,IdTypePlat");
+
+			var s = service.GroupBy(p => p.IdService).Select(pg => {
+				Service pgFirst = pg.FirstOrDefault();
+				pgFirst.Plats = pg.Select(pgi => pgi.Plats.First()).ToList();
+				return pgFirst;
+			}).FirstOrDefault();
+
+			return s;
+
+		}
+
+		/*
+		public async Task<Plat> GetAsync(int id)
+		{
+			var stmt = @"select p.*, pi.*, i.* from Plat as p 
+						 innerJoin PlatIngredient as pi on pi.IdPlat = p.IdPlat,
+					     innerJoin Ingredient as i on i.IdIngredient = pi.IdIngredient 
+						 where IdPlat = @id";
+
+			var plats = await _session.Connection.QueryAsync<Plat, PlatIngredient, Ingredient, Plat>(stmt,
+				(plat, platIngredient, ingredient) => {
+					plat.PlatIngredient = plat.PlatIngredient ?? new List<PlatIngredient>();
+					platIngredient.Ingredient = ingredient;
+					plat.PlatIngredient.Add(platIngredient);
+					return plat;
+				}, new { @id = id }, _session.Transaction, splitOn:"IdIngredient");
+
+
+			var  p = plats.GroupBy( p => p.IdPlat).Select( pg => {
+				Plat pgFirst  = pg.FirstOrDefault();
+				pgFirst.PlatIngredient = pg.Select( pgi=> pgi.PlatIngredient.First()).ToList();
+				return pgFirst;
+			}).FirstOrDefault();
+
+			return p;
+		}
+
+		*/
 
 		/// <summary>
 		/// Permet de mettre a jour un service de la BDD en utilisant une procédure stockéd
@@ -61,15 +140,17 @@ namespace DAL.Repository
 		/// <returns>Retourne un boolean selon le resultat de la mise à jour</returns>
 		public async Task<bool> UpdateAsync(Service menuToUpdate)
 		{
-			Service oldService = await GetAsync(menuToUpdate.IdService);
+			Plat oldServiceP0 = await GetAsyncPlat0(menuToUpdate.IdService);
+			Plat oldServiceP1 = await GetAsyncPlat1(menuToUpdate.IdService);
+			Plat oldServiceP2 = await GetAsyncPlat2(menuToUpdate.IdService);
 
 			var queryParameters = new DynamicParameters();
 
 			queryParameters.Add("IdService", menuToUpdate.IdService);
 
-			queryParameters.Add("IdPlat1Old", oldService.Plats[0].IdPlat);
-			queryParameters.Add("IdPlat2Old", oldService.Plats[1].IdPlat);
-			queryParameters.Add("IdPlat3Old", oldService.Plats[2].IdPlat);
+			queryParameters.Add("IdPlat1Old", oldServiceP0.IdPlat);
+			queryParameters.Add("IdPlat2Old", oldServiceP1.IdPlat);
+			queryParameters.Add("IdPlat3Old", oldServiceP2.IdPlat);
 
 			queryParameters.Add("IdPlat1New", menuToUpdate.Plats[0].IdPlat);
 			queryParameters.Add("IdPlat2New", menuToUpdate.Plats[1].IdPlat);

@@ -32,6 +32,7 @@ namespace DAL
 			services.AddTransient<IClientRepository, ClientRepository>();
 			services.AddTransient<ICommandeRepository, CommandeRepository>();
 			services.AddTransient<IIngredientRepository, IngredientRepository>();
+			services.AddTransient<IPlatIngredientRepository, PlatIngredientRepository>();
 
 			return services;
 

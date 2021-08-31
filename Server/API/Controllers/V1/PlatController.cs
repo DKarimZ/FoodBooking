@@ -31,6 +31,13 @@ namespace API.Controllers.V1
 		}
 
 
+		[HttpGet("request")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<PageResponse<Plat>>> GetAllPlats([FromQuery] PageRequest pagerequest)
+		{
+			return Ok(await _restaurationService.GetAllPlats(pagerequest));
+		}
+
 		/// <summary>
 		/// Permet de récupérer la liste des plats
 		/// </summary>
@@ -38,9 +45,16 @@ namespace API.Controllers.V1
 		/// <returns>retourne le liste des plats</returns>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<PageResponse<Plat>>> GetAllPlats([FromQuery] PageRequest pagerequest)
+		public async Task<ActionResult<PageResponse<Plat>>> GetAllPlats([FromQuery] Service serviceRequest)
 		{
-			return Ok(await _restaurationService.GetAllPlats(pagerequest));		 
+			if(serviceRequest.dateJourservice != null && serviceRequest.Midi != null )
+			{
+				return Ok(await _restaurationService.GetAllPlatsByDayAndService(serviceRequest));
+			}
+			else
+			{
+				return Ok(await _restaurationService.GetAllPlats());		
+			}
 		}
 
 
@@ -67,6 +81,16 @@ namespace API.Controllers.V1
 		{
 			return Ok(await _restaurationService.GetAllPlatsByType(idType));
 		}
+
+
+		//[HttpGet("")]
+		//[ProducesResponseType(StatusCodes.Status200OK)]
+		//public async Task<ActionResult<PageResponse<Plat>>> GetAllPlatsByDateandMidi([FromQuery] DateTime date, int midi)
+		//{
+		//	return Ok(await _restaurationService.GetAllPlatsByDayAndService(date, midi));
+		//}
+
+
 
 
 		/// <summary>

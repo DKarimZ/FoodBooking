@@ -105,10 +105,10 @@ namespace API
 				
 			}
 
-			//app.UseDocFx(config =>
-		 //  {
-			//   config.rootPath = "/doc";
-		 //  });
+			app.UseDocFx(config =>
+		   {
+			   config.rootPath = "/doc";
+		   });
 
 			// Liste des Middlewares du Pipeline
 

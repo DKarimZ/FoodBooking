@@ -31,12 +31,15 @@ namespace BLL.Services
 		/// <returns>retourne un menu en particulier ou null si non touvé</returns>
 		Task<Service> GetServiceById(int IdMenu);
 
-		/// <summary>
-		/// Permet de créer un menu
-		/// </summary>
-		/// <param name="newMenu"></param>
-		/// <returns>Retourne le nouveau menu</returns>
-		Task<Service> CreateService(Service newMenu);
+
+		Task<Service> GetServiceByDateAndMidi(DateTime date, bool midi);
+		
+			/// <summary>
+			/// Permet de créer un menu
+			/// </summary>
+			/// <param name="newMenu"></param>
+			/// <returns>Retourne le nouveau menu</returns>
+			Task<Service> CreateService(Service newMenu);
 
 		/// <summary>
 		/// Permet de mettre à jour un menu
@@ -101,13 +104,19 @@ namespace BLL.Services
 		/// <returns>retourne un boolean en fonction du succès de la suppression</returns>
 		Task<bool> RemovePlat(int IdPlat);
 		#endregion
-		//Services liés aux ingrédients
-		#region Ingredient
-		/// <summary>
-		/// Permet de récupérer la liste des ingrédients
-		/// </summary>
-		/// <returns>retourne la liste des ingrédients</returns>
-		Task<PageResponse<Ingredient>> GetAllIngredients(PageRequest pageRequest);
+
+		Task<List<Plat>> GetAllPlatsByDayAndService(Service service);
+		
+
+
+
+			//Services liés aux ingrédients
+			#region Ingredient
+			/// <summary>
+			/// Permet de récupérer la liste des ingrédients
+			/// </summary>
+			/// <returns>retourne la liste des ingrédients</returns>
+			Task<PageResponse<Ingredient>> GetAllIngredients(PageRequest pageRequest);
 
 		/// <summary>
 		/// Permet de récupérer un ingrédient en fonction de son identifiant

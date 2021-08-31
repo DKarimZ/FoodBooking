@@ -2,10 +2,13 @@ using BLL.Services;
 using BO.DTO.Requests;
 using BO.DTO.Responses;
 using BO.Entity;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Mime;
 using System.Text;
@@ -35,7 +38,7 @@ namespace API.Controllers.V1
 		/// </summary>
 		/// <param name="clientrequest"></param>
 		/// <returns>retourne la liste des clients</returns>
-		[HttpGet]
+		[HttpGet("All/")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<Client>> GetAllClients([FromQuery] Client clientrequest)
 		{
@@ -61,6 +64,25 @@ namespace API.Controllers.V1
 			else
 			{
 				return Ok(client); // StatusCode = 200
+			}
+		}
+
+		
+		[HttpGet]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[Authorize]
+		public async Task<ActionResult<Client>> GetClientByNomAndPassword([FromQuery] string nom, string password)
+		{
+			var accessToken = new JwtSecurityToken(await HttpContext.GetTokenAsync("access_token"));
+			var idClient = int.Parse(accessToken.Claims.Where(c => c.Type == "clientId").FirstOrDefault().Value);
+
+			if (nom != null && password != null)
+			{
+				return Ok(await _reservationService.GetprofilByID(idClient));
+			}
+			else
+			{
+				return Ok(await _reservationService.GetClientById(10));
 			}
 		}
 

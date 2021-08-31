@@ -14,7 +14,7 @@ namespace BO.Entity
 		/// <summary>
 		/// identifiant du plat
 		/// </summary>
-		public int?  IdPlat { get; set; }
+		public int  IdPlat { get; set; }
 
 		/// <summary>
 		/// nom du plat
@@ -52,14 +52,14 @@ namespace BO.Entity
 		/// <param name="typePlat"></param>
 		/// <param name="score"></param>
 		/// <param name="ingredients"></param>
-		public Plat(int? idPlat, string nomPlat, TypePlat typePlat, int score, List<PlatIngredient> platIngredients
+		public Plat(int idPlat, string nomPlat, TypePlat typePlat, int score, List<PlatIngredient> platIngredients
 			)
 		{
 			IdPlat = idPlat;
 			this.Nom = nomPlat;
 			this.typePlat = typePlat;
 			Score = score;
-			PlatIngredient = platIngredients;
+			this.PlatIngredient = platIngredients;
 		}
 
 		// Methode Equals (Si besoin de la redéfinir)

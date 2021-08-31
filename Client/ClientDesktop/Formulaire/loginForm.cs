@@ -13,8 +13,8 @@ namespace ClientDesktop.Formulaire
 {
 	public partial class loginForm : Form
 	{
-		public string login = "";
-		public string motdepasse = "";
+		public string login = "Riviere";
+		public string motdepasse = "Pass";
 
 		public loginForm()
 		{
@@ -25,13 +25,15 @@ namespace ClientDesktop.Formulaire
 		private async void btnLogin_Click(object sender, EventArgs e)
 		{
 			 login = txtBoxLogin.Text;
+			
 			 motdepasse = txtboxPassword.Text;
+			
 
 			 var result = await AuthentificationService.Getinstance().SignIn(login, motdepasse);
 
 			 if (result)
 			 {
-				FenetreCommande fenCommande = new FenetreCommande();
+				FrmMenus fenCommande = new FrmMenus();
 				fenCommande.Show();
 			}
 			 else

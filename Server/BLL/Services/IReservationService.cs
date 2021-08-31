@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BO.DTO;
+using BO.DTO.Requests;
 
 namespace BLL.Services
 {
@@ -33,7 +34,7 @@ namespace BLL.Services
 		/// </summary>
 		/// <param name="newReservation"></param>
 		/// <returns>retourne la nouvelle réservation</returns>
-		Task<Reservation> CreateReservation(Reservation newReservation);
+		Task<Reservation> CreateReservation(ReservationsFilterRequest rfr);
 
 		/// <summary>
 		/// Permet de modifier une réservation
@@ -65,6 +66,8 @@ namespace BLL.Services
 		/// <returns>retourne un client en particulier</returns>
 		Task<Client> GetClientById(int IdClient);
 
+
+		Task<Client> GetprofilByID(int IdClient);
 		/// <summary>
 		/// Permet de créer un nouveau client
 		/// </summary>
@@ -85,6 +88,8 @@ namespace BLL.Services
 		/// <param name="IdClient"></param>
 		/// <returns>retourne un boolean en fonction de la réussite de la suppression</returns>
 		Task<bool> RemoveClientById(int IdClient);
+
+		Task<Client> GetClientByIdAndPassword(string nom, string password);
 
 		#endregion
 		//Services liés aux commandes

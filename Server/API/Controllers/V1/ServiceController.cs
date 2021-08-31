@@ -36,19 +36,29 @@ namespace API.Controllers.V1
 		/// </summary>
 		/// <param name="pageRequest"></param>
 		/// <returns>retourne la liste des plats</returns>
+		//[HttpGet]
+		//[ProducesResponseType(StatusCodes.Status200OK)]
+		//public async Task<ActionResult<Service>> GetAllServices([FromQuery] Service serviceRequest)
+		//{
+		//	return Ok(await _restaurationService.GetAllServices());
+		//}
+
+
+
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<Service>> GetAllServices([FromQuery] Service serviceRequest)
+		public async Task<ActionResult<Service>> GetserviceByDateandMidi([FromQuery] DateTime date, bool midi)
 		{
-			return Ok(await _restaurationService.GetAllServices());
+			if (date != null && midi!= null)
+			{
+				return Ok(await _restaurationService.GetServiceByDateAndMidi(date, midi));
+			}
+
+			else{
+				return Ok(await _restaurationService.GetAllServices());
+			}
 		}
 
-
-		/// <summary>
-		/// Permet de retourner un livre en fonction de son Identifiant
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns>retourne un livre en particulier</returns>
 		[HttpGet("{id}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -64,6 +74,7 @@ namespace API.Controllers.V1
 				return Ok(service); // StatusCode = 200
 			}
 		}
+ 
 
 
 		/// <summary>

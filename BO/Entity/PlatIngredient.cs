@@ -15,12 +15,12 @@ namespace BO.Entity
 		/// <summary>
 		/// Ingredient correspondant à un plat
 		/// </summary>
-		Ingredient Ingredient { get; set; }
+		public Ingredient Ingredient { get; set; }
 
 		/// <summary>
 		/// Quantite de chaque ingrédient
 		/// </summary>
-		float Quantite { get; set; }
+		public float Quantite { get; set; }
 
 		/// <summary>
 		/// constructeur par defaut de PlatIngredient

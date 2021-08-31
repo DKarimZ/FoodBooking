@@ -1,4 +1,5 @@
-﻿using BO.Entity;
+﻿using BO.DTO.Requests;
+using BO.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace DAL.Repository
 	/// </summary>
 	public interface IReservationRepository : IgenericRepository<Reservation>, IpageableRepository<Reservation>
 	{
+		Task<Reservation> InsertAsyncs(ReservationsFilterRequest rfr);
 
 	}
 }

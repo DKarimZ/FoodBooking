@@ -14,7 +14,7 @@ namespace BLLC.Services
 		public ReservationService()
 		{
 			_httpClient = new HttpClient();
-			_httpClient.BaseAddress = new Uri("https://localhost:5001/api/");
+			_httpClient.BaseAddress = new Uri("http://user13.2isa.org/doc/api/");
 		}
 
 		//To continue

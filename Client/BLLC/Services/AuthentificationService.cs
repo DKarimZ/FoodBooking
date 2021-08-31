@@ -53,7 +53,7 @@ namespace BLLC.Services
 
 			};
 
-			_httpClient.BaseAddress = new Uri("https://localhost:5001/api/v1/");
+			_httpClient.BaseAddress = new Uri("http://user13.2isa.org/api/v1/");
 
 			try
 			{

@@ -152,7 +152,6 @@ namespace ClientDesktop
 			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel5.Size = new System.Drawing.Size(1089, 178);
 			this.tableLayoutPanel5.TabIndex = 0;
-			// 
 			// pbPlats
 			// 
 			this.pbPlats.BackColor = System.Drawing.Color.White;
@@ -174,6 +173,7 @@ namespace ClientDesktop
 			this.pbMenus.Size = new System.Drawing.Size(222, 128);
 			this.pbMenus.TabIndex = 1;
 			this.pbMenus.TabStop = false;
+			this.pbMenus.Click += new System.EventHandler(this.pbMenus_Click);
 			// 
 			// pbCommandes
 			// 
@@ -184,6 +184,7 @@ namespace ClientDesktop
 			this.pbCommandes.Size = new System.Drawing.Size(222, 128);
 			this.pbCommandes.TabIndex = 2;
 			this.pbCommandes.TabStop = false;
+			this.pbCommandes.Click += new System.EventHandler(this.pbCommandes_Click);
 			// 
 			// pictureBox5
 			// 
@@ -194,6 +195,7 @@ namespace ClientDesktop
 			this.pictureBox5.Size = new System.Drawing.Size(223, 128);
 			this.pictureBox5.TabIndex = 3;
 			this.pictureBox5.TabStop = false;
+			this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
 			// 
 			// tableLayoutPanel6
 			// 

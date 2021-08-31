@@ -51,11 +51,31 @@ namespace ClientDesktop
 
 		private void pbPlats_Click(object sender, EventArgs e)
 		{
+			Hide();
 			fenPlats fen = new fenPlats();
 			fen.Show();
 		}
 
+		private void pbMenus_Click(object sender, EventArgs e)
+		{
+			Hide();
+			fenService fen = new fenService();
+			fen.Show();
+		}
+
 		
+
+		private void pbCommandes_Click(object sender, EventArgs e)
+		{
+			Hide();
+			fenCommande fen = new fenCommande();
+			fen.Show();
+		}
+
+		private void pictureBox5_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 
 

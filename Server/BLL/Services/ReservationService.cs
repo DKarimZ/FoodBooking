@@ -7,6 +7,7 @@ using BO.DTO;
 using BO.Entity;
 using DAL.UOW;
 using DAL.Repository;
+using BO.DTO.Requests;
 
 namespace BLL.Services
 {
@@ -40,20 +41,29 @@ namespace BLL.Services
 
 		}
 
+
+
+
 		public async Task<Reservation> GetReservationById(int IdReservation)
 		{
 			IReservationRepository _reservations = _db.GetRepository<IReservationRepository>();
 			return await _reservations.GetAsync(IdReservation);
 		}
 
-		public async Task<Reservation> CreateReservation(Reservation newReservation)
+		public async Task<Client> GetprofilByID(int IdClient)
+		{
+			IClientRepository _clients = _db.GetRepository<IClientRepository>();
+			return await _clients.GetAsync(IdClient);
+		}
+
+		public async Task<Reservation> CreateReservation(ReservationsFilterRequest rfrs)
 		{
 			// l'utilisation de la methode InsertAsync se fait à l'interieur d'une transaction
 			_db.BeginTransaction();
 			IReservationRepository _reservations = _db.GetRepository<IReservationRepository>();
-			Reservation nouvReservation = await _reservations.InsertAsync(newReservation);
+			Reservation rfr = await _reservations.InsertAsyncs(rfrs);
 			_db.Commit();
-			return nouvReservation;
+			return rfr;
 
 
 		}
@@ -111,6 +121,13 @@ namespace BLL.Services
 			return clients.ToList();
 
 		}
+
+		public async Task<Client> GetClientByIdAndPassword(string nom,string password)
+		{
+			IClientRepository _clients = _db.GetRepository<IClientRepository>();
+			return await _clients.GetClientByUsernameAndPassword(nom,password);
+		}
+		
 
 		public async Task<Client> GetClientById(int IdClient)
 		{

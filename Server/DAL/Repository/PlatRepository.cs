@@ -50,6 +50,19 @@ namespace DAL.Repository
 		}
 
 
+		public async Task<IEnumerable<Plat>> GetAllPlatsByDayAndService(DateTime date, bool midi)
+		{
+			var stmt = @"SELECT p.IdPlat,Nom, s.IdService, IdTYpePlat FROM Services s Join ServicePlat sp on s.IdService = sp.IdService JOIN Plat p ON sp.IdPlat = p.IdPlat 
+						where dateJourService = @date and midi = @midi
+						ORDER BY  IdTypePlat ASC ";
+
+			return await _session.Connection.QueryAsync<Plat>(stmt, new{@date = date, @midi = midi }, _session.Transaction);
+
+		}
+
+
+		 
+
 
 		/// <summary>
 		/// Permet d'obtenir un plat en fonction de son identifiant
@@ -58,8 +71,27 @@ namespace DAL.Repository
 		/// <returns>Retourne un plat en fonction de son identifiant</returns>
 		public async Task<Plat> GetAsync(int id)
 		{
-			var stmt = @"select * from Plat where IdPlat = @id";
-			return await _session.Connection.QueryFirstOrDefaultAsync<Plat>(stmt, new { @id = id }, _session.Transaction);
+			var stmt = @"select p.*, pi.*, i.* from Plat as p 
+						 innerJoin PlatIngredient as pi on pi.IdPlat = p.IdPlat,
+					     innerJoin Ingredient as i on i.IdIngredient = pi.IdIngredient 
+						 where IdPlat = @id";
+
+			var plats = await _session.Connection.QueryAsync<Plat, PlatIngredient, Ingredient, Plat>(stmt,
+				(plat, platIngredient, ingredient) => {
+					plat.PlatIngredient = plat.PlatIngredient ?? new List<PlatIngredient>();
+					platIngredient.Ingredient = ingredient;
+					plat.PlatIngredient.Add(platIngredient);
+					return plat;
+				}, new { @id = id }, _session.Transaction, splitOn:"IdIngredient");
+
+
+			var  p = plats.GroupBy( p => p.IdPlat).Select( pg => {
+				Plat pgFirst  = pg.FirstOrDefault();
+				pgFirst.PlatIngredient = pg.Select( pgi=> pgi.PlatIngredient.First()).ToList();
+				return pgFirst;
+			}).FirstOrDefault();
+
+			return p;
 		}
 
 
@@ -98,6 +130,14 @@ namespace DAL.Repository
 			try
 			{
 				int i = await _session.Connection.QuerySingleAsync<int>(stmt, platToCreate, _session.Transaction);
+				var stmtPlatIngredient =
+					@"insert into PlatIngredient (IdPlat, IdIngredient, Quantite) output INSERTED.IdPlat values (@idPlat, @idIngredient, @Quantite)";
+				platToCreate.PlatIngredient.ForEach(async platIngredient =>
+				{
+					await _session.Connection.QuerySingleAsync<int>(stmtPlatIngredient,
+						new { idPlat = i, idIngredient = platIngredient.Ingredient.IdIngredient, Quantite = platIngredient.Quantite }, _session.Transaction);
+				});
+
 				return await GetAsync(i);
 			}
 			catch

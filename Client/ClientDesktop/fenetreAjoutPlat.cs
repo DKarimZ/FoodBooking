@@ -22,8 +22,8 @@ namespace ClientDesktop
 		private BindingSource bindingSourcePlats = new BindingSource();
 		private BindingSource bindingSourceIngredients = new BindingSource();
 		private BindingSource bindingSourceIngredieentsinnewplat = new BindingSource();
+		List<PlatIngredient> liste = new List<PlatIngredient>();
 
-		public List<PlatIngredient> platingredients = new();
 
 		public fenetreAjoutPlat()
 		{
@@ -31,13 +31,14 @@ namespace ClientDesktop
 			InitializeComponent();
 			Loadplats();
 			LoadIngredients();
+			LoadTypePlats();
 		
 		}
 
 
 		public async void Loadplats()
 		{
-			PageRequest pagerequest = new PageRequest(page: 1, 30);
+			PageRequest pagerequest = new PageRequest(page: 1, 60);
 
 			Task<PageResponse<Plat>> platsTask = _restaurationService.GetAllPlats(pagerequest);
 			var plats = await platsTask;
@@ -51,8 +52,8 @@ namespace ClientDesktop
 
 		public async void LoadIngredients()
 		{
-
-			PageRequest pagerequest = new PageRequest(page: 1, 30);
+		 List<PlatIngredient> platingredients = new();
+		PageRequest pagerequest = new PageRequest(page: 1, 30);
 
 			Task<PageResponse<Ingredient>> ingredientsTask = _restaurationService.GetAllIngredients(pagerequest);
 			var ingredients = await ingredientsTask;
@@ -77,11 +78,31 @@ namespace ClientDesktop
 
 		}
 
-
-		public List<PlatIngredient> compute()
+		public async void LoadTypePlats()
 		{
 
-			return CreateListIngredient();
+
+			Plat plat = new Plat();
+
+			TypePlat typeplat = new TypePlat();
+			typeplat.IdTypePlat = 2;
+			plat.typePlat = typeplat;
+			lbTypeplat.Items.Add("Entree");
+			lbTypeplat.Items.Add("Plat");
+			lbTypeplat.Items.Add("Dessert");
+		}
+
+
+			public Plat compute()
+		{
+			Plat plat = new Plat();
+			List<PlatIngredient> liste = new List<PlatIngredient>();
+			plat.Nom = txtBNomPlat.Text;
+			plat.Score = 0;
+			plat.PlatIngredient = CreateListIngredient();
+
+			return plat;
+
 		}
 
 	
@@ -98,7 +119,8 @@ namespace ClientDesktop
 
 			Ingredient ingredient = bindingSourceIngredients.Current as Ingredient;
 
-			List<PlatIngredient> liste = new List<PlatIngredient>();
+			
+		
 			liste.Add(new PlatIngredient(ingredient, quantite));
 			return liste;
 
@@ -117,26 +139,27 @@ namespace ClientDesktop
 
 				float quantite = Convert.ToSingle(tbquantiteingredientaajouter.Text);
 
-				
 
+
+				List<PlatIngredient> platingredients = new();
 				Ingredient ingredient = bindingSourceIngredients.Current as Ingredient;
 
 				ingredient.NomIngredient = (IngredientGridView.Rows[IngredientGridView.CurrentRow.Index].Cells[1].Value).ToString();
 
 				txtboxingredientaajouter.Text = ingredient.NomIngredient;
-				platingredients.Add(new PlatIngredient(ingredient as Ingredient, quantite));
+				
 				
 				bindingSourceIngredients.RemoveCurrent();
 
-				plat.PlatIngredient = platingredients;
-				plat.IdPlat = 32;
+				
+			//	plat.IdPlat = 32;
 				plat.Nom = txtBNomPlat.Text;
 				plat.Score = 0;
-				TypePlat typeplat = new TypePlat();
-				//typeplat.IdTypePlat = 2;
-				plat.typePlat = typeplat;
-				
-				
+				//platingredients.Add(new PlatIngredient(ingredient as Ingredient, quantite));
+				//plat.PlatIngredient = platingredients;
+
+				CreateListIngredient();
+				MessageBox.Show("L'ingrédient a bien été ajouté");
 				return plat;
 			}
 			catch (Exception)
@@ -154,25 +177,25 @@ namespace ClientDesktop
 
 		private async void btnAjouterplat_Click(object sender, EventArgs e)
 		{
-			//try
-			//{
+			try
+			{
 
 
 
-			//	await _restaurationService.CreatePlat(compute());
-			//	MessageBox.Show("Votre nouveau plat a bien été ajouté");
-			//}
-			//catch (Exception)
-			//{
+				await _restaurationService.CreatePlat(compute());
+				MessageBox.Show("Votre nouveau plat a bien été ajouté");
+			}
+			catch (Exception)
+			{
 
-			//	MessageBox.Show("Votre nouveau plat n'a pas pu être ajouté");
-			//}
+				MessageBox.Show("Votre nouveau plat n'a pas pu être ajouté");
+			}
 		}
 
 		private void btnAjouteringredient_Click(object sender, EventArgs e)
 		{
 
-			//AjouterIngredient();
+			AjouterIngredient();
 
 			//CreateListIngredientAsync();
 
@@ -189,6 +212,8 @@ namespace ClientDesktop
 			ingredient.NomIngredient = (IngredientGridView.Rows[IngredientGridView.CurrentRow.Index].Cells[1].Value).ToString();
 
 			txtboxingredientaajouter.Text = ingredient.NomIngredient;
+
+		
 
 			
 		}

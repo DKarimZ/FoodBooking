@@ -42,7 +42,7 @@ namespace DAL.Repository
 		/// <returns>Retourne la reservation identifiée</returns>
 		public async Task<Reservation> GetAsync(int id)
 		{
-			var stmt = @"select * from reservation where id = @id";
+			var stmt = @"select * from reservation where IdReservation = @id";
 			return await _session.Connection.QueryFirstOrDefaultAsync<Reservation>(stmt, new { Id = id }, _session.Transaction);
 		}
 
@@ -75,12 +75,40 @@ namespace DAL.Repository
 		/// </summary>
 		/// <param name="reservationToCreate"></param>
 		/// <returns>Retourne  la réservation nouvellement créée</returns>
-		public async Task<Reservation> InsertAsync(Reservation reservationToCreate)
+		public async Task<Reservation> InsertAsyncs(ReservationsFilterRequest rfr)
 		{
-			var stmt = @"insert into reservation(dateReservation, repass) output INSERTED.ID values (@dateReservation, @repass)";
+			var stmt = @"insert into Reservation(DateReservation,Entree,Plat,Dessert,NbPersonnes,IdService,IdClient) output INSERTED.IdReservation
+						values(@DateReservation,@Entree,@Plat,@Dessert,@NbPersonnes,@IdService,@IdClient);";
 			try
 			{
-				int i = await _session.Connection.QuerySingleAsync<int>(stmt, reservationToCreate, _session.Transaction);
+				int i = await _session.Connection.QuerySingleAsync<int>(stmt, param: new {
+
+				IdClient= rfr.idClient,
+				IdService = rfr.IdService,
+				DateReservation = DateTime.Now,
+				NbPersonnes = rfr.NbPersonne,
+				Entree = rfr.Entree,
+				Plat = rfr.Plat,
+				Dessert = rfr.Dessert
+
+
+				}, _session.Transaction);
+				return await GetAsync(i);
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+
+		public async Task<Reservation> InsertAsync(Reservation reservation)
+		{
+			var stmt = @"insert into Reservation(DateReservation,Entree,Plat,Dessert,NbPersonnes,IdService,IdClient) output INSERTED.IdReservation
+						values(@date,@entree,@plat,@dessert,@nbpersonnes,@idservice,@idclient);";
+			try
+			{
+				int i = await _session.Connection.QuerySingleAsync<int>(stmt,reservation, _session.Transaction);
 				return await GetAsync(i);
 			}
 			catch

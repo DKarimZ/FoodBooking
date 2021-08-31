@@ -216,6 +216,20 @@ namespace BLL.Services
 			return (await _plats.GetAllThePlatsByTypePlat(idType)).ToList();
 	}
 
+		public async Task<List<Plat>> GetAllPlatsByDayAndService(Service service)
+		{
+			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();
+			return (await _plats.GetAllPlatsByDayAndService(service.dateJourservice,service.Midi)).ToList();
+
+		}
+
+		public async Task<Service> GetServiceByDateAndMidi(DateTime date, bool midi)
+		{
+			IServiceRepository _service = _db.GetRepository<IServiceRepository>();
+				return (await _service.GetServiceByDateAndMidi(date,midi));
+
+		}
+
 
 		/// <summary>
 		/// Methode de service permettant de mettre a jour un plat

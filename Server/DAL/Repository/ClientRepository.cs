@@ -47,7 +47,7 @@ namespace DAL.Repository
 		/// <returns>Retourne </returns>
 		public async Task<Client> GetAsync(int id)
 		{
-			var stmt = @"select * from client where id = @id";
+			var stmt = @"select * from Client where IdClient= @id";
 			return await _session.Connection.QueryFirstOrDefaultAsync<Client>(stmt, new { Id = id }, _session.Transaction);
 		}
 
@@ -82,7 +82,7 @@ namespace DAL.Repository
 		/// <returns>Retourne le cleint créé</returns>
 		public async Task<Client> InsertAsync(Client clientToCreate)
 		{
-			var stmt = @"insert into client(nom, prenom, telephone) output INSERTED.ID values (@nom, @prenom, @telephone)";
+			var stmt = @"insert into Client(Nom, Prenom, Telephone,Role,Password) output INSERTED.IdClient values (@nom, @prenom, @telephone,@role,@password)";
 			try
 			{
 				int i = await _session.Connection.QuerySingleAsync<int>(stmt, clientToCreate, _session.Transaction);

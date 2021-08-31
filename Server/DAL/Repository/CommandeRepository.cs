@@ -84,6 +84,7 @@ namespace DAL.Repository
 				  JOIN ServicePlat SP ON P.IdPlat = SP.IdPlat
 				  JOIN Services S ON SP.IdService = S.IdService
 				  JOIN Reservation R ON S.IdService = R.IdService
+				  WHERE S.dateJourService BETWEEN (SELECT DATEADD(wk, DATEDIFF(wk, 0, getdate()), 7)) AND (SELECT DATEADD(wk, 0, DATEADD(wk, DATEDIFF(wk, 0,getdate()), 13)))
 				  GROUP BY NomIngredient;";
 			List<EntryCommandDTO>  entries = (await _session.Connection.QueryAsync<EntryCommandDTO>(stmt,null, _session.Transaction)).ToList();
 

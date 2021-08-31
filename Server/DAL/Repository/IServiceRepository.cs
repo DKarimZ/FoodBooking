@@ -14,6 +14,10 @@ namespace DAL.Repository
 	/// </summary>
 	public interface IServiceRepository : IgenericRepository<Service>
 	{
-	
+		Task<Plat> GetAsyncPlat0(int id);
+		Task<Plat> GetAsyncPlat1(int id);
+		Task<Plat> GetAsyncPlat2(int id);
+
+		Task<Service> GetServiceByDateAndMidi(DateTime date, bool midi);
 	}
 }

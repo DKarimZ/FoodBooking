@@ -122,6 +122,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanel3.Size = new System.Drawing.Size(254, 401);
 			this.tableLayoutPanel3.TabIndex = 0;
+			this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
 			// 
 			// btnAdhMenu
 			// 
@@ -438,6 +439,7 @@ namespace ClientDesktop
 			// dateTimePicker1
 			// 
 			this.dateTimePicker1.Location = new System.Drawing.Point(213, 3);
+			this.dateTimePicker1.MinDate = new System.DateTime(2021, 7, 28, 0, 0, 0, 0);
 			this.dateTimePicker1.Name = "dateTimePicker1";
 			this.dateTimePicker1.Size = new System.Drawing.Size(204, 27);
 			this.dateTimePicker1.TabIndex = 3;

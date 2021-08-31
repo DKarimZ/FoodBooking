@@ -18,9 +18,9 @@ namespace DAL.Repository
 	public class IngredientRepository : IIngredientRepository
 	{
 		private readonly DbSession _session;
-		private readonly ILogger<ReservationRepository> _logger;
+		private readonly ILogger<IngredientRepository> _logger;
 
-		public IngredientRepository(DbSession session, ILogger<ReservationRepository> logger)
+		public IngredientRepository(DbSession session, ILogger<IngredientRepository> logger)
 		{
 			_session = session;
 			_logger = logger;

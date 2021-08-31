@@ -76,8 +76,8 @@ namespace API.Controllers.V1
 		[HttpPost()]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[Authorize(Roles = "user, restaurateur")]
-		public async Task<IActionResult> CreateReservation([FromBody] Reservation reservation)
+		//[Authorize(Roles = "user, restaurateur")]
+		public async Task<IActionResult> CreateReservation([FromBody] ReservationsFilterRequest reservation)
 		{
 			// Ajout de la réservation avec la bll server
 			Reservation newReservation = await _reservationService.CreateReservation(reservation);
@@ -97,7 +97,7 @@ namespace API.Controllers.V1
 		/// <summary>
 		/// Permet de supprimer une réservation en BDD en fonction de son Identifiant
 		/// </summary>
-		/// <param name="idReservation"></param>
+		/// <param name="idReservation"></param>CRUD
 		/// <returns>Retourne un code selon le résultat</returns>
 		[HttpDelete("{id}")]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -6,12 +6,12 @@
           "files": [
             "**.csproj"
           ],
-          "src": "C:\\Users\\dksam\\Bureau\\ApplicationFIlRougeJalon4\\FoodBooking\\FoodBookingServer\\Server"
+          "src": "C:\\Users\\dksam\\source\\repos\\FoodBooking\\Server"
         }
       ],
       "dest": "api",
       "disableGitFeatures": false,
-      "disableDefaultFilter": false
+      "disableDefaultFilter": true
     }
   ],
   "build": {

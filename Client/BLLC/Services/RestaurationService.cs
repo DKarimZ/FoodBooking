@@ -30,7 +30,7 @@ namespace BLLC.Services
 //END
 
 			_httpClient = new HttpClient(handler);
-			_httpClient.BaseAddress = new Uri("https://localhost:5001/api/v1/");
+			_httpClient.BaseAddress = new Uri("http://user13.2isa.org/api/v1/");
 		}
 
 		public async Task<IEnumerable<Service>> GetAllServices()
@@ -143,7 +143,7 @@ namespace BLLC.Services
 					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
 
 
-				var reponse = await _httpClient.GetAsync(($"plats{pageRequest.ToUriQuery()}"));
+				var reponse = await _httpClient.GetAsync(($"plats/request/{pageRequest.ToUriQuery()}"));
 
 				if (reponse.IsSuccessStatusCode)
 				{
@@ -370,7 +370,7 @@ namespace BLLC.Services
 					return null;
 				}
 
-				var reponse = await _httpClient.PostAsJsonAsync($"services/{menuToUpdate.IdService}", menuToUpdate);
+				var reponse = await _httpClient.PutAsJsonAsync($"services/{menuToUpdate.IdService}", menuToUpdate);
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
 					return await JsonSerializer.DeserializeAsync<Service>(stream,

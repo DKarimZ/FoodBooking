@@ -20,5 +20,7 @@ namespace DAL.Repository
 		Task<IEnumerable<Plat>> GetAllScoreAsync();
 
 		Task<IEnumerable<Plat>> GetAllPLatswithIngredientX(int Idingredient);
+
+		Task<IEnumerable<Plat>> GetAllPlatsByDayAndService(DateTime date, bool midi);
 	}
 }
