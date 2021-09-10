@@ -27,28 +27,6 @@ namespace DAL.Repository
 			_logger = logger;
 		}
 
-
-		/// <summary>
-		/// Permet d'ajouter une commande en BDD
-		/// </summary>
-		/// <param name="commandeToCreate"></param>
-		/// <returns>Retourne la commande ajoutée</returns>
-		//public async Task<Commande> InsertAsync(Commande commandeToCreate)
-		//{
-		//	var stmt = @"insert into commande(jourCommande, Ingredients) output INSERTED.ID values (@jourCommande, @Ingredients)";
-		//	try
-		//	{
-		//		int i = await _session.Connection.QuerySingleAsync<int>(stmt, commandeToCreate, _session.Transaction);
-		//		return await GetAsync(i);
-		//	}
-		//	catch
-		//	{
-		//		return null;
-		//	}
-		//}
-
-
-
 		/// <summary>
 		/// Permet d'obtenir un PageResponse de toutes les commandes présentes en BDD
 		/// </summary>

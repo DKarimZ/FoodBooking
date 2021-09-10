@@ -19,7 +19,7 @@ namespace API.Controllers.V1
 	[Route("api/v{version:apiVersion}/services")]
 	[Produces(MediaTypeNames.Application.Json)]
 	[Consumes(MediaTypeNames.Application.Json)]
-	[Authorize(Roles = "Restaurateur")]
+//	[Authorize(Roles = "Restaurateur")]
 
 	public class ServiceController : ControllerBase
 	{
@@ -36,15 +36,20 @@ namespace API.Controllers.V1
 		/// </summary>
 		/// <param name="pageRequest"></param>
 		/// <returns>retourne la liste des plats</returns>
-		//[HttpGet]
-		//[ProducesResponseType(StatusCodes.Status200OK)]
-		//public async Task<ActionResult<Service>> GetAllServices([FromQuery] Service serviceRequest)
-		//{
-		//	return Ok(await _restaurationService.GetAllServices());
-		//}
+		[HttpGet("All")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<Service>> GetAllServices([FromQuery] Service serviceRequest)
+		{
+			return Ok(await _restaurationService.GetAllServices());
+		}
 
 
-
+		/// <summary>
+		/// Permet de récupérer un service en fonction de la date et du service (midi ou soir)
+		/// </summary>
+		/// <param name="date"></param>
+		/// <param name="midi"></param>
+		/// <returns>retourne le service et un message 200 si  succès s</returns>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<Service>> GetserviceByDateandMidi([FromQuery] DateTime date, bool midi)
@@ -59,6 +64,11 @@ namespace API.Controllers.V1
 			}
 		}
 
+		/// <summary>
+		/// Permet de récupérer un service en fonction de son identifiant
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>retourne le service et un message 200 si succès et 404 si erreur</returns>
 		[HttpGet("{id}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]

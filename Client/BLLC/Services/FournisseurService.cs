@@ -19,7 +19,7 @@ namespace BLLC.Services
 		public FournisseurService()
 		{
 			_httpClient = new HttpClient();
-			_httpClient.BaseAddress = new Uri("http://user13.2isa.org/doc/api/");
+			_httpClient.BaseAddress = new Uri("https://localhost:5001/api/v1/");
 		}
 
 		public async Task<CommandDTO> GetCommande()

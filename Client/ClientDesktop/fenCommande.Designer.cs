@@ -31,6 +31,13 @@ namespace ClientDesktop
 		{
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+			this.btnAfficher = new System.Windows.Forms.Button();
+			this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+			this.txtBoxTotPrice = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.dgvCommande = new System.Windows.Forms.DataGridView();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -39,23 +46,16 @@ namespace ClientDesktop
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
-			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-			this.btnAfficher = new System.Windows.Forms.Button();
-			this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-			this.txtBoxTotPrice = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.dgvCommande = new System.Windows.Forms.DataGridView();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
-			this.tableLayoutPanel3.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-			this.tableLayoutPanel12.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.tableLayoutPanel5.SuspendLayout();
 			this.tableLayoutPanel6.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvCommande)).BeginInit();
+			this.tableLayoutPanel3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+			this.tableLayoutPanel12.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -89,6 +89,98 @@ namespace ClientDesktop
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.10844F));
 			this.tableLayoutPanel2.Size = new System.Drawing.Size(880, 538);
 			this.tableLayoutPanel2.TabIndex = 0;
+			// 
+			// tableLayoutPanel4
+			// 
+			this.tableLayoutPanel4.ColumnCount = 2;
+			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.625F));
+			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.375F));
+			this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 0, 0);
+			this.tableLayoutPanel4.Controls.Add(this.dgvCommande, 1, 0);
+			this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 126);
+			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+			this.tableLayoutPanel4.RowCount = 1;
+			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(874, 409);
+			this.tableLayoutPanel4.TabIndex = 1;
+			// 
+			// tableLayoutPanel5
+			// 
+			this.tableLayoutPanel5.ColumnCount = 1;
+			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel5.Controls.Add(this.btnAfficher, 0, 0);
+			this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 0, 1);
+			this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+			this.tableLayoutPanel5.RowCount = 2;
+			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 332F));
+			this.tableLayoutPanel5.Size = new System.Drawing.Size(235, 403);
+			this.tableLayoutPanel5.TabIndex = 0;
+			// 
+			// btnAfficher
+			// 
+			this.btnAfficher.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.btnAfficher.Location = new System.Drawing.Point(3, 3);
+			this.btnAfficher.Name = "btnAfficher";
+			this.btnAfficher.Size = new System.Drawing.Size(229, 65);
+			this.btnAfficher.TabIndex = 0;
+			this.btnAfficher.Text = "Afficher Commande";
+			this.btnAfficher.UseVisualStyleBackColor = true;
+			// 
+			// tableLayoutPanel6
+			// 
+			this.tableLayoutPanel6.ColumnCount = 1;
+			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel6.Controls.Add(this.txtBoxTotPrice, 0, 1);
+			this.tableLayoutPanel6.Controls.Add(this.label1, 0, 0);
+			this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 74);
+			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+			this.tableLayoutPanel6.RowCount = 2;
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.16564F));
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.83436F));
+			this.tableLayoutPanel6.Size = new System.Drawing.Size(229, 326);
+			this.tableLayoutPanel6.TabIndex = 1;
+			// 
+			// txtBoxTotPrice
+			// 
+			this.txtBoxTotPrice.Location = new System.Drawing.Point(3, 71);
+			this.txtBoxTotPrice.Name = "txtBoxTotPrice";
+			this.txtBoxTotPrice.Size = new System.Drawing.Size(125, 27);
+			this.txtBoxTotPrice.TabIndex = 1;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label1.Location = new System.Drawing.Point(3, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(223, 68);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "Prix Total";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// dgvCommande
+			// 
+			this.dgvCommande.AllowUserToAddRows = false;
+			this.dgvCommande.AllowUserToDeleteRows = false;
+			this.dgvCommande.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.dgvCommande.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.dgvCommande.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvCommande.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.dgvCommande.Location = new System.Drawing.Point(244, 3);
+			this.dgvCommande.Name = "dgvCommande";
+			this.dgvCommande.ReadOnly = true;
+			this.dgvCommande.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+			this.dgvCommande.RowTemplate.Height = 29;
+			this.dgvCommande.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvCommande.Size = new System.Drawing.Size(627, 403);
+			this.dgvCommande.TabIndex = 1;
 			// 
 			// tableLayoutPanel3
 			// 
@@ -195,93 +287,6 @@ namespace ClientDesktop
 			this.button4.Text = "Tri";
 			this.button4.UseVisualStyleBackColor = true;
 			// 
-			// tableLayoutPanel4
-			// 
-			this.tableLayoutPanel4.ColumnCount = 2;
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.625F));
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.375F));
-			this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 0, 0);
-			this.tableLayoutPanel4.Controls.Add(this.dgvCommande, 1, 0);
-			this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 126);
-			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-			this.tableLayoutPanel4.RowCount = 1;
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(874, 409);
-			this.tableLayoutPanel4.TabIndex = 1;
-			// 
-			// tableLayoutPanel5
-			// 
-			this.tableLayoutPanel5.ColumnCount = 1;
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel5.Controls.Add(this.btnAfficher, 0, 0);
-			this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 0, 1);
-			this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
-			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-			this.tableLayoutPanel5.RowCount = 2;
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 332F));
-			this.tableLayoutPanel5.Size = new System.Drawing.Size(235, 403);
-			this.tableLayoutPanel5.TabIndex = 0;
-			// 
-			// btnAfficher
-			// 
-			this.btnAfficher.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnAfficher.Location = new System.Drawing.Point(3, 3);
-			this.btnAfficher.Name = "btnAfficher";
-			this.btnAfficher.Size = new System.Drawing.Size(229, 65);
-			this.btnAfficher.TabIndex = 0;
-			this.btnAfficher.Text = "Afficher Commande";
-			this.btnAfficher.UseVisualStyleBackColor = true;
-			// 
-			// tableLayoutPanel6
-			// 
-			this.tableLayoutPanel6.ColumnCount = 1;
-			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel6.Controls.Add(this.txtBoxTotPrice, 0, 1);
-			this.tableLayoutPanel6.Controls.Add(this.label1, 0, 0);
-			this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 74);
-			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-			this.tableLayoutPanel6.RowCount = 2;
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.16564F));
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.83436F));
-			this.tableLayoutPanel6.Size = new System.Drawing.Size(229, 326);
-			this.tableLayoutPanel6.TabIndex = 1;
-			// 
-			// txtBoxTotPrice
-			// 
-			this.txtBoxTotPrice.Location = new System.Drawing.Point(3, 71);
-			this.txtBoxTotPrice.Name = "txtBoxTotPrice";
-			this.txtBoxTotPrice.Size = new System.Drawing.Size(125, 27);
-			this.txtBoxTotPrice.TabIndex = 1;
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label1.Location = new System.Drawing.Point(3, 0);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(223, 68);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Prix Total";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// dgvCommande
-			// 
-			this.dgvCommande.AllowUserToAddRows = false;
-			this.dgvCommande.AllowUserToDeleteRows = false;
-			this.dgvCommande.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvCommande.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvCommande.Location = new System.Drawing.Point(244, 3);
-			this.dgvCommande.Name = "dgvCommande";
-			this.dgvCommande.ReadOnly = true;
-			this.dgvCommande.RowHeadersWidth = 51;
-			this.dgvCommande.RowTemplate.Height = 29;
-			this.dgvCommande.Size = new System.Drawing.Size(627, 403);
-			this.dgvCommande.TabIndex = 1;
-			// 
 			// fenCommande
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -292,15 +297,15 @@ namespace ClientDesktop
 			this.Text = "fenCommande";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel2.ResumeLayout(false);
-			this.tableLayoutPanel3.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-			this.tableLayoutPanel12.ResumeLayout(false);
 			this.tableLayoutPanel4.ResumeLayout(false);
 			this.tableLayoutPanel5.ResumeLayout(false);
 			this.tableLayoutPanel6.ResumeLayout(false);
 			this.tableLayoutPanel6.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvCommande)).EndInit();
+			this.tableLayoutPanel3.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+			this.tableLayoutPanel12.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

@@ -79,7 +79,7 @@ namespace BLL.Services
 			claims.Add(new Claim(ClaimTypes.Role, client.role));
 			claims.Add(new Claim("clientId", client.IdClient.ToString()));
 
-				//Signing key
+			//Signing key
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
 			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

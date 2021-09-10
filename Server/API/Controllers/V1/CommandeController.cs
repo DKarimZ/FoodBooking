@@ -67,35 +67,7 @@ namespace API.Controllers.V1
 			}
 		}
 
-
-		/// <summary>
-		/// Permet de créer une commande en BDD
-		/// </summary>
-		/// <param name="commande"></param>
-		/// <returns>retourne la commande avec le nouvel identifiant généré</returns>
-		//[HttpPost()]
-		//[ProducesResponseType(StatusCodes.Status201Created)]
-		//[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		////public async Task<IActionResult> CreateCommande([FromBody] Commande commande)
-		////{
-		////	// Ajout de la commande avec la bll server
-		////	Commande newCommande = await _reservationService.CreateCommande(commande);
-		////	if (newCommande != null)
-		////	{
-		////		// Créer une redirection vers GetcommandeById(newCommande.IdCommande);
-		////		return CreatedAtAction(nameof(GetCommandeById), new { id = newCommande.IdCommande }, newCommande);
-		////	}
-		////	else
-		////	{
-		////		// Retourne un code 400  Bad Request
-		////		return BadRequest();
-		////	}
-		////}
-
-
 	}
-
-
 
 }
 

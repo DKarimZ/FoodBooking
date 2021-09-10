@@ -86,7 +86,9 @@ namespace DAL.Repository
 						left join ServicePlat sp ON s.Idservice = sp.IdService
 						left join Plat p ON sp.IdPlat = p.IdPlat
 						left join TypePlat tp on p.IdTypePlat = tp.IdTypePlat
-						where dateJourService = @date and Midi = @midi";
+						where dateJourService = @date and Midi = @midi
+						ORDER by p.IdTypePlat"
+;
 			var service = await _session.Connection.QueryAsync<Service,Plat,TypePlat,Service>(stmt,(service,plat,typePlat) =>
 				{
 				service.Plats = service.Plats ?? new List<Plat>();
@@ -105,33 +107,6 @@ namespace DAL.Repository
 
 		}
 
-		/*
-		public async Task<Plat> GetAsync(int id)
-		{
-			var stmt = @"select p.*, pi.*, i.* from Plat as p 
-						 innerJoin PlatIngredient as pi on pi.IdPlat = p.IdPlat,
-					     innerJoin Ingredient as i on i.IdIngredient = pi.IdIngredient 
-						 where IdPlat = @id";
-
-			var plats = await _session.Connection.QueryAsync<Plat, PlatIngredient, Ingredient, Plat>(stmt,
-				(plat, platIngredient, ingredient) => {
-					plat.PlatIngredient = plat.PlatIngredient ?? new List<PlatIngredient>();
-					platIngredient.Ingredient = ingredient;
-					plat.PlatIngredient.Add(platIngredient);
-					return plat;
-				}, new { @id = id }, _session.Transaction, splitOn:"IdIngredient");
-
-
-			var  p = plats.GroupBy( p => p.IdPlat).Select( pg => {
-				Plat pgFirst  = pg.FirstOrDefault();
-				pgFirst.PlatIngredient = pg.Select( pgi=> pgi.PlatIngredient.First()).ToList();
-				return pgFirst;
-			}).FirstOrDefault();
-
-			return p;
-		}
-
-		*/
 
 		/// <summary>
 		/// Permet de mettre a jour un service de la BDD en utilisant une procédure stockéd

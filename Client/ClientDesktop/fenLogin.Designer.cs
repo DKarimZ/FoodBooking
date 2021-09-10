@@ -142,6 +142,7 @@ namespace ClientDesktop
 			this.MotPasseTb.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.MotPasseTb.Location = new System.Drawing.Point(290, 149);
 			this.MotPasseTb.Name = "MotPasseTb";
+			this.MotPasseTb.PasswordChar = '*';
 			this.MotPasseTb.Size = new System.Drawing.Size(125, 27);
 			this.MotPasseTb.TabIndex = 3;
 			// 

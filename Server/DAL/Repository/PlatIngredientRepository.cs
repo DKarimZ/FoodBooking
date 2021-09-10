@@ -44,5 +44,12 @@ namespace DAL.Repository
 		}
 
 
+		//public async Task<bool> DeleteAllIngredientsOfDish(int IdPlat)
+		//{
+
+		//	var stmt = $"delete from PlatIngredient where IdPlat = @IdPlat";
+
+		//}
+
 	}
 }

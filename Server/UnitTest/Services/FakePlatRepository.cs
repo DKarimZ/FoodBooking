@@ -105,7 +105,7 @@ namespace UnitTest.Services
 			return Task.FromResult(new Plat()
 			{
 				IdPlat = id,
-				nomPlat = "confit de canard aux olives",
+				Nom = "confit de canard aux olives",
 				Score = 1,
 				PlatIngredient = new List<PlatIngredient>()
 			});
@@ -151,6 +151,26 @@ namespace UnitTest.Services
 			{
 				return Task.FromResult(true);
 			}
+		}
+
+		public Task<IEnumerable<Plat>> GetAllThePlatsByTypePlat(int idtypePlat){
+
+			return Task.FromResult(PlatDb as IEnumerable<Plat>);
+		}
+
+		public Task<IEnumerable<Plat>> GetAllScoreAsync(){
+
+			return Task.FromResult(PlatDb as IEnumerable<Plat>);
+		}
+
+		public Task<IEnumerable<Plat>> GetAllPLatswithIngredientX(int Idingredient){
+
+			return Task.FromResult(PlatDb as IEnumerable<Plat>);
+		}
+
+		public Task<IEnumerable<Plat>> GetAllPlatsByDayAndService(DateTime date, bool midi){
+
+			return Task.FromResult(PlatDb as IEnumerable<Plat>);
 		}
 	}
 }

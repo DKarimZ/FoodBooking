@@ -1,4 +1,5 @@
-﻿using BO.DTO.Requests;
+﻿using BO.DTO;
+using BO.DTO.Requests;
 using BO.DTO.Responses;
 using BO.Entity;
 using System;
@@ -32,14 +33,20 @@ namespace BLL.Services
 		Task<Service> GetServiceById(int IdMenu);
 
 
+		/// <summary>
+		/// Permet de récuperer un service selon une dat eet soir ou midi
+		/// </summary>
+		/// <param name="date"></param>
+		/// <param name="midi"></param>
+		/// <returns></returns>
 		Task<Service> GetServiceByDateAndMidi(DateTime date, bool midi);
 		
-			/// <summary>
-			/// Permet de créer un menu
-			/// </summary>
-			/// <param name="newMenu"></param>
-			/// <returns>Retourne le nouveau menu</returns>
-			Task<Service> CreateService(Service newMenu);
+		/// <summary>
+		/// Permet de créer un menu
+		/// </summary>
+		/// <param name="newMenu"></param>
+		/// <returns>Retourne le nouveau menu</returns>
+		Task<Service> CreateService(Service newMenu);
 
 		/// <summary>
 		/// Permet de mettre à jour un menu
@@ -60,6 +67,11 @@ namespace BLL.Services
 		#region Plat
 
 
+		/// <summary>
+		/// Permet de récupérer tous les plats selon l'identifiant du type(1=entree,2=plat,3=dessert)
+		/// </summary>
+		/// <param name="idType"></param>
+		/// <returns></returns>
 		Task<List<Plat>> GetAllPlatsByType(int idType);
 
 		/// <summary>
@@ -69,11 +81,23 @@ namespace BLL.Services
 		Task<PageResponse<Plat>> GetAllPlats(PageRequest pageRequest);
 
 
-
+		/// <summary>
+		/// Permet de retourner tous les plats contenant un identifiant d'un ingrédient donné en paramètre
+		/// </summary>
+		/// <param name="IdIngredient"></param>
+		/// <returns></returns>
 		Task<IEnumerable<Plat>> GetAllPlatsByIngredients(int IdIngredient);
 
+		/// <summary>
+		/// Permet de trier les plats par popuularité
+		/// </summary>
+		/// <returns></returns>
 		Task<IEnumerable<Plat>> GetAllPlatsScore();
 
+		/// <summary>
+		/// Permet de récupérer une liste de plats
+		/// </summary>
+		/// <returns></returns>
 		Task<List<Plat>> GetAllPlats();
 
 		/// <summary>
@@ -105,18 +129,23 @@ namespace BLL.Services
 		Task<bool> RemovePlat(int IdPlat);
 		#endregion
 
-		Task<List<Plat>> GetAllPlatsByDayAndService(Service service);
-		
 
+		/// <summary>
+		/// Permet de récupérer tous les plats selon une date et un service
+		/// </summary>
+		/// <param name="date"></param>
+		/// <param name="midi"></param>
+		/// <returns></returns>
+		Task<List<Plat>> GetAllPlatsByDayAndService(DateTime date, bool midi);
+	
 
-
-			//Services liés aux ingrédients
-			#region Ingredient
-			/// <summary>
-			/// Permet de récupérer la liste des ingrédients
-			/// </summary>
-			/// <returns>retourne la liste des ingrédients</returns>
-			Task<PageResponse<Ingredient>> GetAllIngredients(PageRequest pageRequest);
+		//Services liés aux ingrédients
+		#region Ingredient
+		/// <summary>
+		/// Permet de récupérer la liste des ingrédients
+		/// </summary>
+		/// <returns>retourne la liste des ingrédients</returns>
+		Task<PageResponse<Ingredient>> GetAllIngredients(PageRequest pageRequest);
 
 		/// <summary>
 		/// Permet de récupérer un ingrédient en fonction de son identifiant
@@ -145,6 +174,8 @@ namespace BLL.Services
 		/// <param name="IdIngredient"></param>
 		/// <returns>retroune un booléen en fonction du succès de la suppression</returns>
 		Task<bool> RemoveIngredient(int IdIngredient);
+
+		Task<IngredientsofPlatDTO> GetAllIngredientsByIdPlat(int IdPlat);
 
 		#endregion
 	}

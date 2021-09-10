@@ -89,6 +89,12 @@ namespace BLL.Services
 		/// <returns>retourne un boolean en fonction de la réussite de la suppression</returns>
 		Task<bool> RemoveClientById(int IdClient);
 
+		/// <summary>
+		/// Permet de récupérer yn client à partir de son nom et de son mot de passe
+		/// </summary>
+		/// <param name="nom"></param>
+		/// <param name="password"></param>
+		/// <returns></returns>
 		Task<Client> GetClientByIdAndPassword(string nom, string password);
 
 		#endregion

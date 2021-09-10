@@ -29,22 +29,11 @@ namespace BLL.Services
 
 		//méthodes liés aux services de gestion des commandes
 		#region Commmande
-		//public async Task<Commande> CreateCommande(Commande newCommande)
-		//{
-		//	//debut Transaction
-		//	_db.BeginTransaction();
-		//	//Récupération de l'Interface du repository Commande (ICommandeRepository)
-		//	ICommandeRepository _commandes = _db.GetRepository<ICommandeRepository>();
-		//	//Utilisation de sa méthode Insert
-		//	Commande nouvCommande = await _commandes.InsertAsync(newCommande);
-		//	//Fin transaction
-		//	_db.Commit();
-		//	//retour de la nouvelle commande 
-		//	return nouvCommande;
-
-
-		//}
-
+	
+		/// <summary>
+		/// Permet de récupérer les commandes
+		/// </summary>
+		/// <returns>Retourne un DTO(CommandDTO°</returns>
 		public async Task<CommandDTO> GetCommande( )
 		{
 			_db.BeginTransaction();

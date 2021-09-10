@@ -11,7 +11,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-
+using BO.DTO;
 namespace API.Controllers.V1
 {
 	[ApiController]
@@ -65,6 +65,27 @@ namespace API.Controllers.V1
 			}
 		}
 
+		/// <summary>
+		/// Permet de récupérer la liste des ingrédients d'un plat en fonction de son identifiant
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>retourne 200 en cas de succès et 400 en cas d'erreur si il ne trouve pas les ingrédients</returns>
+		[HttpGet("byPlat/{id}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public async Task<IActionResult> GetIngredientsbyIdPlat([FromRoute] int id)
+		{
+			IngredientsofPlatDTO ingredientDTO = await _restaurationService.GetAllIngredientsByIdPlat(id);
+
+			if (ingredientDTO == null)
+			{
+				return NotFound(); // StatusCode = 404
+			}
+			else
+			{
+				return Ok(ingredientDTO); // StatusCode = 200
+			}
+		}
 
 		/// <summary>
 		/// Permet de créer un ingrédient en BDD

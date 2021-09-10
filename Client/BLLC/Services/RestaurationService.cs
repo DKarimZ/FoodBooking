@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using BLLC.Extension;
 using BO.DTO.Requests;
 using BO.DTO.Responses;
+using System.Globalization;
+using BO.DTO;
 
 namespace BLLC.Services
 {
@@ -30,7 +32,8 @@ namespace BLLC.Services
 //END
 
 			_httpClient = new HttpClient(handler);
-			_httpClient.BaseAddress = new Uri("http://user13.2isa.org/api/v1/");
+		//	_httpClient.BaseAddress = new Uri("http://user13.2isa.org/api/v1/");
+			_httpClient.BaseAddress = new Uri("https://localhost:5001/api/v1/");
 		}
 
 		public async Task<IEnumerable<Service>> GetAllServices()
@@ -42,7 +45,7 @@ namespace BLLC.Services
 					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
 
 
-				var reponse = await _httpClient.GetAsync($"services");
+				var reponse = await _httpClient.GetAsync($"services/All");
 
 				if (reponse.IsSuccessStatusCode)
 				{
@@ -99,6 +102,76 @@ namespace BLLC.Services
 
 
 
+
+
+		public async Task<IngredientsofPlatDTO> GetAllIngredientsByIdPlat(int IdPlat)
+		{
+
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+				var reponse = await _httpClient.GetAsync(($"ingredients/byPlat/" + IdPlat));
+
+				if (reponse.IsSuccessStatusCode)
+				{
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						var ingredients = await JsonSerializer.DeserializeAsync<IngredientsofPlatDTO>(stream,
+							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+						return ingredients;
+					}
+				}
+				else
+				{
+					return null;
+				}
+
+			}
+
+			return null;
+
+		}
+
+
+
+
+
+
+		public async Task<IEnumerable<Plat>> GetAllPlatsByDateServiceandMidi(DateTime datee, bool midie)
+		{
+
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
+
+
+				var reponse = await _httpClient.GetAsync($"plats/byService?date={datee.ToString("d", CultureInfo.InvariantCulture)}&midi={midie}");
+
+				if (reponse.IsSuccessStatusCode)
+				{
+					using (var stream = await reponse.Content.ReadAsStreamAsync())
+					{
+						var plats = await JsonSerializer.DeserializeAsync<IEnumerable<Plat>>(stream,
+							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+						return plats;
+					}
+				}
+				else
+				{
+					return null;
+				}
+
+			}
+
+			return null;
+
+		}
 
 
 
@@ -349,10 +422,19 @@ namespace BLLC.Services
 			try
 			{
 				var reponse = await _httpClient.PostAsJsonAsync($"services", newService);
+
+				if(reponse.IsSuccessStatusCode){
+
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
 					return await JsonSerializer.DeserializeAsync<Service>(stream,
 						new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+				}
+				}
+
+				else{
+					return null;
+
 				}
 			}
 			catch (Exception)
@@ -375,6 +457,30 @@ namespace BLLC.Services
 				{
 					return await JsonSerializer.DeserializeAsync<Service>(stream,
 						new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+				}
+			}
+			catch (Exception)
+			{
+
+				return null;
+			}
+
+		}
+
+		public async Task<Plat> UpdatePlat(Plat platToUpdate)
+		{
+			try
+			{
+				if (platToUpdate.IdPlat == null)
+				{
+					return null;
+				}
+
+				var reponse = await _httpClient.PutAsJsonAsync($"plats/{platToUpdate.IdPlat}", platToUpdate);
+				using (var stream = await reponse.Content.ReadAsStreamAsync())
+				{
+					return await JsonSerializer.DeserializeAsync<Plat>(stream,
+						new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 				}
 			}
 			catch (Exception)

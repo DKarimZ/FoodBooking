@@ -67,7 +67,12 @@ namespace API.Controllers.V1
 			}
 		}
 
-		
+		/// <summary>
+		/// Permet de récupérer un utilisateur en base de données en fonction de son nom et de son mot de passe
+		/// </summary>
+		/// <param name="nom"></param>
+		/// <param name="password"></param>
+		/// <returns></returns>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[Authorize]
@@ -91,7 +96,7 @@ namespace API.Controllers.V1
 		/// Permet de créer un client en BDD
 		/// </summary>
 		/// <param name="client"></param>
-		/// <returns>retourne le nouveau client avec l'Identifiant généré</returns>
+		/// <returns>Retourne un résulatt (201 si scuccès - 400 si échec) attestant de la création ou pas du client</returns>
 		[HttpPost()]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]

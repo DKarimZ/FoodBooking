@@ -22,7 +22,11 @@ namespace UnitTest.Services
 			{
 				new Service(1, true,
 					new(){ }
-					)};
+					),
+				new Service(2, true,
+					new(){ }
+					)
+			};
 
 			
 
@@ -77,6 +81,8 @@ namespace UnitTest.Services
 				return Task.FromResult(newService);
 			}
 
+			
+
 			else
 			{
 				return Task.FromResult<Service>(null);
@@ -90,10 +96,12 @@ namespace UnitTest.Services
 		/// <returns>Returns the new plat created if the nomPlat attribute is not null or returns null  in nthe other case</returns>
 		Task<Plat> IRestaurationService.CreatePlat(Plat newPlat)
 		{
-			if (newPlat.nomPlat != null)
+			if (newPlat.Nom != null)
 			{
 				return Task.FromResult(newPlat);
 			}
+
+			
 
 			else
 			{
@@ -218,6 +226,9 @@ namespace UnitTest.Services
 		/// </summary>
 		/// <param name="idMenu"></param>
 		/// <returns>Returns true if the idMenu belongs to the MenuDb list</returns>
+		/// 
+
+
 		Task<bool> IRestaurationService.RemoveService(int idService)
 		{
 			int i = ServiceDb.RemoveAll(b => b.IdService == idService);
@@ -229,6 +240,8 @@ namespace UnitTest.Services
 		/// </summary>
 		/// <param name="idPlat"></param>
 		/// <returns>Returns true if the idPlat belongs to the PlatDb list</returns>
+		/// 
+
 		Task<bool> IRestaurationService.RemovePlat(int idPlat)
 		{
 			int i = PlatDb.RemoveAll(b => b.IdPlat == idPlat);

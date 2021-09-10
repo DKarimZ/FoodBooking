@@ -1,4 +1,5 @@
-﻿using BO.DTO.Requests;
+﻿using BO.DTO;
+using BO.DTO.Requests;
 using BO.DTO.Responses;
 using BO.Entity;
 using DAL.UOW;
@@ -36,6 +37,22 @@ namespace DAL.Repository
 			var stmt = @"select * from Ingredient";
 			return await _session.Connection.QueryAsync<Ingredient>(stmt, null, _session.Transaction);
 		}
+
+		public async Task<IngredientsofPlatDTO> GetAllIngredientsByIdPlat(int idPlat)
+		{
+			var stmt = @"select i.IdIngredient,i.NomIngredient,i.PrixMoyen , quantite from Ingredient i inner join PlatIngredient pg ON i.IdIngredient = pg.IdIngredient where pg.IdPlat = @idPlat";
+
+
+			List<EntryIOPDTO> entries  = (await _session.Connection.QueryAsync<EntryIOPDTO>(stmt, new { @idPlat = idPlat }, _session.Transaction)).ToList();
+
+
+			return new IngredientsofPlatDTO()
+			{
+				ingredients = entries
+			};
+
+		}
+		
 
 
 		/// <summary>
@@ -113,6 +130,7 @@ namespace DAL.Repository
 			}
 		}
 
+		
 
 		/// <summary>
 		/// Permet d'obtenir la liste de tous les ingrédients en base de données de façon paginée

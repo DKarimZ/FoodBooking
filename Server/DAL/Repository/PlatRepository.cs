@@ -71,10 +71,7 @@ namespace DAL.Repository
 		/// <returns>Retourne un plat en fonction de son identifiant</returns>
 		public async Task<Plat> GetAsync(int id)
 		{
-			var stmt = @"select p.*, pi.*, i.* from Plat as p 
-						 innerJoin PlatIngredient as pi on pi.IdPlat = p.IdPlat,
-					     innerJoin Ingredient as i on i.IdIngredient = pi.IdIngredient 
-						 where IdPlat = @id";
+			var stmt = @"select p.*, pi.*, i.* from Plat as p INNER JOIN PlatIngredient as pi on pi.IdPlat = p.IdPlat INNER JOIN  Ingredient as i on i.IdIngredient = pi.IdIngredient where p.IdPlat = @id";
 
 			var plats = await _session.Connection.QueryAsync<Plat, PlatIngredient, Ingredient, Plat>(stmt,
 				(plat, platIngredient, ingredient) => {
@@ -103,14 +100,31 @@ namespace DAL.Repository
 		/// <returns>Retourne un boolean selon le resultat de la mise à jour</returns>
 		public async Task<bool> UpdateAsync(Plat platToUpdate)
 		{
-			var stmt = @"update plat set nomPlat = @nomPlat, typePlat = @typePlat, score = @Score, Ingredients = @Ingredients from plat join ingredient where IdPlat = @IdPlat";
+			var stmt = @"update Plat set Nom = @nomPlat, Score = @Score from Plat p inner Join PlatIngredient i ON p.IdPlat = i.IdPlat where p.IdPlat = @idPlat";
 
 			try
 			{
-				int i = await _session.Connection.ExecuteAsync(stmt, platToUpdate, _session.Transaction);
+				//PLat entity
+				int i = await _session.Connection.ExecuteAsync(stmt, new { NomPlat = platToUpdate.Nom, TypePlat = platToUpdate.typePlat, Score = platToUpdate.Score, IdPlat = platToUpdate.IdPlat}, _session.Transaction);
+
+				//Remove Ingredients
+				var stmtPlatIngredientDelete =
+				@"delete from PlatIngredient where idPlat = @IdPlat";
+				await _session.Connection.ExecuteAsync(stmtPlatIngredientDelete, new { idPlat = platToUpdate.IdPlat}, _session.Transaction);
+
+				//Add new ingredients
+				var stmtPlatIngredient =
+				@"insert into PlatIngredient (IdPlat, IdIngredient, Quantite) values (@idPlat, @idIngredient, @Quantite)";
+				platToUpdate.PlatIngredient.ForEach(async platIngredient =>
+				{
+					await _session.Connection.ExecuteAsync(stmtPlatIngredient,
+						new { idPlat = platToUpdate.IdPlat, idIngredient = platIngredient.Ingredient.IdIngredient, Quantite = platIngredient.Quantite }, _session.Transaction);
+				});
+
+
 				return i > 0;
 			}
-			catch
+			catch (Exception e)
 			{
 				return false;
 			}
@@ -237,10 +251,7 @@ namespace DAL.Repository
 						ORDER BY Score DESC";
 						
 			IEnumerable<Plat> platTask = await _session.Connection.QueryAsync<Plat>(stmt, null, _session.Transaction);
-
 			return await _session.Connection.QueryAsync<Plat>(stmt, null, _session.Transaction);
-
-			
 
 		}
 

@@ -17,7 +17,5 @@ namespace BLLC.Services
 			_httpClient.BaseAddress = new Uri("http://user13.2isa.org/doc/api/");
 		}
 
-		//To continue
-
 	}
 }

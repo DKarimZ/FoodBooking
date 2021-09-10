@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BO.DTO.Responses;
 using BO.DTO.Requests;
+using BO.DTO;
 
 namespace BLL.Services
 {
@@ -20,12 +21,17 @@ namespace BLL.Services
 		/// <summary>
 		/// Permet d'uiliser l'Interface Unit of Work
 		/// </summary>
+		/// 
+
+
 		private readonly IUnitOfWork _db;
 
 		public RestaurationService(IUnitOfWork unitOfWork)
 		{
 			_db = unitOfWork;
 		}
+
+
 
 		// Methodes liées aux services de gestion des menus
 		#region Service
@@ -64,16 +70,39 @@ namespace BLL.Services
 		/// <returns>retourne le nouveau service</returns>
 		public async Task<Service> CreateService(Service newMenu)
 		{
+			bool existdeja = false;
 			//La methode InsertAsync est appelé dans une transaction
 			_db.BeginTransaction();
 			
 			IServiceRepository _menus = _db.GetRepository<IServiceRepository>();
+
+			//Je vérifie que je ne puisse pas ajouter deux fois un service le meme jour au meme moment (midi ou soir)
+			//Task<Service> serviceexistantTask = _menus.GetServiceByDateAndMidi(newMenu.dateJourservice, newMenu.Midi);
+			//Service serviceexistant = await serviceexistantTask;
+
+			Task<IEnumerable<Service>> listserviceexistantsTask = _menus.GetAllAsync();
+			IEnumerable<Service> Enumdeservicesexistants = await listserviceexistantsTask;
+			List<Service> listeDesServices = Enumdeservicesexistants.ToList();
+
+			for(int i = 0; i<listeDesServices.Count;i++){
+			if((newMenu.dateJourservice.Date ==listeDesServices[i].dateJourservice.Date) && (newMenu.Midi == listeDesServices[i].Midi)){
+					
+				return null;
+					
+			} }
+			
+
 			Service nouvMenu = await _menus.InsertAsync(newMenu);
 			_db.Commit();
-			return nouvMenu;
+			return nouvMenu; 
 
+
+			
+			
+			
+			
+		
 		}
-
 
 		/// <summary>
 		/// Methode de service resturation permettant  de mettre a jour un service
@@ -147,14 +176,12 @@ namespace BLL.Services
 		/// </summary>
 		/// <param name="pageRequest"></param>
 		/// <returns>Retourne un DTO page response de plat</returns>
+		/// 
+
 		public async Task<PageResponse<Plat>> GetAllPlats(PageRequest pageRequest)
 		{
-			//Utilisation de la méthode GetAllAsync du repository IPlatrepository
-
 			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();
 			return await _plats.GetAllAsync(pageRequest);
-
-			
 		}
 
 		public async Task<IEnumerable<Plat>> GetAllPlatsByIngredients(int Idingredient)
@@ -216,10 +243,10 @@ namespace BLL.Services
 			return (await _plats.GetAllThePlatsByTypePlat(idType)).ToList();
 	}
 
-		public async Task<List<Plat>> GetAllPlatsByDayAndService(Service service)
+		public async Task<List<Plat>> GetAllPlatsByDayAndService(DateTime date, bool midi)
 		{
 			IPlatRepository _plats = _db.GetRepository<IPlatRepository>();
-			return (await _plats.GetAllPlatsByDayAndService(service.dateJourservice,service.Midi)).ToList();
+			return (await _plats.GetAllPlatsByDayAndService(date,midi)).ToList();
 
 		}
 
@@ -298,6 +325,15 @@ namespace BLL.Services
 			IIngredientRepository _ingredients = _db.GetRepository<IIngredientRepository>();
 			return await _ingredients.GetAsync(IdIngredient);
 		}
+
+		public async Task<IngredientsofPlatDTO> GetAllIngredientsByIdPlat(int IdPlat)
+		{
+			IIngredientRepository _ingredients = _db.GetRepository<IIngredientRepository>();
+			return await _ingredients.GetAllIngredientsByIdPlat(IdPlat);
+
+		}
+
+
 		public async Task<Ingredient> CreateIngredient(Ingredient newIngredient)
 		{
 			//LA methode InsertAsync est utilisée dans une transaction

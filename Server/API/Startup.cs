@@ -129,8 +129,10 @@ namespace API
 
 			app.UseRouting();
 
+
 			//Add Authentification -> Error 401
 			app.UseAuthentication();
+
 
 			//Add AUthorisation -> Error 403
 			app.UseAuthorization();

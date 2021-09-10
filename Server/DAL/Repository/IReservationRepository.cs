@@ -13,6 +13,11 @@ namespace DAL.Repository
 	/// </summary>
 	public interface IReservationRepository : IgenericRepository<Reservation>, IpageableRepository<Reservation>
 	{
+		/// <summary>
+		/// Méthode permettant de créer une réservation à partir d'un DTO (ReservationsFilterrequest en base de données
+		/// </summary>
+		/// <param name="rfr"></param>
+		/// <returns></returns>
 		Task<Reservation> InsertAsyncs(ReservationsFilterRequest rfr);
 
 	}

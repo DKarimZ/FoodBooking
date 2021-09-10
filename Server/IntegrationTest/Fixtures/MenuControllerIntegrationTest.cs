@@ -19,6 +19,7 @@ namespace IntegrationTest.Fixtures
 	{
 		public MenuControllerIntegrationTest(APIWebApplicationFactory factory) : base(factory) { }
 
+
 		[Fact]
 		public async Task GetMenuById_Should_be_OK()
 		{
@@ -58,7 +59,16 @@ namespace IntegrationTest.Fixtures
 
 		}
 
-		
+		[Fact]
+		public async Task createSameMenuWithSameDateANdMidi_Should_Be_notWorking()
+		{
+			var servceiTest = new Service { dateJourservice=new DateTime(2021-09-18),Midi = true};
+			var response = await _client.PostAsJsonAsync("api/v1/services/",servceiTest );
+
+			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+
+		}
 
 	}
 }

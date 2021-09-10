@@ -46,7 +46,6 @@ namespace ClientDesktop
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
 			this.button9 = new System.Windows.Forms.Button();
-			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
@@ -122,7 +121,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(1100, 612);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(1102, 620);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// tableLayoutPanel2
@@ -137,7 +136,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel2.RowCount = 2;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.89157F));
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.10844F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(1017, 606);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(1019, 614);
 			this.tableLayoutPanel2.TabIndex = 0;
 			// 
 			// tableLayoutPanel3
@@ -153,7 +152,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(1011, 132);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(1013, 134);
 			this.tableLayoutPanel3.TabIndex = 0;
 			// 
 			// pictureBox1
@@ -163,7 +162,7 @@ namespace ClientDesktop
 			this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pictureBox1.Location = new System.Drawing.Point(3, 3);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(163, 126);
+			this.pictureBox1.Size = new System.Drawing.Size(163, 128);
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
 			// 
@@ -174,7 +173,7 @@ namespace ClientDesktop
 			this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pictureBox2.Location = new System.Drawing.Point(172, 3);
 			this.pictureBox2.Name = "pictureBox2";
-			this.pictureBox2.Size = new System.Drawing.Size(836, 126);
+			this.pictureBox2.Size = new System.Drawing.Size(838, 128);
 			this.pictureBox2.TabIndex = 1;
 			this.pictureBox2.TabStop = false;
 			// 
@@ -187,11 +186,11 @@ namespace ClientDesktop
 			this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel11, 1, 0);
 			this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 141);
+			this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 143);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			this.tableLayoutPanel4.RowCount = 1;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(1011, 462);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(1013, 468);
 			this.tableLayoutPanel4.TabIndex = 1;
 			// 
 			// tableLayoutPanel5
@@ -206,7 +205,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
 			this.tableLayoutPanel5.RowCount = 1;
 			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel5.Size = new System.Drawing.Size(635, 456);
+			this.tableLayoutPanel5.Size = new System.Drawing.Size(637, 462);
 			this.tableLayoutPanel5.TabIndex = 0;
 			// 
 			// tableLayoutPanel9
@@ -221,7 +220,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel9.RowCount = 2;
 			this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.70213F));
 			this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.29787F));
-			this.tableLayoutPanel9.Size = new System.Drawing.Size(623, 450);
+			this.tableLayoutPanel9.Size = new System.Drawing.Size(625, 456);
 			this.tableLayoutPanel9.TabIndex = 1;
 			// 
 			// tableLayoutPanel10
@@ -231,12 +230,12 @@ namespace ClientDesktop
 			this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel13, 0, 0);
 			this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel8, 0, 1);
 			this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 55);
+			this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 56);
 			this.tableLayoutPanel10.Name = "tableLayoutPanel10";
 			this.tableLayoutPanel10.RowCount = 2;
 			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.3522F));
 			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.6478F));
-			this.tableLayoutPanel10.Size = new System.Drawing.Size(617, 392);
+			this.tableLayoutPanel10.Size = new System.Drawing.Size(619, 397);
 			this.tableLayoutPanel10.TabIndex = 0;
 			// 
 			// tableLayoutPanel13
@@ -249,7 +248,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel13.Name = "tableLayoutPanel13";
 			this.tableLayoutPanel13.RowCount = 1;
 			this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel13.Size = new System.Drawing.Size(611, 58);
+			this.tableLayoutPanel13.Size = new System.Drawing.Size(613, 58);
 			this.tableLayoutPanel13.TabIndex = 1;
 			// 
 			// tableLayoutPanel14
@@ -267,7 +266,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel14.Name = "tableLayoutPanel14";
 			this.tableLayoutPanel14.RowCount = 1;
 			this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel14.Size = new System.Drawing.Size(605, 52);
+			this.tableLayoutPanel14.Size = new System.Drawing.Size(607, 52);
 			this.tableLayoutPanel14.TabIndex = 0;
 			// 
 			// button7
@@ -283,6 +282,7 @@ namespace ClientDesktop
 			this.button7.TabIndex = 0;
 			this.button7.Text = "Popularité";
 			this.button7.UseVisualStyleBackColor = false;
+			this.button7.Click += new System.EventHandler(this.button7_Click);
 			// 
 			// tableLayoutPanel15
 			// 
@@ -298,7 +298,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel15.RowCount = 1;
 			this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
-			this.tableLayoutPanel15.Size = new System.Drawing.Size(232, 46);
+			this.tableLayoutPanel15.Size = new System.Drawing.Size(233, 46);
 			this.tableLayoutPanel15.TabIndex = 1;
 			// 
 			// button8
@@ -310,16 +310,17 @@ namespace ClientDesktop
 			this.button8.ForeColor = System.Drawing.Color.White;
 			this.button8.Location = new System.Drawing.Point(3, 3);
 			this.button8.Name = "button8";
-			this.button8.Size = new System.Drawing.Size(86, 40);
+			this.button8.Size = new System.Drawing.Size(87, 40);
 			this.button8.TabIndex = 0;
 			this.button8.Text = "Type";
 			this.button8.UseVisualStyleBackColor = false;
+			this.button8.Click += new System.EventHandler(this.button8_Click);
 			// 
 			// listBox1
 			// 
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.ItemHeight = 20;
-			this.listBox1.Location = new System.Drawing.Point(95, 3);
+			this.listBox1.Location = new System.Drawing.Point(96, 3);
 			this.listBox1.Name = "listBox1";
 			this.listBox1.Size = new System.Drawing.Size(117, 24);
 			this.listBox1.TabIndex = 1;
@@ -328,16 +329,15 @@ namespace ClientDesktop
 			// 
 			this.tableLayoutPanel16.BackColor = System.Drawing.Color.WhiteSmoke;
 			this.tableLayoutPanel16.ColumnCount = 2;
-			this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-			this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+			this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.71429F));
+			this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
 			this.tableLayoutPanel16.Controls.Add(this.button9, 0, 0);
-			this.tableLayoutPanel16.Controls.Add(this.textBox1, 1, 0);
 			this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel16.Location = new System.Drawing.Point(365, 3);
+			this.tableLayoutPanel16.Location = new System.Drawing.Point(366, 3);
 			this.tableLayoutPanel16.Name = "tableLayoutPanel16";
 			this.tableLayoutPanel16.RowCount = 1;
 			this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel16.Size = new System.Drawing.Size(237, 46);
+			this.tableLayoutPanel16.Size = new System.Drawing.Size(238, 46);
 			this.tableLayoutPanel16.TabIndex = 2;
 			// 
 			// button9
@@ -349,17 +349,11 @@ namespace ClientDesktop
 			this.button9.ForeColor = System.Drawing.Color.White;
 			this.button9.Location = new System.Drawing.Point(3, 3);
 			this.button9.Name = "button9";
-			this.button9.Size = new System.Drawing.Size(88, 40);
+			this.button9.Size = new System.Drawing.Size(198, 40);
 			this.button9.TabIndex = 0;
 			this.button9.Text = "Ingred.";
 			this.button9.UseVisualStyleBackColor = false;
-			// 
-			// textBox1
-			// 
-			this.textBox1.Location = new System.Drawing.Point(97, 3);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(119, 27);
-			this.textBox1.TabIndex = 1;
+			this.button9.Click += new System.EventHandler(this.button9_Click);
 			// 
 			// tableLayoutPanel8
 			// 
@@ -376,7 +370,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel8.RowCount = 2;
 			this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
 			this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
-			this.tableLayoutPanel8.Size = new System.Drawing.Size(611, 322);
+			this.tableLayoutPanel8.Size = new System.Drawing.Size(613, 327);
 			this.tableLayoutPanel8.TabIndex = 2;
 			// 
 			// label7
@@ -385,7 +379,7 @@ namespace ClientDesktop
 			this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label7.Location = new System.Drawing.Point(3, 0);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(299, 48);
+			this.label7.Size = new System.Drawing.Size(300, 49);
 			this.label7.TabIndex = 0;
 			this.label7.Text = "Liste des plats";
 			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -394,9 +388,9 @@ namespace ClientDesktop
 			// 
 			this.label8.AutoSize = true;
 			this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label8.Location = new System.Drawing.Point(308, 0);
+			this.label8.Location = new System.Drawing.Point(309, 0);
 			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(300, 48);
+			this.label8.Size = new System.Drawing.Size(301, 49);
 			this.label8.TabIndex = 1;
 			this.label8.Text = "Liste des ingrédients";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -405,26 +399,27 @@ namespace ClientDesktop
 			// 
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView1.Location = new System.Drawing.Point(3, 51);
+			this.dataGridView1.Location = new System.Drawing.Point(3, 52);
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.RowHeadersVisible = false;
 			this.dataGridView1.RowHeadersWidth = 51;
 			this.dataGridView1.RowTemplate.Height = 29;
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView1.Size = new System.Drawing.Size(299, 268);
+			this.dataGridView1.Size = new System.Drawing.Size(300, 272);
 			this.dataGridView1.TabIndex = 2;
+			this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
 			// 
 			// dataGridView3
 			// 
 			this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView3.Location = new System.Drawing.Point(308, 51);
+			this.dataGridView3.Location = new System.Drawing.Point(309, 52);
 			this.dataGridView3.Name = "dataGridView3";
 			this.dataGridView3.RowHeadersVisible = false;
 			this.dataGridView3.RowHeadersWidth = 51;
 			this.dataGridView3.RowTemplate.Height = 29;
 			this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView3.Size = new System.Drawing.Size(300, 268);
+			this.dataGridView3.Size = new System.Drawing.Size(301, 272);
 			this.dataGridView3.TabIndex = 3;
 			this.dataGridView3.SelectionChanged += new System.EventHandler(this.dataGridView3_SelectionChanged);
 			// 
@@ -438,9 +433,9 @@ namespace ClientDesktop
 			this.label2.ForeColor = System.Drawing.Color.Black;
 			this.label2.Location = new System.Drawing.Point(3, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(617, 52);
+			this.label2.Size = new System.Drawing.Size(619, 53);
 			this.label2.TabIndex = 1;
-			this.label2.Text = "Liste des plats";
+			this.label2.Text = "Gestion et Tri des plats";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// tableLayoutPanel11
@@ -452,14 +447,14 @@ namespace ClientDesktop
 			this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel18, 0, 2);
 			this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel19, 0, 3);
 			this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel11.Location = new System.Drawing.Point(644, 3);
+			this.tableLayoutPanel11.Location = new System.Drawing.Point(646, 3);
 			this.tableLayoutPanel11.Name = "tableLayoutPanel11";
 			this.tableLayoutPanel11.RowCount = 4;
 			this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13F));
 			this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13F));
 			this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13F));
 			this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61F));
-			this.tableLayoutPanel11.Size = new System.Drawing.Size(364, 456);
+			this.tableLayoutPanel11.Size = new System.Drawing.Size(364, 462);
 			this.tableLayoutPanel11.TabIndex = 1;
 			// 
 			// label3
@@ -468,7 +463,7 @@ namespace ClientDesktop
 			this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label3.Location = new System.Drawing.Point(3, 0);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(358, 59);
+			this.label3.Size = new System.Drawing.Size(358, 60);
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Composition du plat";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -481,11 +476,11 @@ namespace ClientDesktop
 			this.tableLayoutPanel17.Controls.Add(this.label4, 0, 0);
 			this.tableLayoutPanel17.Controls.Add(this.textBox2, 1, 0);
 			this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 62);
+			this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 63);
 			this.tableLayoutPanel17.Name = "tableLayoutPanel17";
 			this.tableLayoutPanel17.RowCount = 1;
 			this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel17.Size = new System.Drawing.Size(358, 53);
+			this.tableLayoutPanel17.Size = new System.Drawing.Size(358, 54);
 			this.tableLayoutPanel17.TabIndex = 1;
 			// 
 			// label4
@@ -494,7 +489,7 @@ namespace ClientDesktop
 			this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label4.Location = new System.Drawing.Point(3, 0);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(75, 53);
+			this.label4.Size = new System.Drawing.Size(75, 54);
 			this.label4.TabIndex = 0;
 			this.label4.Text = "Nom";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -515,11 +510,11 @@ namespace ClientDesktop
 			this.tableLayoutPanel18.Controls.Add(this.label5, 0, 0);
 			this.tableLayoutPanel18.Controls.Add(this.listBox2, 1, 0);
 			this.tableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel18.Location = new System.Drawing.Point(3, 121);
+			this.tableLayoutPanel18.Location = new System.Drawing.Point(3, 123);
 			this.tableLayoutPanel18.Name = "tableLayoutPanel18";
 			this.tableLayoutPanel18.RowCount = 1;
 			this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel18.Size = new System.Drawing.Size(358, 53);
+			this.tableLayoutPanel18.Size = new System.Drawing.Size(358, 54);
 			this.tableLayoutPanel18.TabIndex = 2;
 			// 
 			// label5
@@ -528,7 +523,7 @@ namespace ClientDesktop
 			this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label5.Location = new System.Drawing.Point(3, 0);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(74, 53);
+			this.label5.Size = new System.Drawing.Size(74, 54);
 			this.label5.TabIndex = 0;
 			this.label5.Text = "Type";
 			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -540,7 +535,7 @@ namespace ClientDesktop
 			this.listBox2.ItemHeight = 20;
 			this.listBox2.Location = new System.Drawing.Point(83, 3);
 			this.listBox2.Name = "listBox2";
-			this.listBox2.Size = new System.Drawing.Size(272, 47);
+			this.listBox2.Size = new System.Drawing.Size(272, 48);
 			this.listBox2.TabIndex = 1;
 			// 
 			// tableLayoutPanel19
@@ -552,14 +547,14 @@ namespace ClientDesktop
 			this.tableLayoutPanel19.Controls.Add(this.tableLayoutPanel7, 0, 3);
 			this.tableLayoutPanel19.Controls.Add(this.listView1, 0, 2);
 			this.tableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel19.Location = new System.Drawing.Point(3, 180);
+			this.tableLayoutPanel19.Location = new System.Drawing.Point(3, 183);
 			this.tableLayoutPanel19.Name = "tableLayoutPanel19";
 			this.tableLayoutPanel19.RowCount = 4;
 			this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.93939F));
 			this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.06061F));
 			this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
 			this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-			this.tableLayoutPanel19.Size = new System.Drawing.Size(358, 273);
+			this.tableLayoutPanel19.Size = new System.Drawing.Size(358, 276);
 			this.tableLayoutPanel19.TabIndex = 3;
 			// 
 			// tableLayoutPanel20
@@ -574,7 +569,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel20.Name = "tableLayoutPanel20";
 			this.tableLayoutPanel20.RowCount = 1;
 			this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel20.Size = new System.Drawing.Size(352, 26);
+			this.tableLayoutPanel20.Size = new System.Drawing.Size(352, 28);
 			this.tableLayoutPanel20.TabIndex = 0;
 			// 
 			// label1
@@ -605,15 +600,16 @@ namespace ClientDesktop
 			this.tableLayoutPanel6.Controls.Add(this.textBox5, 1, 0);
 			this.tableLayoutPanel6.Controls.Add(this.button5, 2, 0);
 			this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 35);
+			this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 37);
 			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
 			this.tableLayoutPanel6.RowCount = 1;
 			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel6.Size = new System.Drawing.Size(352, 36);
+			this.tableLayoutPanel6.Size = new System.Drawing.Size(352, 37);
 			this.tableLayoutPanel6.TabIndex = 3;
 			// 
 			// textBox4
 			// 
+			this.textBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
 			this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.textBox4.Location = new System.Drawing.Point(3, 3);
 			this.textBox4.Name = "textBox4";
@@ -633,7 +629,7 @@ namespace ClientDesktop
 			this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.button5.Location = new System.Drawing.Point(250, 3);
 			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(99, 30);
+			this.button5.Size = new System.Drawing.Size(99, 31);
 			this.button5.TabIndex = 2;
 			this.button5.Text = "Ajouter";
 			this.button5.UseVisualStyleBackColor = true;
@@ -649,7 +645,7 @@ namespace ClientDesktop
 			this.tableLayoutPanel7.Controls.Add(this.button10, 1, 0);
 			this.tableLayoutPanel7.Controls.Add(this.button11, 2, 0);
 			this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 237);
+			this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 240);
 			this.tableLayoutPanel7.Name = "tableLayoutPanel7";
 			this.tableLayoutPanel7.RowCount = 1;
 			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -676,6 +672,7 @@ namespace ClientDesktop
 			this.button10.TabIndex = 1;
 			this.button10.Text = "Modif Plat";
 			this.button10.UseVisualStyleBackColor = true;
+			this.button10.Click += new System.EventHandler(this.button10_Click);
 			// 
 			// button11
 			// 
@@ -686,6 +683,7 @@ namespace ClientDesktop
 			this.button11.TabIndex = 2;
 			this.button11.Text = "Supp Plat";
 			this.button11.UseVisualStyleBackColor = true;
+			this.button11.Click += new System.EventHandler(this.button11_Click);
 			// 
 			// listView1
 			// 
@@ -695,7 +693,7 @@ namespace ClientDesktop
             this.CoutTotalIngredient});
 			this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.listView1.HideSelection = false;
-			this.listView1.Location = new System.Drawing.Point(3, 77);
+			this.listView1.Location = new System.Drawing.Point(3, 80);
 			this.listView1.Name = "listView1";
 			this.listView1.Size = new System.Drawing.Size(352, 154);
 			this.listView1.TabIndex = 5;
@@ -793,7 +791,7 @@ namespace ClientDesktop
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(1100, 612);
+			this.ClientSize = new System.Drawing.Size(1102, 620);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "fenPlats";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -812,7 +810,6 @@ namespace ClientDesktop
 			this.tableLayoutPanel14.ResumeLayout(false);
 			this.tableLayoutPanel15.ResumeLayout(false);
 			this.tableLayoutPanel16.ResumeLayout(false);
-			this.tableLayoutPanel16.PerformLayout();
 			this.tableLayoutPanel8.ResumeLayout(false);
 			this.tableLayoutPanel8.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -859,7 +856,6 @@ namespace ClientDesktop
 		private System.Windows.Forms.ListBox listBox1;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
 		private System.Windows.Forms.Button button9;
-		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
